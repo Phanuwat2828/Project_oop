@@ -4,6 +4,7 @@ import java.util.concurrent.CountedCompleter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.tools.Tool;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +14,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 import component.Button_all;
 import component.Color_all;
@@ -45,15 +48,16 @@ public class App {
         JPanel pn2 = new JPanel(new GridBagLayout());
         
         pn2.setSize(800,700);
-        pn2.setBackground(color.cl_bg_red);
-        pn2.add(bt.bt_1("Start Program",400,70,color.cl_bg_white),gbc);
+        pn2.setBackground(color.cl_bg);
+        pn2.add(bt.bt_1("Start Program",400,70,color.cl_bg_white,20),gbc);
         gbc.gridy = 1;
-        pn2.add(bt_1.bt_1("Organizer",400,70,color.cl_bg_white),gbc);
+        pn2.add(bt_1.bt_1("Organizer",400,70,color.cl_bg_white,20),gbc);
         gbc.gridy = 2;
-        pn2.add(bt_2.bt_1("Exit",400,70,color.cl_bg_white),gbc);
+        pn2.add(bt_2.bt_1("Exit",400,70,color.cl_bg_white,20),gbc);
+        gbc.gridy =3;
+
         pn1.add(pn2);
         // =======================================================
-
         // ===================== Setting_app =====================
         frame.setLayout(null);
         // pn1.add();
@@ -63,16 +67,12 @@ public class App {
         // frame.add(dp.button_import());
         // frame.setBackground(195,179,238);
         // =======================================================
-        
-
-        frame.add(bt.bt_1("buttom",100,200,200,200,color.cl_bg));
-
-
+        frame.add(pn1);
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         // =======================================================
-    
+        
     }
 }
 
