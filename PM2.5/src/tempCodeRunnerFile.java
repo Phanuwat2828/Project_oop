@@ -1,2 +1,1 @@
-gbc.gridx = 0;
-        // gbc.gridy = 0;
+  JFrame frame = new JFrame("PM2.5 version alpha");

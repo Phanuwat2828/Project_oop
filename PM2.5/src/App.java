@@ -55,7 +55,6 @@ public class App {
         gbc.gridy = 2;
         pn2.add(bt_2.bt_1("Exit",400,70,color.cl_bg_white,20),gbc);
         gbc.gridy =3;
-
         pn1.add(pn2);
         // =======================================================
         // ===================== Setting_app =====================
@@ -65,7 +64,6 @@ public class App {
         frame.setIconImage(null);
         frame.setSize(1300,700);
         // frame.add(dp.button_import());
-        // frame.setBackground(195,179,238);
         // =======================================================
         frame.add(pn1);
         // =======================================================
