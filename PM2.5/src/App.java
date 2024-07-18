@@ -40,19 +40,16 @@ public class App {
         // frame.add(dp.button_import());
         // frame.setBackground(195,179,238);
         // =======================================================
-       
+        
 
         frame.add(bt.bt_1("buttom",100,200,200,200,color.cl_bg));
-
-
 
 
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         // =======================================================
-        
-
+    
     }
 }
 
