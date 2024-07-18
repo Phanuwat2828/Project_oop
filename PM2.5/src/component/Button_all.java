@@ -42,9 +42,6 @@ public class Button_all{
         //  gbc.gridy = 1;
         //  panel.add(fileNameLabel, gbc);
          
-
-
-
         //  // เพิ่ม ActionListener ให้กับปุ่ม openButton
         // //  openButton.addActionListener(new ActionListener() {
         // //      public void actionPerformed(ActionEvent e) {

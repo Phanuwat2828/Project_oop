@@ -1,31 +1,45 @@
 package component;
 import java.awt.Color;
 
-import javax.swing.JButton;;
+import javax.swing.JButton;
+import java.awt.Button;
+import java.awt.Dimension;
 
-public class Button_ extends JButton{
-    private String name_bt ;
-    private Color color ;
-    private int[] size =new int[2];
-    private int[] position = new int[2];
-    private JButton bt_main = new JButton();
-    
+public class Button_ extends Button{
+   public Button bt_main =new Button();
+   public Font_all font = new Font_all();
+   
 
-    public JButton bt_1(String name){
-        bt_main.setText(name);
+    public Button bt_1(String name,int s){
+        bt_main.setLabel(name);
         return bt_main;
     }
 
-    public JButton bt_1(String name,int w,int h,int x,int y){
-        bt_main.setText(name);
-        bt_main.setBounds(x, y, w, h);
+    public Button bt_1(String name,int w,int h){
+        bt_main.setLabel(name);
+        bt_main.setPreferredSize(new Dimension(w,h));
         return bt_main;
     }
-    public JButton bt_1(String name,int w,int h,int x,int y,Color c){
-        bt_main.setText(name);
-        bt_main.setBounds(x, y, w, h);
+    public Button bt_1(String name,int w,int h,Color c){
+        bt_main.setLabel(name);
+        bt_main.setPreferredSize(new Dimension(w,h));
         bt_main.setBackground(c);
         return bt_main;
     }
+
+    public Button bt_1(String name,int w,int h,int x,int y){
+        bt_main.setLabel(name);
+        bt_main.setLocation(x, y);
+        bt_main.setPreferredSize(new Dimension(w,h));
+        return bt_main;
+    }
+    public Button bt_1(String name,int w,int h,int x,int y,Color c){
+        bt_main.setLabel(name);
+        bt_main.setLocation(x, y);
+        bt_main.setPreferredSize(new Dimension(w,h));
+        bt_main.setBackground(c);
+        return bt_main;
+    }
+
 
 }
