@@ -1,6 +1,11 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+<<<<<<< HEAD
+=======
+// import javafx.scene.control.TextField;
+
+>>>>>>> main
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Graphics;
