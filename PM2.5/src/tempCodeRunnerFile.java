@@ -1,1 +1,0 @@
-  JFrame frame = new JFrame("PM2.5 version alpha");

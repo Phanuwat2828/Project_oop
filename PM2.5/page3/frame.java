@@ -19,8 +19,7 @@ public class frame {
                 frame.add(bt[i][j]);
             }
         }
-
-
+  
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 frame.dispose();

@@ -14,7 +14,7 @@ public class assemble {
                 drawAdditionalRectangles(g);
             }
         };
-
+        
         panel.setLayout(null);
 
         TextField tf = new TextField();

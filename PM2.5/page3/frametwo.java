@@ -6,16 +6,17 @@ import java.awt.Graphics;
 public class frametwo {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Rectangle Frame");
-        frame.setSize(1980, 1080); 
+        frame.setSize(1300, 700); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        
+
+
         JPanel panel = new JPanel() {
             /*----- method create rectangle set size and position --------*/
             protected void paintComponent(Graphics g) {
         
                 g.setFont(new Font("Tahoma", Font.BOLD, 15)); 
                   /*------- สร้าง object and กำหนด position and size of React  ----------*/
-                ColorRectangle redRect = new ColorRectangle(20, 15, 110, 100, Color.RED, "จำนวนผู้ป่วย", "มากกว่า30%");
+                ColorRectangle redRect = new ColorRectangle(20, 15, 50, 100, Color.RED, "จำนวนผู้ป่วย", "มากกว่า30%");
                 ColorRectangle orangeRect = new ColorRectangle(255, 15, 110, 100, new Color(255, 125, 0), "จำนวนผู้ป่วย", "มากกว่า30%");
                 ColorRectangle yellowRect = new ColorRectangle(485, 15, 110, 100, Color.YELLOW, "จำนวนผู้ป่วย", "มากกว่า30%");
                 ColorRectangle greenRect = new ColorRectangle(725, 15, 110, 100, Color.GREEN, "จำนวนผู้ป่วย", "มากกว่า30%");
@@ -26,12 +27,13 @@ public class frametwo {
                 greenRect.draw(g);
             }
         };
-        
+         
+
         frame.add(panel);
         frame.setVisible(true);
     }
 }
-
+    
 class ColorRectangle {
     int x, y, width, height;         //สร้างตัวแปร รับแกรน x,y ยาว สูง
     Color color;             //ตัวแปรมารับสี

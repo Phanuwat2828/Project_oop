@@ -14,7 +14,7 @@ public class framethree {
             /*----- method create rectangle set size and position --------*/
             protected void paintComponent(Graphics g) {
                 g.setFont(new Font("Tahoma", Font.BOLD, 15)); 
-
+                
                 /*------- สร้าง object and กำหนด position and size of React  ----------*/
                 Rectangle Rect = new Rectangle(1200, 230, 580, 600, Color.RED);
                 Rectangle RectCal_one = new Rectangle(1240, 280, 500, 50, Color.WHITE);

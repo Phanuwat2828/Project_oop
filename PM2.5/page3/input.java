@@ -23,8 +23,6 @@ public class input {
         frame.add(panel);
         
 
-
-         
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 frame.dispose();
