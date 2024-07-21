@@ -1,19 +1,27 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Font;
-import java.awt.Color; 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
+
 public class frametwo {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Rectangle Frame");
-        frame.setSize(1000, 300); 
+        frame.setSize(1000, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel() {
-            protected void paintComponent(Graphics g) {
+        // Create the main panel (panel2)
+        JPanel panel2 = new JPanel(new BorderLayout());
 
-                g.setFont(new Font("Tahoma", Font.BOLD, 15)); 
+        // Create the panel that will draw rectangles
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g); // Ensure proper rendering
+
+                g.setFont(new Font("Tahoma", Font.BOLD, 15));
 
                 ColorRectangle redRect = new ColorRectangle(20, 15, 95, 90, Color.RED, "จำนวนผู้ป่วย", "มากกว่า30%");
                 ColorRectangle orangeRect = new ColorRectangle(255, 15, 110, 100, new Color(255, 125, 0), "จำนวนผู้ป่วย", "มากกว่า30%");
@@ -25,20 +33,26 @@ public class frametwo {
                 yellowRect.draw(g);
                 greenRect.draw(g);
             }
+
+            // @Override
+            // public Dimension getPreferredSize() {
+            //     return new Dimension(700, 200); // Set the preferred size to 700x200
+            // }
         };
-        JPanel pn2 = new JPanel();
-        pn2.add(panel);
-        
-        frame.add(pn2);
+
+        // Add the rectangle drawing panel to panel2
+        panel2.add(panel, BorderLayout.CENTER);
+
+        // Add panel2 to the frame
+        frame.add(panel2);
         frame.setVisible(true);
     }
 }
 
 class ColorRectangle {
-    int x, y, width, height;         //สร้างตัวแปร รับแกรน x,y ยาว สูง
-    Color color;             //ตัวแปรมารับสี
-    String text1, text2;          //มาใส่ข้อความ
-
+    int x, y, width, height;
+    Color color;
+    String text1, text2;
 
     public ColorRectangle(int x, int y, int width, int height, Color color, String text1, String text2) {
         this.x = x;
