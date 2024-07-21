@@ -20,6 +20,7 @@ public class frame {
             }
         }
 
+
 //กดออกได้
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

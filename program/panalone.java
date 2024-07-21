@@ -4,21 +4,22 @@ import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class frame {
+
+
+public class panalone {
     public static void main(String[] args) {
-        Frame frame = new Frame("SSS");
+        Frame frame = new Frame("Panal Rate  The Patient ");
         frame.setSize(400, 300); 
         frame.setLocationRelativeTo(null);
 
-        frame.setLayout(new GridLayout(10, 20));
+        Button button = new Button("   ");
+        button.setSize(15, 20);
+        
 
-        Button[][] bt = new Button[10][20];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 20; j++) {
-                bt[i][j] = new Button();
-                frame.add(bt[i][j]);
-            }
-        }
+
+        frame.setLayout(new GridLayout(2, 2));
+        frame.add(button);
+
 
 //กดออกได้
         frame.addWindowListener(new WindowAdapter() {
