@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -45,7 +46,7 @@ public class Main_ {
         gbc.gridx = 1;
         panel_1.add(content_2,gbc);
         // ==============================================================
-        
+        frame.setIconImage(new ImageIcon("./image/mark2.png").getImage());
         frame.setLayout(new GridLayout());
         // pn1.add();
         // frame.setBackground(color.cl_bg);
