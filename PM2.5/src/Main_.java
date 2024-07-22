@@ -137,7 +137,7 @@ class Panel_table extends JPanel{
                 
                 bt.setPreferredSize(new Dimension(33,33));
                 if(pm[i][j] >=0 && pm[i][j] <=50){
-                    bt.setBackground(new Color());
+                    // bt.setBackground(new Color());
                 }else  if(pm[i][j] >=51 && pm[i][j] <=100) {
                     bt.setBackground(new Color_all().cl_bg_gray);
                 }else  if(pm[i][j] >=101 && pm[i][j] <=150) {
