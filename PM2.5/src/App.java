@@ -25,18 +25,16 @@ import java.awt.Image;
 
 
 
-import component.Button_all;
 import component.Color_all;
-import component.RoundedButton;
+
 import component.Button_;
 import component.Font_all;
 
 public class App {
     public static void main(String[] args){
         // =================================
-        String path_image = "./image/mark2.png";
+        String path_image = "/image/mark2.png";
         // ===================== ประกาศ object ===================
-        Button_all dp = new Button_all();
         JFrame frame = new JFrame("PM2.5 version alpha");
         Color_all color = new Color_all();// สี
         Button_ bt = new Button_();
@@ -68,7 +66,7 @@ public class App {
 
         // ====================== Image Pm2.5 =============================
         // JPanel image_Label = new JPanel(new GridBagLayout());
-        ImageIcon image_ = new ImageIcon(path_image);
+        ImageIcon image_ = new ImageIcon(App.class.getResource(path_image));
         Image image_2 = image_.getImage();
         Image scaled = image_2.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         image_ = new ImageIcon(scaled);
@@ -97,7 +95,7 @@ public class App {
 
         // =======================================================
         // ===================== Setting_app =====================
-        frame.setIconImage(new ImageIcon(path_image).getImage());
+        frame.setIconImage(new ImageIcon(App.class.getResource(path_image)).getImage());
         frame.setLayout(null);
         frame.setSize(1300,700);
 

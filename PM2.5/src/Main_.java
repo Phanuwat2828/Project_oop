@@ -20,6 +20,7 @@ import javax.swing.border.Border;
 import org.w3c.dom.css.Rect;
 
 import component.Color_all;
+import component.Button_input;
 import component.ColorPanel;
 import component.Table;
 import component.ColorRectangle;
@@ -41,7 +42,7 @@ public class Main_ {
         // ================== content_1 ===================
  
         content_1.setPreferredSize(new Dimension(800,700));
-        content_1.setBackground(new Color_all().cl_bg_red);
+        content_1.setBackground(new Color_all().cl_bg);
 
         JPanel Tapbar = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
         Tapbar.setPreferredSize(new Dimension(800,100));
@@ -81,18 +82,14 @@ public class Main_ {
         Tapbar.add(yellowPanel);
         Tapbar.add(greenPanel);
 
-        // ====================== Table ==================
-        JPanel table_in = new JPanel(new FlowLayout(FlowLayout.LEFT,2,8));
-        table_in.setPreferredSize(new Dimension(700,500));
-        for(int i=0;i<200;i++){
-            JButton bt =new JButton();
-            bt.setBackground(new Color_all().cl_bg_gray);
-            bt.setPreferredSize(new Dimension(33,33));
-            table_in.add(bt);
-        }
-        Table.add(table_in);
+        // ====================== Table ================== <== work here
+        
+        // Table.add(new Panel_table());
 
-
+        // ====================== inputfile ==================
+        inputfile.add(new Button_input().button());
+        inputfile.setBackground(new Color_all().cl_bg_white);
+        
          // ========================= add panel ===============================
          GridBagConstraints gbc2 = new GridBagConstraints();
          gbc2.gridx=0;
@@ -101,7 +98,6 @@ public class Main_ {
          content_1.add(Table);
          content_1.add(inputfile);
         
-        
         // ====================== Add ===================================
         panel_1.add(content_1);
         
@@ -109,8 +105,7 @@ public class Main_ {
         panel_1.add(content_2);
        
         
-
-        frame.setIconImage(new ImageIcon("./image/mark2.png").getImage());
+        frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
         
         // pn1.add();
         // frame.setBackground(color.cl_bg);
@@ -127,5 +122,38 @@ public class Main_ {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         // =======================================================
+    }
+}
+
+
+class Panel_table extends JPanel{
+    JPanel table_in = new JPanel(new FlowLayout(FlowLayout.LEFT,2,8));
+
+    public Panel_table(int people,int[][] pm ){
+
+        removeAll();
+        setLayout(new FlowLayout(FlowLayout.LEFT,2,8));
+        setPreferredSize(new Dimension(700,500));
+        for(int i=0;i<10;i++){
+            for(int j=0;j<20;j++){
+                JButton bt =new JButton();
+                
+                bt.setPreferredSize(new Dimension(33,33));
+                if(pm[i][j] >=0 && pm[i][j] <=50){
+                    // bt.setBackground(new Color());
+                }else  if(pm[i][j] >=51 && pm[i][j] <=100) {
+                    bt.setBackground(new Color_all().cl_bg_gray);
+                }else  if(pm[i][j] >=101 && pm[i][j] <=150) {
+                    bt.setBackground(new Color_all().cl_bg_gray);
+                }else  if(pm[i][j] >=151 && pm[i][j] <=250) {
+                    bt.setBackground(new Color_all().cl_bg_gray);
+                }
+                add(bt);
+            }
+            
+        }
+        
+        revalidate();
+        repaint();
     }
 }
