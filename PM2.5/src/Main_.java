@@ -9,7 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
-import java.util.concurrent.Flow;
+// import java.util.concurrent.Flow;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -102,7 +102,7 @@ public class Main_ {
         panel_1.add(content_2);
        
         
-        frame.setIconImage(new ImageIcon("./image/mark2.png").getImage());
+        frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
         
         // pn1.add();
         // frame.setBackground(color.cl_bg);

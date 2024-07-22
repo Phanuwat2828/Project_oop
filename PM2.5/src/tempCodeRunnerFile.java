@@ -1,1 +1,0 @@
-cl_bg_gray
