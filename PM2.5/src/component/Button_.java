@@ -12,7 +12,7 @@ public class Button_ extends Button{
 
     public Button bt_1(String name,int s){
         bt_main.setLabel(name);
-        bt_main.setFont(font.font_size(s));
+        bt_main.setFont(getFont(s)) ;
         return bt_main;
     }
 
