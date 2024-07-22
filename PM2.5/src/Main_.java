@@ -24,7 +24,7 @@ import component.Button_input;
 import component.ColorPanel;
 import component.Table;
 import component.ColorRectangle;
-import component.framethree;
+
 public class Main_ {
     public static void main(String[] args) {
         JFrame frame = new JFrame("PM2.5 version alpha");
@@ -56,7 +56,7 @@ public class Main_ {
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
-       
+        JPanel x = new JPanel();
         Status.setPreferredSize(new Dimension(450,480));
         Status.setBackground(new Color_all().cl_bg_red);
         Rain.setPreferredSize(new Dimension(450,200));
@@ -66,7 +66,7 @@ public class Main_ {
         content_2.setBackground(new Color_all().cl_bg_white);
         content_2.add(Status);
         content_2.add(Rain);
-        
+            
 
 
         // ====================== Tabbar ==================
