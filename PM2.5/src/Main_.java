@@ -9,7 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
-import java.util.concurrent.Flow;
+// import java.util.concurrent.Flow;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,11 +17,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import org.w3c.dom.css.Rect;
+
 import component.Color_all;
 import component.ColorPanel;
 import component.Table;
 import component.ColorRectangle;
-
+import component.framethree;
 public class Main_ {
     public static void main(String[] args) {
         JFrame frame = new JFrame("PM2.5 version alpha");
@@ -53,6 +55,7 @@ public class Main_ {
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
+       
         Status.setPreferredSize(new Dimension(450,480));
         Status.setBackground(new Color_all().cl_bg_red);
         Rain.setPreferredSize(new Dimension(450,200));

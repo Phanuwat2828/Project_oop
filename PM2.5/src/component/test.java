@@ -1,3 +1,4 @@
+package component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Font;
@@ -11,7 +12,7 @@ import java.awt.GridLayout;
 public class ColorPanel extends JPanel {
     Color rectColor;
     Color bgColor;
-    String txt1;
+    String txt1;    
 
     public ColorPanel(Color rectColor, Color bgColor,String txt1) {
         this.rectColor = rectColor;

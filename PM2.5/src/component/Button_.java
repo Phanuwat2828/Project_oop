@@ -16,11 +16,7 @@ public class Button_ extends Button{
 
     public Button bt_1(String name,int s){
         bt_main.setLabel(name);
-<<<<<<< HEAD
         bt_main.setFont(getFont(s)) ;
-=======
-        bt_main.setFont(getFont(s));
->>>>>>> Phanuwat
         return bt_main;
     }
 
