@@ -8,14 +8,18 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.util.concurrent.Flow;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import component.Color_all;
 import component.ColorPanel;
+import component.Table;
 import component.ColorRectangle;
 
 public class Main_ {
@@ -23,7 +27,7 @@ public class Main_ {
         JFrame frame = new JFrame("PM2.5 version alpha");
         JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,0));
         JPanel content_1 = new JPanel();
-        JPanel content_2 = new JPanel();
+        JPanel content_2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         // ======================= Panel_1 ===============================
         GridBagConstraints gbc = new GridBagConstraints();
     
@@ -33,31 +37,35 @@ public class Main_ {
         panel_1.setBackground(new Color_all().cl_bg);
 
         // ================== content_1 ===================
-        JPanel Rain = new JPanel();
-        JPanel Status = new JPanel();
-        JPanel People = new JPanel();
+ 
         content_1.setPreferredSize(new Dimension(800,700));
         content_1.setBackground(new Color_all().cl_bg_red);
 
         JPanel Tapbar = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
         Tapbar.setPreferredSize(new Dimension(800,100));
-        JPanel Table = new JPanel();
+        JPanel Table = new JPanel(new FlowLayout(FlowLayout.CENTER,0,40));
+
         Table.setPreferredSize(new Dimension(800,500));
         JPanel inputfile = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
         inputfile.setPreferredSize(new Dimension(800,100));
 
 
         // ================== content_2 ===================
-        
+        JPanel Rain = new JPanel();
+        JPanel Status = new JPanel();
+        Status.setPreferredSize(new Dimension(450,480));
+        Status.setBackground(new Color_all().cl_bg_red);
+        Rain.setPreferredSize(new Dimension(450,200));
+        Rain.setBackground(new Color_all().cl_bg_gray);
         content_2.setPreferredSize(new Dimension(450,700));
         // content_2.setLocation(800,0);
         content_2.setBackground(new Color_all().cl_bg_white);
+        content_2.add(Status);
+        content_2.add(Rain);
+        
 
 
         // ====================== Tabbar ==================
-
-        
-
         // Create the panels that will draw rectangles with different background colors
         JPanel redPanel = new ColorPanel(Color.RED, new Color(255, 200, 200),"มากกว่า 30%");
         JPanel orangePanel = new ColorPanel(new Color(255, 125, 0), new Color(255, 200, 150),"ตั้งแต่ 20-29%");
@@ -70,6 +78,16 @@ public class Main_ {
         Tapbar.add(yellowPanel);
         Tapbar.add(greenPanel);
 
+        // ====================== Table ==================
+        JPanel table_in = new JPanel(new FlowLayout(FlowLayout.LEFT,2,8));
+        table_in.setPreferredSize(new Dimension(700,500));
+        for(int i=0;i<200;i++){
+            JButton bt =new JButton();
+            bt.setBackground(new Color_all().cl_bg_gray);
+            bt.setPreferredSize(new Dimension(33,33));
+            table_in.add(bt);
+        }
+        Table.add(table_in);
 
 
          // ========================= add panel ===============================
