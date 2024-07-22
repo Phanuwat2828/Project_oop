@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.awt.*;
 
 import javax.swing.ImageIcon;
@@ -5,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import component.Color_all;
+=======
+>>>>>>> Phanuwat
 public class Organizer {
     public static void main(String[] args) {
         //============สร้างobject==================================
