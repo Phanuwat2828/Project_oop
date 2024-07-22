@@ -9,7 +9,7 @@ import javax.tools.Tool;
 import javax.swing.JLabel;
 
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -44,7 +44,6 @@ public class App {
         Label label = new Label();
 
 
-
         // =====================  Panel ==================================
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -64,6 +63,7 @@ public class App {
         
         pn2.setSize(800,700);
         pn2.setBackground(color.cl_bg);
+
         // ====================== Image Pm2.5 =============================
         // JPanel image_Label = new JPanel(new GridBagLayout());
         ImageIcon image_ = new ImageIcon(App.class.getResource(path_image));

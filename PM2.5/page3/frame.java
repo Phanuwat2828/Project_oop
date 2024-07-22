@@ -15,13 +15,11 @@ public class frame {
         Button[][] bt = new Button[10][20];
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 20; j++) {
-                bt[i][j] = new Button();
+                bt[i][j] = new Button(); 
                 frame.add(bt[i][j]);
             }
         }
-
-
-//กดออกได้
+  
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 frame.dispose();
