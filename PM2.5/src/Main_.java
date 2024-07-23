@@ -1,22 +1,20 @@
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
+
+
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 import java.util.StringTokenizer;
-import java.util.concurrent.Flow;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,20 +23,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import component.Color_all;
 import component.Font_all;
 // import component.Button_input;
 import component.ColorPanel;
-// import component.Table;
-import component.ColorRectangle;
 
 public class Main_ {
     public static void main(String[] args) {
         JFrame frame = new JFrame("PM2.5 version alpha");
-        Panel_table panelTable = new Panel_table(new int[10][20]);
+        Panel_table panelTable = new Panel_table(new int[10][20] ,5000);
         Button_input bt_input = new Button_input();
         JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,0));
         JPanel content_1 = new JPanel();
@@ -136,11 +132,13 @@ public class Main_ {
     }
 }
 
-class Panel_table extends JPanel {
+class Panel_table extends JPanel implements ActionListener {
     private int[][] pm25;
+    private int people = 5000;
     
-    public Panel_table(int[][] pm) {
+    public Panel_table(int[][] pm,int people) {
         this.pm25 = pm;
+        this.people = people;
         setLayout(new FlowLayout(FlowLayout.LEFT,2,8));
         setPreferredSize(new Dimension(700,500));
         updateTable();
@@ -150,6 +148,9 @@ class Panel_table extends JPanel {
         removeAll(); // ล้างคอมโพเนนต์เดิม
         for (int i = 0; i < pm25.length; i++) {
             for (int j = 0; j < pm25[i].length; j++) {
+                int row = i;
+                int coloumn =j;
+                int people_in = this.people;
                 JButton bt = new JButton();
                 bt.setPreferredSize(new Dimension(33, 33));
                 if (pm25[i][j] >= 0 && pm25[i][j] <= 50) {
@@ -161,16 +162,51 @@ class Panel_table extends JPanel {
                 } else if (pm25[i][j] >= 151 && pm25[i][j] <= 250) {
                     bt.setBackground(Color.RED);
                 }
+            
+                bt.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int data = pm25[row][coloumn];
+                        float persen =0;
+                        Random rn =new Random();
+                        System.out.println(row+","+coloumn+" = "+data);
+                        if(data>=0 && data<=50){
+                            persen =  rn.nextInt(0,10);
+                        }else if(data>=51 && data<=100){
+                            persen =  rn.nextInt(11,20);
+                        }else if(data>=101 && data<=150){
+                            persen =  rn.nextInt(20,30);
+                        }else if(data>=151 && data<=250){
+                            persen =  rn.nextInt(30,51);
+                        } 
+                        persen*=0.01;
+                        persen= formatFloat(persen, 2);
+                        System.out.println("Persen : "+persen);
+                        System.out.println("People: "+ people_in+" People sick : "+people_in*persen+"People good: "+(people_in-(int)people_in*persen));
+
+                    }
+                });
                 add(bt);
             }
         }
         revalidate();
         repaint();
     }
+    public static float formatFloat(float value, int decimalPlaces) {
+        String formatString = String.format("%." + decimalPlaces + "f", value);
+        return Float.parseFloat(formatString);
+    }
 
     public void setPm25(int[][] pm25) {
         this.pm25 = pm25;
         updateTable();
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
     }
 }
 
@@ -236,7 +272,6 @@ class Button_input implements ActionListener{
                     updateTable();
                 }
             }
-            
         });
 
          input_bt.add(bt);
@@ -252,7 +287,7 @@ class Button_input implements ActionListener{
     private void updateTable() {
         // Remove old components and update the table with new data
         tablePanel.removeAll();
-        Panel_table newTable = new Panel_table(pm25);
+        Panel_table newTable = new Panel_table(pm25,people);
         tablePanel.add(newTable);
         tablePanel.revalidate();
         tablePanel.repaint();
