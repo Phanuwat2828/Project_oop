@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.awt.*;
 
 import javax.swing.ImageIcon;
@@ -6,8 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import component.Color_all;
-=======
->>>>>>> Phanuwat
 public class Organizer {
     public static void main(String[] args) {
         //============สร้างobject==================================
@@ -22,14 +19,18 @@ public class Organizer {
         pn1.setBackground(color.cl_bg);
         frame.add(pn1);
         //===========image===================
-        JPanel pn2=new JPanel();
-        pn2.setSize(200,200);
-        //ImageIcon imagenight=new ImageIcon("Night.jpg");
-        //ImageIcon imagenate=new ImageIcon(nate);
-        //ImageIcon imagemark=new ImageIcon(mark);
-        JLabel label = new JLabel(new ImageIcon("./image/Night.jpg"));
-        pn2.add(label);
-        pn1.add(pn2);
+        // Panel pn2 = new Panel();
+        // String image = "/image/Night.jpg";
+        // ImageIcon image_ = new ImageIcon(App.class.getResource(image));
+        // Image image2 = image_.getImage();
+        // Image scaled = image2.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        // image_ = new ImageIcon(scaled);
+        // JLabel lable = new JLabel(image_);
+        // image.setPreferredSize(new Dimension(200,200));
+        //pn2.add(lable,gbc);
+        //frame.setIconImage(new ImageIcon(App.class.getResource(image)).getImage());
+        //frame.setLayout(null);
+        //frame.setSize(1300,700);
         //=======================ชื่อ===========================
         // JPanel pn3 = new JPanel();
         // pn3.setSize(100,300);
