@@ -37,6 +37,7 @@ public class Button_input extends JPanel implements ActionListener{
     private  JButton bt_count =new JButton("Select File");
     JTextField input_count = new JTextField(Integer.toString(this.people));
 
+
     public JPanel button(){
         JPanel input_bt = new JPanel(new FlowLayout(FlowLayout.CENTER,10,17));
         input_bt.setPreferredSize(new Dimension(800,80));
@@ -57,6 +58,7 @@ public class Button_input extends JPanel implements ActionListener{
         Label.setPreferredSize(new Dimension(300,35));
         //  // เพิ่ม ActionListener ให้กับปุ่ม openButton
         bt.addActionListener(new ActionListener() {
+            
              public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File", "txt");
@@ -75,6 +77,7 @@ public class Button_input extends JPanel implements ActionListener{
                     }
                 }
             }
+            
         });
 
         bt_count.addActionListener(new ActionListener() {
@@ -98,7 +101,7 @@ public class Button_input extends JPanel implements ActionListener{
         // ไม่ได้ใช้ในโค้ดนี้ แต่ต้องมีเพราะ implements ActionListener
     }
     private void readFile(File file) throws IOException {
-        StringBuilder content = new StringBuilder();
+        // StringBuilder content = new StringBuilder();
        
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
