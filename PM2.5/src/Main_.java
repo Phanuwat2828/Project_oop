@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 
 
 import java.awt.GridBagConstraints;
+<<<<<<< HEAD
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
+=======
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Label;
+// import java.util.concurrent.Flow;
+>>>>>>> PROJECT_OOPs
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +32,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.w3c.dom.css.Rect;
 
 import component.Color_all;
 import component.Font_all;
@@ -64,6 +73,7 @@ public class Main_ {
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
+        JPanel x = new JPanel();
         Status.setPreferredSize(new Dimension(450,480));
         Status.setBackground(new Color_all().cl_bg_red);
         Rain.setPreferredSize(new Dimension(450,200));
@@ -73,7 +83,7 @@ public class Main_ {
         content_2.setBackground(new Color_all().cl_bg_white);
         content_2.add(Status);
         content_2.add(Rain);
-        
+            
 
 
         // ====================== Tabbar ==================
