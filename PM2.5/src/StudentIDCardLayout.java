@@ -34,35 +34,7 @@ public class StudentIDCardLayout extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String javaFilePath = "App.java"; // แทนที่ชื่อไฟล์ Java ที่คุณต้องการคอมไพล์และรัน
-
-                try {
-                    // คอมไพล์ไฟล์ Java โดยใช้ ProcessBuilder
-                    ProcessBuilder compilerProcess = new ProcessBuilder("javac", javaFilePath);
-                    compilerProcess.directory(new File(".")); // ตั้ง working directory เป็นปัจจุบัน
-                    Process compile = compilerProcess.start();
-                    compile.waitFor(); // รอให้การคอมไพล์เสร็จสิ้น
-
-                    // ไม่ต้องตรวจสอบว่าคอมไพล์ไฟล์ Java สำเร็จหรือไม่
-
-                    // รันไฟล์ Java หลังจากคอมไพล์เสร็จสิ้น
-                    ProcessBuilder runProcess = new ProcessBuilder("java", "MyProgram");
-                    runProcess.directory(new File(".")); // ตั้ง working directory เป็นปัจจุบัน
-                    Process run = runProcess.start();
-                    run.waitFor(); // รอให้การรันเสร็จสิ้น
-
-                    // อ่าน output จากการรัน
-                    java.io.InputStream is = run.getInputStream();
-                    java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(is));
-                    String s = null;
-                    while ((s = reader.readLine()) != null) {
-                        System.out.println(s);
-                    }
-                    reader.close();
-
-                } catch (IOException | InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+               System.out.println("555555");
             }
 
         });
@@ -76,10 +48,10 @@ public class StudentIDCardLayout extends JFrame {
         // Replace these with actual file paths, names, and IDs
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา",
                 "66011212124"));
-        // cardPanel.add(createStudentCard("src/image/Mark.png", "นนทพัทธ์ กัตโร",
-        // "66011212106"));
-        // cardPanel.add(createStudentCard("src/image/Nate.jpg", "จิรัชยา พันอุ่น",
-        // "66011212079"));
+        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร",
+        "66011212106"));
+        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น",
+        "66011212079"));
 
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
