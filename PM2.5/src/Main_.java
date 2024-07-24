@@ -70,13 +70,13 @@ public class Main_ {
 
         Rain.setPreferredSize(new Dimension(450,200));
         Rain.setBackground(new Color_all().cl_bg_gray);
-//Rain
+        //Rain
         buttonRain btnRain = new buttonRain();
         JButton rainButton = btnRain.rain();
         Rain.setLayout(null); 
         Rain.add(rainButton);
 
-//Atificial Rain
+        //Atificial Rain
         buttonRain btnRainTwo = new buttonRain();
         JButton rainButtonTwo = btnRainTwo.rain_two();
         Rain.setLayout(null); 
