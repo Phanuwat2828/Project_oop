@@ -2,11 +2,14 @@ package component;
 
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 
-public class middle {
+public class middle extends JPanel {
 
 //ช่องใหญ่
     public static JPanel big(){
@@ -25,14 +28,24 @@ public class middle {
     }
 
 //5 ช่่อง
-    public JPanel[] smallrect(){
+    public JPanel[] smallrect(int data[]){
+        String data_1[] = {"People : ","Persen : ","People Sick :","People good: ","Number : "};
         JPanel[] pn3A = new JPanel[5];
         int yPosition = 80;
 
         for (int i = 0; i < 5; i++) {
-            JPanel pn3 = new JPanel();
+            JPanel pn3 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,15));
+            JLabel lable = new JLabel();
             pn3.setBounds(65, yPosition, 320, 50);
             pn3.setBackground(new Color(255, 255, 255));
+            if(i!=1){
+                lable.setText(data_1[i]+" "+data[i]);
+            }else{
+                lable.setText(data_1[i]+" "+data[i]+" %");
+            }
+            lable.setFont(new Font_all().font_kanit(14,"Kanit-Bold.ttf"));
+           
+            pn3.add(lable);
             pn3A[i] = pn3;
             yPosition += 65;
         }
@@ -40,13 +53,13 @@ public class middle {
     } 
 
     //JLayeredPane ช่วยจัดตำแหน่ง
-    public JLayeredPane manageRect_all() {
+    public middle(int data[] ) {
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(450, 500));
         
         JPanel bigPanel = big();
         JPanel middlePanel = middlerect();
-        JPanel[] smallPanels = smallrect();
+        JPanel[] smallPanels = smallrect(data);
         
 //set positiion of rect
         layeredPane.add(bigPanel, JLayeredPane.DEFAULT_LAYER);
@@ -56,6 +69,7 @@ public class middle {
         for (JPanel smallPanel : smallPanels) {
             layeredPane.add(smallPanel, JLayeredPane.MODAL_LAYER);
         }
-        return layeredPane;
+        setBackground(null);
+        add(layeredPane);
     }
 }

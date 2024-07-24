@@ -33,12 +33,17 @@ import component.Font_all;
 import component.ColorPanel;
 import component.buttonRain;
 import component.middle;
+import component.read_data;
 
 public class Main_ {
     public static void main(String[] args) {
         JFrame frame = new JFrame("PM2.5 version alpha");
-        Panel_table panelTable = new Panel_table(new int[10][20] ,5000);
         Button_input bt_input = new Button_input();
+        int data_start[] = {0,0,0,0,0};
+        middle box_status = new middle(data_start);
+        Panel_table panelTable = new Panel_table(new int[10][20] ,5000,box_status);
+       
+       
         JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,0));
         JPanel content_1 = new JPanel();
         JPanel content_2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -62,14 +67,14 @@ public class Main_ {
         JPanel inputfile = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
         inputfile.setPreferredSize(new Dimension(800,100));
 
-
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
-        middle manageRect = new middle();
+        // middle manageRect = new middle();
+        String data[] = {"1","2","3","4","5"};
 
-        JLayeredPane layeredPane = manageRect.manageRect_all();
-        Status.add(layeredPane);
+        // JLayeredPane layeredPane = manageRect.manageRect_all(data);
+        Status.add(box_status);
 
         
         Status.setPreferredSize(new Dimension(450,480));
@@ -113,7 +118,7 @@ public class Main_ {
         
 
         // ====================== inputfile ==================
-        inputfile.add(bt_input.button(panelTable));
+        inputfile.add(bt_input.button(panelTable,box_status));
         inputfile.setBackground(new Color_all().cl_bg_white);
         
          // ========================= add panel ===============================
@@ -154,22 +159,25 @@ public class Main_ {
 class Panel_table extends JPanel implements ActionListener {
     private int[][] pm25;
     private int people = 5000;
+
     
-    public Panel_table(int[][] pm,int people) {
+    public Panel_table(int[][] pm,int people,JPanel data) {
         this.pm25 = pm;
         this.people = people;
         setLayout(new FlowLayout(FlowLayout.LEFT,2,8));
-        setPreferredSize(new Dimension(700,500));
-        updateTable();
+        setPreferredSize(new Dimension(705,500));
+        updateTable(data);
     }
+  
+    
 
-    public void updateTable() {
+    public void updateTable(JPanel status) {
         removeAll(); // ล้างคอมโพเนนต์เดิม
+       int box_number=0;
         for (int i = 0; i < pm25.length; i++) {
             for (int j = 0; j < pm25[i].length; j++) {
-                int row = i;
-                int coloumn =j;
-                int people_in = this.people;
+                box_number+=1;
+                int row = i,coloumn =j,people_in = this.people,number=box_number;
                 JButton bt = new JButton();
                 bt.setPreferredSize(new Dimension(33, 33));
                 if (pm25[i][j] >= 0 && pm25[i][j] <= 50) {
@@ -183,7 +191,7 @@ class Panel_table extends JPanel implements ActionListener {
                 }
             
                 bt.addActionListener(new ActionListener() {
-
+                    int data_1[] = new int[5];
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int data = pm25[row][coloumn];
@@ -201,9 +209,18 @@ class Panel_table extends JPanel implements ActionListener {
                         } 
                         persen*=0.01;
                         persen= formatFloat(persen, 2);
-                        System.out.println("Persen : "+persen);
-                        System.out.println("People: "+ people_in+" People sick : "+people_in*persen+"People good: "+(people_in-(int)people_in*persen));
-
+                        status.removeAll();
+                        data_1[0] = people_in;
+                        data_1[1] =(int)(persen*100);
+                        data_1[2] =(int)(people_in*persen);
+                        data_1[3] = (people_in-(int)(people_in*persen));
+                        data_1[4] = number;
+                        
+                        middle re_status = new middle(data_1);
+                        status.add(re_status);
+                        status.revalidate();
+                        status.repaint();
+                        
                     }
                 });
                 add(bt);
@@ -212,15 +229,16 @@ class Panel_table extends JPanel implements ActionListener {
         revalidate();
         repaint();
     }
+    
     public static float formatFloat(float value, int decimalPlaces) {
         String formatString = String.format("%." + decimalPlaces + "f", value);
         return Float.parseFloat(formatString);
     }
 
-    public void setPm25(int[][] pm25) {
-        this.pm25 = pm25;
-        updateTable();
-    }
+    // public void setPm25(int[][] pm25) {
+    //     this.pm25 = pm25;
+    //     updateTable();
+    // }
 
 
     @Override
@@ -236,11 +254,13 @@ class Button_input implements ActionListener{
     private  JButton bt_count =new JButton("Select File");
     JTextField input_count = new JTextField(Integer.toString(this.people));
     private JPanel tablePanel;
+    private JPanel status;
    
     
 
-    public JPanel button(JPanel panelTable){
+    public JPanel button(JPanel panelTable ,JPanel status){
         this.tablePanel = panelTable;
+        this.status = status;
         JPanel input_bt = new JPanel(new FlowLayout(FlowLayout.CENTER,10,17));
         input_bt.setPreferredSize(new Dimension(800,80));
         input_bt.setBackground(null);
@@ -273,7 +293,9 @@ class Button_input implements ActionListener{
                     Label.setText(selectfile.getName());
                     try {
                        readFile(selectfile);
+                       reset_status();
                         updateTable();
+                        
                        
                        // JOptionPane.showMessageDialog(null, content, "File Content", JOptionPane.INFORMATION_MESSAGE);
                    } catch (IOException ex) {
@@ -289,8 +311,11 @@ class Button_input implements ActionListener{
                 if(e.getSource() == bt_count){
                     setCount(Integer.parseInt(input_count.getText()));
                     updateTable();
+                    reset_status();
                 }
             }
+            
+            
         });
 
          input_bt.add(bt);
@@ -303,10 +328,16 @@ class Button_input implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // ไม่ได้ใช้ในโค้ดนี้ แต่ต้องมีเพราะ implements ActionListener
     }
+    public void reset_status(){
+        this.status.removeAll();
+        middle new_status = new middle(new int[5]);
+        this.status.add(new_status);
+        
+    }
     private void updateTable() {
         // Remove old components and update the table with new data
         tablePanel.removeAll();
-        Panel_table newTable = new Panel_table(pm25,people);
+        Panel_table newTable = new Panel_table(pm25,people,status);
         tablePanel.add(newTable);
         tablePanel.revalidate();
         tablePanel.repaint();
