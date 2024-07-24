@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -30,6 +31,8 @@ import component.Color_all;
 import component.Font_all;
 // import component.Button_input;
 import component.ColorPanel;
+import component.buttonRain;
+import component.middle;
 
 public class Main_ {
     public static void main(String[] args) {
@@ -63,10 +66,27 @@ public class Main_ {
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
+        middle manageRect = new middle();
+
+        JLayeredPane layeredPane = manageRect.manageRect_all();
+        Status.add(layeredPane);
+
+        
         Status.setPreferredSize(new Dimension(450,480));
         Status.setBackground(new Color_all().cl_bg_red);
         Rain.setPreferredSize(new Dimension(450,200));
         Rain.setBackground(new Color_all().cl_bg_gray);
+        //Rain
+        buttonRain btnRain = new buttonRain();
+        JButton rainButton = btnRain.rain();
+        Rain.setLayout(null); 
+        Rain.add(rainButton);
+
+        //Atificial Rain
+        buttonRain btnRainTwo = new buttonRain();
+        JButton rainButtonTwo = btnRainTwo.rain_two();
+        Rain.setLayout(null); 
+        Rain.add(rainButtonTwo);
         content_2.setPreferredSize(new Dimension(450,700));
         // content_2.setLocation(800,0);
         content_2.setBackground(new Color_all().cl_bg_white);
