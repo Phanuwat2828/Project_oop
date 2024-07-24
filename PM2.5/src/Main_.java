@@ -1,91 +1,86 @@
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.StringTokenizer;
-import java.util.concurrent.Flow;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import component.Color_all;
-import component.Font_all;
-// import component.Button_input;
 import component.ColorPanel;
-// import component.Table;
-import component.ColorRectangle;
+import component.middle;
+import component.Button_input;
+import component.Panel_table;
 
 public class Main_ {
     public static void main(String[] args) {
         JFrame frame = new JFrame("PM2.5 version alpha");
-        Panel_table panelTable = new Panel_table(new int[10][20]);
         Button_input bt_input = new Button_input();
-        JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,0));
+        int data_start[] = new int[5];
+        Color color_t[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
+        middle box_status = new middle(data_start, color_t);
+        Panel_table panelTable = new Panel_table(new int[10][20], 5000, box_status, false);
+        Color_all color_all = new Color_all();
+        JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         JPanel content_1 = new JPanel();
         JPanel content_2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         // ======================= Panel_1 ===============================
         GridBagConstraints gbc = new GridBagConstraints();
-    
-        // gbc.fill = GridBagConstraints.HORIZONTAL;
+        // gbc.fill = GridBagConstraints.HORIZONTAL;s
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel_1.setBackground(new Color_all().cl_bg);
 
         // ================== content_1 ===================
- 
-        content_1.setPreferredSize(new Dimension(800,700));
+
+        content_1.setPreferredSize(new Dimension(800, 700));
         content_1.setBackground(new Color_all().cl_bg);
 
-        JPanel Tapbar = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
-        Tapbar.setPreferredSize(new Dimension(800,100));
-        JPanel Table = new JPanel(new FlowLayout(FlowLayout.CENTER,0,40));
+        JPanel Tapbar = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        Tapbar.setPreferredSize(new Dimension(800, 100));
+        Tapbar.setBackground(Color_all.cl_bg_white);
+        JPanel Table = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 40));
+        Table.setBackground(Color_all.cl_bg_white);
 
-        Table.setPreferredSize(new Dimension(800,500));
-        JPanel inputfile = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
-        inputfile.setPreferredSize(new Dimension(800,100));
-
+        Table.setPreferredSize(new Dimension(800, 500));
+        JPanel inputfile = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        inputfile.setPreferredSize(new Dimension(800, 100));
 
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
-        Status.setPreferredSize(new Dimension(450,480));
-        Status.setBackground(new Color_all().cl_bg_red);
-        Rain.setPreferredSize(new Dimension(450,200));
-        Rain.setBackground(new Color_all().cl_bg_gray);
-        content_2.setPreferredSize(new Dimension(450,700));
+        // middle manageRect = new middle();
+
+        // JLayeredPane layeredPane = manageRect.manageRect_all(data);
+        Status.add(box_status);
+
+        Status.setPreferredSize(new Dimension(450, 480));
+        Status.setBackground(color_all.cl_bg_white);
+        Rain.setPreferredSize(new Dimension(450, 200));
+        Rain.setBackground(color_all.cl_bg_white);
+        // Rain
+
+        JButton rainButton = bt_input.rain();
+        Rain.setLayout(null);
+        Rain.add(rainButton);
+
+        JButton rainButtonTwo = bt_input.rain_two();
+        Rain.setLayout(null);
+        Rain.add(rainButtonTwo);
+        content_2.setPreferredSize(new Dimension(450, 700));
         // content_2.setLocation(800,0);
-        content_2.setBackground(new Color_all().cl_bg_white);
+        content_2.setBackground(null);
         content_2.add(Status);
         content_2.add(Rain);
-        
-
 
         // ====================== Tabbar ==================
         // Create the panels that will draw rectangles with different background colors
-        JPanel redPanel = new ColorPanel(Color.RED, new Color(255, 200, 200),"มากกว่า 30%");
-        JPanel orangePanel = new ColorPanel(new Color(255, 125, 0), new Color(255, 200, 150),"ตั้งแต่ 20-29%");
-        JPanel yellowPanel = new ColorPanel(Color.YELLOW, new Color(255, 255, 200),"ตั้งแต่ 10-19%");
-        JPanel greenPanel = new ColorPanel(Color.GREEN, new Color(200, 255, 200),"ตั้งแต่ 0-9%");
+        JPanel redPanel = new ColorPanel(Color.RED, color_all.cl_li_red, "มากกว่า 30%");
+        JPanel orangePanel = new ColorPanel(color_all.cl_bg_or, color_all.cl_li_or, "ตั้งแต่ 20-29%");
+        JPanel yellowPanel = new ColorPanel(Color.YELLOW, color_all.cl_li_yellow, "ตั้งแต่ 10-19%");
+        JPanel greenPanel = new ColorPanel(Color.GREEN, color_all.cl_li_green, "ตั้งแต่ 0-9%");
 
         // Add the color panels to panel2
         Tapbar.add(redPanel);
@@ -95,204 +90,35 @@ public class Main_ {
 
         // ====================== Table ================== <== work here
         Table.add(panelTable);
-        
 
         // ====================== inputfile ==================
-        inputfile.add(bt_input.button(panelTable));
+        inputfile.add(bt_input.button(panelTable, box_status));
         inputfile.setBackground(new Color_all().cl_bg_white);
-        
-         // ========================= add panel ===============================
-         GridBagConstraints gbc2 = new GridBagConstraints();
-         gbc2.gridx=0;
-         gbc2.gridy=0;
-         content_1.add(Tapbar);
-         content_1.add(Table);
-         content_1.add(inputfile);
-        
+
+        // ========================= add panel ===============================
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridx = 0;
+        gbc2.gridy = 0;
+        content_1.add(Tapbar);
+        content_1.add(Table);
+        content_1.add(inputfile);
+
         // ====================== Add ===================================
         panel_1.add(content_1);
-        
+
         gbc.gridx = 1;
         panel_1.add(content_2);
-       
-        
-        frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
-        
-        // pn1.add();
-        // frame.setBackground(color.cl_bg);
 
-        frame.setSize(1300,750);
-        // frame.add(dp.button_import());
-        // frame.setBackground(195,179,238);
+        frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
+
+        frame.setSize(1300, 750);
         frame.add(panel_1);
-        
+
         // =======================================================
-        
 
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         // =======================================================
     }
-}
-
-class Panel_table extends JPanel {
-    private int[][] pm25;
-    
-    public Panel_table(int[][] pm) {
-        this.pm25 = pm;
-        setLayout(new FlowLayout(FlowLayout.LEFT,2,8));
-        setPreferredSize(new Dimension(700,500));
-        updateTable();
-    }
-
-    public void updateTable() {
-        removeAll(); // ล้างคอมโพเนนต์เดิม
-        for (int i = 0; i < pm25.length; i++) {
-            for (int j = 0; j < pm25[i].length; j++) {
-                JButton bt = new JButton();
-                bt.setPreferredSize(new Dimension(33, 33));
-                if (pm25[i][j] >= 0 && pm25[i][j] <= 50) {
-                    bt.setBackground(Color.GREEN);
-                } else if (pm25[i][j] >= 51 && pm25[i][j] <= 100) {
-                    bt.setBackground(Color.YELLOW);
-                } else if (pm25[i][j] >= 101 && pm25[i][j] <= 150) {
-                    bt.setBackground(new Color(255, 125, 0));
-                } else if (pm25[i][j] >= 151 && pm25[i][j] <= 250) {
-                    bt.setBackground(Color.RED);
-                }
-                add(bt);
-            }
-        }
-        revalidate();
-        repaint();
-    }
-
-    public void setPm25(int[][] pm25) {
-        this.pm25 = pm25;
-        updateTable();
-    }
-}
-
-
-class Button_input implements ActionListener{
-    private int people = 5000;
-    private int[][] pm25 = new int[10][20] ;
-    private  JButton bt_count =new JButton("Select File");
-    JTextField input_count = new JTextField(Integer.toString(this.people));
-    private JPanel tablePanel;
-   
-    
-
-    public JPanel button(JPanel panelTable){
-        this.tablePanel = panelTable;
-        JPanel input_bt = new JPanel(new FlowLayout(FlowLayout.CENTER,10,17));
-        input_bt.setPreferredSize(new Dimension(800,80));
-        input_bt.setBackground(null);
-        
-        JButton bt =new JButton("Select File");
-        bt.setPreferredSize(new Dimension(100,35));
-        bt.setBackground(new Color_all().cl_bg_bt);
-        JLabel Label = new JLabel();
-        Label.setFont(new Font_all().font_kanit(17, "Kanit-Bold.ttf"));
-
-       
-        bt_count.setPreferredSize(new Dimension(100,35));
-        bt_count.setBackground(new Color_all().cl_bg_bt);
-       
-        input_count.setPreferredSize(new Dimension(200,35));
-
-        Label.setPreferredSize(new Dimension(300,35));
-        //  // เพิ่ม ActionListener ให้กับปุ่ม openButton
-        bt.addActionListener(new ActionListener() {
-            
-            public void actionPerformed(ActionEvent e) {
-               JFileChooser fileChooser = new JFileChooser();
-               FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File", "txt");
-               fileChooser.setFileFilter(filter);
-
-               int returnValue = fileChooser.showOpenDialog(null);
-               if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    // ดึงชื่อไฟล์และตั้งค่าให้กับ JLabel
-                    File selectfile = fileChooser.getSelectedFile();
-                    Label.setText(selectfile.getName());
-                    try {
-                       readFile(selectfile);
-                        updateTable();
-                       
-                       // JOptionPane.showMessageDialog(null, content, "File Content", JOptionPane.INFORMATION_MESSAGE);
-                   } catch (IOException ex) {
-                       // JOptionPane.showMessageDialog(null, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
-                   }
-               }   
-           }
-       });
-
-        bt_count.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == bt_count){
-                    setCount(Integer.parseInt(input_count.getText()));
-                    updateTable();
-                }
-            }
-            
-        });
-
-         input_bt.add(bt);
-         input_bt.add(Label);
-         input_bt.add(bt_count);
-         input_bt.add(input_count);
-        
-        return input_bt;
-    }
-    public void actionPerformed(ActionEvent e) {
-        // ไม่ได้ใช้ในโค้ดนี้ แต่ต้องมีเพราะ implements ActionListener
-    }
-    private void updateTable() {
-        // Remove old components and update the table with new data
-        tablePanel.removeAll();
-        Panel_table newTable = new Panel_table(pm25);
-        tablePanel.add(newTable);
-        tablePanel.revalidate();
-        tablePanel.repaint();
-    }
-    public void readFile(File file) throws IOException {
-        // StringBuilder content = new StringBuilder();
-       
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            int i=0;
-            while ((line = br.readLine()) != null) {
-                int j=0;
-                // content.append(line).append("\n");
-                StringTokenizer tk = new StringTokenizer(line);
-                
-                for(;tk.hasMoreTokens();){
-                    int data = Integer.parseInt(tk.nextToken());
-                    System.out.print(data+" ");
-                    this.pm25[i][j] = data;
-                    j++;
-                }
-                System.out.print("|"+"\n");
-                i++;
-            }
-        }
-    }
-
-    private void setCount(int num){
-        this.people = num;
-        System.out.print(this.people);
-    }
-    
-
-    public int[][] getpm(){
-        return this.pm25;
-    }
-
-    public int getcount(){
-        return this.people;
-    }
-
-   
 }

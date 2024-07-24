@@ -8,8 +8,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-
-
+ 
+ 
 public class ColorPanel extends JPanel {
     Color rectColor;
     Color bgColor;
