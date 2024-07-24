@@ -34,7 +34,7 @@ public class StudentIDCardLayout extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               System.out.println("555555");
+                System.out.println("555555");
             }
 
         });
@@ -49,9 +49,9 @@ public class StudentIDCardLayout extends JFrame {
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา",
                 "66011212124"));
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร",
-        "66011212106"));
+                "66011212106"));
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น",
-        "66011212079"));
+                "66011212079"));
 
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
