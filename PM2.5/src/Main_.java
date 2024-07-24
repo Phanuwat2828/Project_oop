@@ -9,21 +9,24 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
+import javax.swing.JLayeredPane;
 // import java.util.concurrent.Flow;
-
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
-import org.w3c.dom.css.Rect;
 
 import component.Color_all;
 import component.Button_input;
 import component.ColorPanel;
 import component.Table;
 import component.ColorRectangle;
+import component.buttonRain;
+import component.middle;
+
 
 public class Main_ {
     public static void main(String[] args) {
@@ -56,26 +59,48 @@ public class Main_ {
         // ================== content_2 ===================
         JPanel Rain = new JPanel();
         JPanel Status = new JPanel();
-        JPanel x = new JPanel();
+        middle manageRect = new middle();
+
+        JLayeredPane layeredPane = manageRect.manageRect_all();
+        Status.add(layeredPane);
+
+
         Status.setPreferredSize(new Dimension(450,480));
-        Status.setBackground(new Color_all().cl_bg_red);
+        Status.setBackground(null);
+
         Rain.setPreferredSize(new Dimension(450,200));
         Rain.setBackground(new Color_all().cl_bg_gray);
+//Rain
+        buttonRain btnRain = new buttonRain();
+        JButton rainButton = btnRain.rain();
+        Rain.setLayout(null); 
+        Rain.add(rainButton);
+
+//Atificial Rain
+        buttonRain btnRainTwo = new buttonRain();
+        JButton rainButtonTwo = btnRainTwo.rain_two();
+        Rain.setLayout(null); 
+        Rain.add(rainButtonTwo);
+
         content_2.setPreferredSize(new Dimension(450,700));
-        // content_2.setLocation(800,0);
         content_2.setBackground(new Color_all().cl_bg_white);
+        // content_2.setLocation(800,0);
+        
+
+        // content_2.setBackground(new Color_all().cl_bg_white);
+        
         content_2.add(Status);
         content_2.add(Rain);
-            
+  
 
-
+  
         // ====================== Tabbar ==================
         // Create the panels that will draw rectangles with different background colors
         JPanel redPanel = new ColorPanel(Color.RED, new Color(255, 200, 200),"มากกว่า 30%");
         JPanel orangePanel = new ColorPanel(new Color(255, 125, 0), new Color(255, 200, 150),"ตั้งแต่ 20-29%");
         JPanel yellowPanel = new ColorPanel(Color.YELLOW, new Color(255, 255, 200),"ตั้งแต่ 10-19%");
         JPanel greenPanel = new ColorPanel(Color.GREEN, new Color(200, 255, 200),"ตั้งแต่ 0-9%");
-
+         
         // Add the color panels to panel2
         Tapbar.add(redPanel);
         Tapbar.add(orangePanel);
