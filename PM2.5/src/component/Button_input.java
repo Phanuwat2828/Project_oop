@@ -133,7 +133,8 @@ public class Button_input extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 set_statusRain(!get_statusRain());
                 updateTable(pm25, people,get_statusfile());
-                btn2.setText(get_statusRain() ? "Select Area" : "Atificial Rain");
+                btn2.setText(get_statusRain() ? "Stop": "Atificial Rain");
+                btn2.setBackground(get_statusRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
             }
         });
 
