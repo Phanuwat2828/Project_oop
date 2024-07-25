@@ -55,19 +55,19 @@ public class Panel_table extends JPanel implements ActionListener {
                         Color color[] = new Color[2];
                         Random rn = new Random();
                         if (data >= 0 && data <= 50) {
-                            persen = rn.nextInt(0, 10);
+                            persen = (int) (Math.random() * (10 )) + 0; // สุ่มตัวเลขตั้งแต่ 0 ถึง 9 แล้วบวก 10
                             color[0] = Color.GREEN;
                             color[1] = cl_all.cl_li_green;
                         } else if (data >= 51 && data <= 100) {
-                            persen = rn.nextInt(11, 20);
+                            persen = (int) (Math.random() * (20 - 10)) + 10;
                             color[0] = Color.YELLOW;
                             color[1] = cl_all.cl_li_yellow;
                         } else if (data >= 101 && data <= 150) {
-                            persen = rn.nextInt(20, 30);
+                            persen = (int) (Math.random() * (30 - 20)) + 20;
                             color[0] = cl_all.cl_bg_or;
                             color[1] = cl_all.cl_li_or;
                         } else if (data >= 151 && data <= 250) {
-                            persen = rn.nextInt(30, 51);
+                            persen = (int) (Math.random() * (51 - 30)) + 30;
                             color[0] = Color.RED;
                             color[1] = cl_all.cl_li_red;
                         }
