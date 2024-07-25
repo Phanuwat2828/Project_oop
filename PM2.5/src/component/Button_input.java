@@ -27,6 +27,7 @@ public class Button_input extends JFrame implements ActionListener {
     private JPanel tablePanel;
     private JPanel status;
     private Boolean status_rain = false;
+    private Boolean status_file = false;
 
     public JPanel button(JPanel panelTable, JPanel status) {
         this.tablePanel = panelTable;
@@ -63,13 +64,12 @@ public class Button_input extends JFrame implements ActionListener {
                     try {
                         readFile(selectfile);
                         reset_status();
-                        updateTable(getPm(), getPeople());
+                        updateTable(getPm(), getPeople(),get_statusfile());
 
                         // JOptionPane.showMessageDialog(null, content, "File Content",
                         // JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
-                        // JOptionPane.showMessageDialog(null, "Error reading file", "Error",
-                        // JOptionPane.ERROR_MESSAGE);
+                       System.out.println(ex);
                     }
                 }
             }
@@ -80,7 +80,7 @@ public class Button_input extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == bt_count) {
                     setCount(Integer.parseInt(input_count.getText()));
-                    updateTable(getPm(), getPeople());
+                    updateTable(getPm(), getPeople(),get_statusfile());
                     reset_status();
                 }
             }
@@ -97,9 +97,9 @@ public class Button_input extends JFrame implements ActionListener {
 
     public JButton rain() {
         JButton btn = new JButton("RAIN");
-        btn.setBounds(20, 50, 170, 70);
+        btn.setBounds(20, 20, 170, 70);
         btn.setBackground(new Color(215, 156, 229));
-        btn.setFont(new Font_all().font_kanit(20, "Bold"));
+        btn.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
         btn.addActionListener(new ActionListener() {
 
             @Override
@@ -113,7 +113,7 @@ public class Button_input extends JFrame implements ActionListener {
                         }
                     }
                     setPm(data);
-                    updateTable(getPm(), getPeople());
+                    updateTable(getPm(), getPeople(),get_statusfile());
                     reset_status();
 
                 }
@@ -124,16 +124,31 @@ public class Button_input extends JFrame implements ActionListener {
 
     public JButton rain_two() {
         JButton btn2 = new JButton("Atificial Rain");
-        btn2.setBounds(250, 50, 170, 70);
+        btn2.setBounds(250, 20, 170, 70);
         btn2.setBackground(new Color(215, 156, 229));
-        btn2.setFont(new Font_all().font_kanit(20, "Bold"));
+        btn2.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
 
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 set_statusRain(!get_statusRain());
-                updateTable(pm25, people);
+                updateTable(pm25, people,get_statusfile());
                 btn2.setText(get_statusRain() ? "Select Area" : "Atificial Rain");
+            }
+        });
+
+        return btn2;
+    }
+    public JButton back() {
+        JButton btn2 = new JButton("Back to Manu");
+        btn2.setBounds(20, 150, 170, 40);
+        btn2.setBackground(new Color_all().cl_bg_red);
+        btn2.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
+        btn2.setForeground(new Color_all().cl_bg_white);
+        btn2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.print("Back");
             }
         });
 
@@ -148,6 +163,10 @@ public class Button_input extends JFrame implements ActionListener {
         return this.status_rain;
     }
 
+    public Boolean get_statusfile() {
+        return this.status_file;
+    }
+
     public void actionPerformed(ActionEvent e) {
         // ไม่ได้ใช้ในโค้ดนี้ แต่ต้องมีเพราะ implements ActionListener
     }
@@ -155,7 +174,7 @@ public class Button_input extends JFrame implements ActionListener {
     public void reset_status() {
         this.status.removeAll();
         Color color_t[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
-        middle new_status = new middle(new int[5], color_t);
+        middle new_status = new middle(new int[6], color_t);
         this.status.add(new_status);
 
     }
@@ -176,10 +195,10 @@ public class Button_input extends JFrame implements ActionListener {
         this.people = people;
     }
 
-    private void updateTable(int[][] pm, int people_) {
+    private void updateTable(int[][] pm, int people_,boolean status_file) {
         // Remove old components and update the table with new data
         tablePanel.removeAll();
-        Panel_table newTable = new Panel_table(pm, people_, status, get_statusRain());
+        Panel_table newTable = new Panel_table(pm, people_, status, get_statusRain(),status_file);
         tablePanel.add(newTable);
         tablePanel.revalidate();
         tablePanel.repaint();
@@ -189,6 +208,7 @@ public class Button_input extends JFrame implements ActionListener {
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
+            this.status_file = true;
             int i = 0;
             while ((line = br.readLine()) != null) {
                 int j = 0;

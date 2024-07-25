@@ -18,10 +18,10 @@ public class Main_ {
     public static void main(String[] args) {
         JFrame frame = new JFrame("PM2.5 version alpha");
         Button_input bt_input = new Button_input();
-        int data_start[] = new int[5];
+        int data_start[] = new int[6];
         Color color_t[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
         middle box_status = new middle(data_start, color_t);
-        Panel_table panelTable = new Panel_table(new int[10][20], 5000, box_status, false);
+        Panel_table panelTable = new Panel_table(new int[10][20], 5000, box_status, false,false);
         Color_all color_all = new Color_all();
         JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         JPanel content_1 = new JPanel();
@@ -67,13 +67,17 @@ public class Main_ {
         Rain.add(rainButton);
 
         JButton rainButtonTwo = bt_input.rain_two();
-        Rain.setLayout(null);
+        // Rain.setLayout(null);
         Rain.add(rainButtonTwo);
         content_2.setPreferredSize(new Dimension(450, 700));
+
+        JButton back = bt_input.back();
+        Rain.add(back);
         // content_2.setLocation(800,0);
         content_2.setBackground(null);
         content_2.add(Status);
         content_2.add(Rain);
+        
 
         // ====================== Tabbar ==================
         // Create the panels that will draw rectangles with different background colors
