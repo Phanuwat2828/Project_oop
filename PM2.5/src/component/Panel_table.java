@@ -5,82 +5,58 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Panel_table extends JPanel implements ActionListener {
     private int[][] pm25;
-    private int people = 5000;
+    private Data data_tr;
+    private int people[][];
+    // ================== Constructer ===============
 
-    public Panel_table(int[][] pm, int people, JPanel data, Boolean status_Rain , Boolean status_file) {
-        this.pm25 = pm;
-        this.people = people;
+    public Panel_table(JPanel data,Data data_tr) {
+        this.pm25 = data_tr.getPm25();
+        this.people = data_tr.getPeople();
+        this.data_tr = data_tr;
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 8));
         setPreferredSize(new Dimension(705, 500));
         setBackground(null);
-        updateTable(data, status_Rain,status_file);
+        updateTable(data);
     }
 
-    public void updateTable(JPanel status, Boolean status_Rain ,Boolean status_file) {
+    public void updateTable(JPanel status) {
         removeAll(); // ล้างคอมโพเนนต์เดิม
         int box_number = 0;
         for (int i = 0; i < pm25.length; i++) {
             for (int j = 0; j < pm25[i].length; j++) {
+                // =========== Variable =================
+
                 box_number += 1;
-                int row = i, coloumn = j, people_in = this.people, number = box_number;
+                int row = i, coloumn = j, people_in = this.people[row][coloumn], number = box_number;
+    
+                // ======================================
+
                 JButton bt = new JButton();
                 bt.setPreferredSize(new Dimension(33, 33));
-                if (pm25[i][j] >= 0 && pm25[i][j] <= 50) {
-                    bt.setBackground(Color.GREEN);
-                } else if (pm25[i][j] >= 51 && pm25[i][j] <= 100) {
-                    bt.setBackground(Color.YELLOW);
-                } else if (pm25[i][j] >= 101 && pm25[i][j] <= 150) {
-                    bt.setBackground(new Color(255, 125, 0));
-                } else if (pm25[i][j] >= 151) {
-                    bt.setBackground(Color.RED);
-                } else if(pm25[i][j]<0){
-                    bt.setBackground( new Color(135, 135, 135));
-                }
-                if(!status_file){
-                    bt.setBackground( new Color(135, 135, 135));
-                }
-                bt.addActionListener(new ActionListener() {
-                    int data_1[] = new int[6];
+                data_tr.setStatus_all(i, j);
+                bt.setBackground(data_tr.getColorbt());  
 
+                // ======================================
+                if(!data_tr.getFile()){
+                    bt.setBackground(new Color(135, 135, 135));
+                }
+
+                bt.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int data = pm25[row][coloumn];
-                        float persen = 0;
-                        Color_all cl_all = new Color_all();
-                        Color color[] = new Color[2];
-                        Random rn = new Random();
-                        if (data >= 0 && data <= 50) {
-                            persen = (int) (Math.random() * (10 )) + 0; // สุ่มตัวเลขตั้งแต่ 0 ถึง 9 แล้วบวก 10
-                            color[0] = Color.GREEN;
-                            color[1] = cl_all.cl_li_green;
-                        } else if (data >= 51 && data <= 100) {
-                            persen = (int) (Math.random() * (20 - 10)) + 10;
-                            color[0] = Color.YELLOW;
-                            color[1] = cl_all.cl_li_yellow;
-                        } else if (data >= 101 && data <= 150) {
-                            persen = (int) (Math.random() * (30 - 20)) + 20;
-                            color[0] = cl_all.cl_bg_or;
-                            color[1] = cl_all.cl_li_or;
-                        } else if (data >= 151) {
-                            persen = (int) (Math.random() * (51 - 30)) + 30;
-                            color[0] = Color.RED;
-                            color[1] = cl_all.cl_li_red;
-                        }else if(data<0){
-                            persen = 0;
-                            color[0] = new Color(135, 135, 135);
-                            color[1] = new Color(215, 215, 215) ;
-                        }
-                        
+                        int data_1[] = new int[6];
+                        data_tr.setStatus_all(row, coloumn);
+                        Color color[] = data_tr.getColor_status();
+                        float persen = data_tr.getPersen();
                         persen *= 0.01;
-                        if (!status_Rain) {
-                            if(status_file){
+                        if (!data_tr.getRain()) {
+                            if(data_tr.getFile()){
                                 persen = formatFloat(persen, 2);
                                 status.removeAll();
                                 data_1[0] = pm25[row][coloumn];
@@ -89,14 +65,14 @@ public class Panel_table extends JPanel implements ActionListener {
                                 data_1[3] = (int) (people_in * persen);
                                 data_1[4] = (people_in - (int) (people_in * persen));
                                 data_1[5] = number;
-            
+    
                                 middle re_status = new middle(data_1, color);
                                 status.add(re_status);
                                 status.revalidate();
                                 status.repaint();
-                            }else{
+                            } else {
                                 color[0] = new Color(135, 135, 135);
-                                color[1] = new Color(215, 215, 215) ;
+                                color[1] = new Color(215, 215, 215);
                                 persen = formatFloat(persen, 2);
                                 status.removeAll();
                                 data_1[0] = pm25[row][coloumn];
@@ -105,24 +81,21 @@ public class Panel_table extends JPanel implements ActionListener {
                                 data_1[3] = 0;
                                 data_1[4] = people_in;
                                 data_1[5] = number;
-            
+    
                                 middle re_status = new middle(data_1, color);
                                 status.add(re_status);
                                 status.revalidate();
                                 status.repaint();
                             }
-                            
                         } else {
                             setRain(row, coloumn);
-                            updateTable(status, status_Rain,status_file);
+                            updateTable(status);
                             status.removeAll();
                             Color color_t[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
                             middle new_status = new middle(new int[6], color_t);
                             status.add(new_status);
                         }
-
                     }
-
                 });
                 add(bt);
             }
@@ -130,36 +103,31 @@ public class Panel_table extends JPanel implements ActionListener {
         revalidate();
         repaint();
     }
-
+    
+    // =================== Change Data ================== ฝนเทียม
     public void setRain(int row, int col) {
         // 50%
-        this.pm25[row][col] = (int) (this.pm25[row][col] * 0.5);
+        data_tr.setPm25(row,col,(int) (this.pm25[row][col] * 0.5));
         // 30%
         for (int i = row - 1; i <= row + 1; i++) {
             for (int j = col - 1; j <= col + 1; j++) {
                 if (i >= 0 && i < 10 && j >= 0 && j < 20 && !(i == row && j == col)) {
-                    this.pm25[i][j] = (int) (this.pm25[i][j] * 0.7);
+                    data_tr.setPm25(i,j,(int) (this.pm25[i][j] * 0.7));
                 }
             }
         }
 
     }
-
-    public float formatFloat(float value, int decimalPlaces) {
-        String formatString = String.format("%." + decimalPlaces + "f", value);
-        return Float.parseFloat(formatString);
+    // ============ Format Float ====================
+    private float formatFloat(float value, int decimalPlaces) {
+        float scale = (float) Math.pow(10, decimalPlaces);
+        return Math.round(value * scale) / scale;
     }
-
-    public int[][] getPm() {
-        return this.pm25;
-    }
-
-    public void setPm(int[][] pm) {
-        this.pm25 = pm;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
+
+
+   
 }

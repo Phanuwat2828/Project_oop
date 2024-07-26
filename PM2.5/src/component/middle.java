@@ -37,8 +37,32 @@ public class middle extends JPanel {
             JLabel lable = new JLabel();
             pn3.setPreferredSize(new Dimension(320, 50));
             pn3.setBackground(new Color(255, 255, 255));
-            lable.setText(i !=2 ? name[i] + " "+data[i]:name[i] + " " + data[i] + " %");
-            lable.setText(data[i] <0 && i==0 ? name[i] + " Error Pm2.5 "+data[i]:name[i] + " "+data[i]);
+            // ================== Error Color ================
+            if (i == 1 || i == 4) {
+            
+                if (data[1] == -200) {
+                    lable.setText(name[i] + " !Example \"4000\"or\"10-20\"");
+                    lable.setForeground(new Color_all().cl_bg_red);
+                } else if (data[1] == -300) {
+                    lable.setText(name[i] + " !Please Integer \"4000\"or\"10-20\"");
+                    lable.setForeground(new Color_all().cl_bg_red);
+                } else {
+                    lable.setText(name[i] + " " + data[i]);
+                }
+            } else {
+                if (i != 2) {
+                    lable.setText(name[i] + " " + data[i]);
+                } else {
+                    lable.setText(name[i] + " " + data[i] + " %");
+                }
+            
+                if (data[i] < 0 && i == 0) {
+                    lable.setText(name[i] + " Error Pm2.5 " + data[i]);
+                    lable.setForeground(new Color_all().cl_bg_red);
+                }
+            }
+            
+            
             lable.setFont(i==0?new Font_all().font_kanit(20, "Kanit-Bold.ttf"):new Font_all().font_kanit(14, "Kanit-Bold.ttf") );
             pn3.add(lable);
             pn3A[i] = pn3;
@@ -47,11 +71,8 @@ public class middle extends JPanel {
         return pn3A;
     }
 
-    // JLayeredPane ช่วยจัดตำแหน่ง
-    public middle(int data[], Color color[]) {
-        // JLayeredPane layeredPane = new JLayeredPane();
-        // layeredPane.setPreferredSize(new Dimension(450, 500));
 
+    public middle(int data[], Color color[]) {
         JPanel bigPanel = big(color[1]);
         JPanel middlePanel = middlerect(color[0]);
         JPanel[] smallPanels = smallrect(data);

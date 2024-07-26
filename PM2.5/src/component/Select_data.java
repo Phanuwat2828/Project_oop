@@ -19,36 +19,44 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Button_input extends JFrame implements ActionListener {
-    private int people = 5000;
-    private int[][] pm25 = new int[10][20];
+
+public class Select_data extends JFrame implements ActionListener {
+    // ================ Attribute ======================== 
+    private Data data_tr ;
     private JButton bt_count = new JButton("Enter");
-    JTextField input_count = new JTextField(Integer.toString(this.people));
+    JTextField input_count = new JTextField("5000");
     private JPanel tablePanel;
     private JPanel status;
-    private Boolean status_rain = false;
-    private Boolean status_file = false;
+    private int start =0;
+    private int end =0;
+    // =================================================
 
-    public JPanel button(JPanel panelTable, JPanel status) {
+    public JPanel button(JPanel panelTable, JPanel status,Data data_tr) {
+        // ================ Setdata ==========
         this.tablePanel = panelTable;
         this.status = status;
+        this.data_tr = data_tr;
+        // ======================================
+
+        // =================== Layout ============-=============
         JPanel input_bt = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 17));
-        input_bt.setPreferredSize(new Dimension(800, 80));
-        input_bt.setBackground(null);
-
         JButton bt = new JButton("Select File");
-        bt.setPreferredSize(new Dimension(100, 35));
-        bt.setBackground(new Color_all().cl_bg_bt);
         JLabel Label = new JLabel();
-        Label.setFont(new Font_all().font_kanit(17, "Kanit-Bold.ttf"));
-
+        // =====================================================
+        
+        // =================== set ==============================
+        input_bt.setPreferredSize(new Dimension(800, 80));
+        bt.setPreferredSize(new Dimension(100, 35));
         bt_count.setPreferredSize(new Dimension(100, 35));
-        bt_count.setBackground(new Color_all().cl_bg_bt);
-
         input_count.setPreferredSize(new Dimension(200, 35));
-
         Label.setPreferredSize(new Dimension(300, 35));
-        // // เพิ่ม ActionListener ให้กับปุ่ม openButton
+
+        Label.setFont(new Font_all().font_kanit(17, "Kanit-Bold.ttf"));
+        bt_count.setBackground(new Color_all().cl_bg_bt);
+        bt.setBackground(new Color_all().cl_bg_bt);
+        input_bt.setBackground(null);
+        // =========================================================
+
         bt.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
@@ -58,16 +66,13 @@ public class Button_input extends JFrame implements ActionListener {
 
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    // ดึงชื่อไฟล์และตั้งค่าให้กับ JLabel
+
                     File selectfile = fileChooser.getSelectedFile();
                     Label.setText(selectfile.getName());
                     try {
                         readFile(selectfile);
                         reset_status();
-                        updateTable(getPm(), getPeople(),get_statusfile());
-
-                        // JOptionPane.showMessageDialog(null, content, "File Content",
-                        // JOptionPane.INFORMATION_MESSAGE);
+                        updateTable();
                     } catch (IOException ex) {
                        System.out.println(ex);
                     }
@@ -79,13 +84,20 @@ public class Button_input extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == bt_count) {
-                    setCount(Integer.parseInt(input_count.getText()));
-                    updateTable(getPm(), getPeople(),get_statusfile());
+                    String data = input_count.getText();
+                   for(int i=0;i<10;i++){
+                    for(int j=0;j<20;j++){
+                        setPeople(i, j, data);
+                    }
+                   }
+
+                    updateTable();
                     reset_status();
                 }
             }
 
         });
+        // ================== add ====================
 
         input_bt.add(bt);
         input_bt.add(Label);
@@ -95,6 +107,7 @@ public class Button_input extends JFrame implements ActionListener {
         return input_bt;
     }
 
+    // ================== Rain ================= ฝนธรรมชาติ
     public JButton rain() {
         JButton btn = new JButton("RAIN");
         btn.setBounds(20, 20, 170, 70);
@@ -104,16 +117,15 @@ public class Button_input extends JFrame implements ActionListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int data[][] = new int[10][20];
-                data = getPm();
+                int data[][] = data_tr.getPm25();
                 if (e.getSource() == btn) {
                     for (int i = 0; i < 10; i++) {
                         for (int j = 0; j < 20; j++) {
                             data[i][j] = (int) (data[i][j] * 0.5);
                         }
                     }
-                    setPm(data);
-                    updateTable(getPm(), getPeople(),get_statusfile());
+                    data_tr.setPm25(data);
+                    updateTable();
                     reset_status();
 
                 }
@@ -122,6 +134,7 @@ public class Button_input extends JFrame implements ActionListener {
         return btn;
     }
 
+    // ==================== Rain ================ ฝนเทียม
     public JButton rain_two() {
         JButton btn2 = new JButton("Atificial Rain");
         btn2.setBounds(250, 20, 170, 70);
@@ -131,15 +144,17 @@ public class Button_input extends JFrame implements ActionListener {
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                set_statusRain(!get_statusRain());
-                updateTable(pm25, people,get_statusfile());
-                btn2.setText(get_statusRain() ? "Stop": "Atificial Rain");
-                btn2.setBackground(get_statusRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
+                data_tr.setRain(!data_tr.getRain());
+                updateTable();
+                btn2.setText(data_tr.getRain() ? "Stop": "Atificial Rain");
+                btn2.setBackground(data_tr.getRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
             }
         });
 
         return btn2;
     }
+
+    // ================== Back ==================== กลับไป menu
     public JButton back() {
         JButton btn2 = new JButton("Back to Manu");
         btn2.setBounds(20, 150, 170, 40);
@@ -156,22 +171,12 @@ public class Button_input extends JFrame implements ActionListener {
         return btn2;
     }
 
-    public void set_statusRain(Boolean status) {
-        this.status_rain = status;
-    }
-
-    public Boolean get_statusRain() {
-        return this.status_rain;
-    }
-
-    public Boolean get_statusfile() {
-        return this.status_file;
-    }
-
     public void actionPerformed(ActionEvent e) {
-        // ไม่ได้ใช้ในโค้ดนี้ แต่ต้องมีเพราะ implements ActionListener
+       
     }
 
+
+    // =================== Status =============== reset ค่าในstatus
     public void reset_status() {
         this.status.removeAll();
         Color color_t[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
@@ -180,36 +185,23 @@ public class Button_input extends JFrame implements ActionListener {
 
     }
 
-    public int[][] getPm() {
-        return this.pm25;
-    }
 
-    public void setPm(int[][] pm) {
-        this.pm25 = pm;
-    }
 
-    public int getPeople() {
-        return this.people;
-    }
-
-    public void setPeople(int people) {
-        this.people = people;
-    }
-
-    private void updateTable(int[][] pm, int people_,boolean status_file) {
-        // Remove old components and update the table with new data
+    // ================== Udate ================== Upsate ค่า table
+    private void updateTable() {
         tablePanel.removeAll();
-        Panel_table newTable = new Panel_table(pm, people_, status, get_statusRain(),status_file);
+        Panel_table newTable = new Panel_table(status, data_tr);
         tablePanel.add(newTable);
         tablePanel.revalidate();
         tablePanel.repaint();
     }
 
+    // =================== Read ================ อ่าน ไฟล์
     public void readFile(File file) throws IOException {
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            this.status_file = true;
+            data_tr.setFile(true);
             int i = 0;
             while ((line = br.readLine()) != null) {
                 int j = 0;
@@ -223,10 +215,10 @@ public class Button_input extends JFrame implements ActionListener {
                         int data = Integer.parseInt(data_str);
                         System.out.print(data + " ");
                  
-                        this.pm25[i][j] = data;
+                        data_tr.setPm25(i, j, data);
                     }else{
                         System.out.print(data_str + " ");
-                        this.pm25[i][j] = -1;
+                        data_tr.setPm25(i, j, -1);
                     }
                     j++;
                 }
@@ -236,6 +228,7 @@ public class Button_input extends JFrame implements ActionListener {
         }
     }
 
+    // ==================== Check_data Pm2.5 ========= เช็ค ว่ามี text ใน file txt
     public Boolean check_data(String data){
         Boolean check_str = false;
         for(int i=0;i<data.length();i++){
@@ -250,9 +243,45 @@ public class Button_input extends JFrame implements ActionListener {
 
     }
 
-    private void setCount(int num) {
-        this.people = num;
-        System.out.print(this.people);
+    // ====================== Process data People ============ แปลงข้อมูลจำนวณคน
+    public void setPeople(int row,int col,String people_func){
+        String people = people_func;
+        int data;
+        if(people.contains("-")){
+            String pe[] = people.split("[-]");
+            
+            if(pe.length-1==1 && pe.length==2){
+                try {
+                    int data_random[] = new int[2];
+                    data_random[0] = Integer.parseInt(pe[0]);
+                    data_random[1] = Integer.parseInt(pe[1]);
+                 
+
+                    if (data_random[0] > data_random[1]) {
+                        this.end=data_random[0];
+                        this.start = data_random[1];
+                    }else {
+                        this.end=data_random[1];
+                        this.start = data_random[0];
+                    }
+
+                    if(end==start){
+                        data = start;
+                    }else{
+                        data = (int) (Math.random() * (end - start + 1)) + start;
+                    }
+                } catch (NumberFormatException e) {
+                    data= -200; // Handle number format exception
+                }
+            }else{
+                data = -200;
+            }
+        }else if(people.matches("\\d+")){ 
+            data = Integer.parseInt(people);
+        }else{
+            data = -300;
+        }
+        data_tr.setPeople(row, col, data);
     }
 
 }
