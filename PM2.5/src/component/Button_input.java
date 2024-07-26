@@ -217,15 +217,37 @@ public class Button_input extends JFrame implements ActionListener {
                 StringTokenizer tk = new StringTokenizer(line);
 
                 for (; tk.hasMoreTokens();) {
-                    int data = Integer.parseInt(tk.nextToken());
-                    System.out.print(data + " ");
-                    this.pm25[i][j] = data;
+                    String data_str = tk.nextToken();
+
+                    if(check_data(data_str)){
+                        int data = Integer.parseInt(data_str);
+                        System.out.print(data + " ");
+                 
+                        this.pm25[i][j] = data;
+                    }else{
+                        System.out.print(data_str + " ");
+                        this.pm25[i][j] = -1;
+                    }
                     j++;
                 }
                 System.out.print("|" + "\n");
                 i++;
             }
         }
+    }
+
+    public Boolean check_data(String data){
+        Boolean check_str = false;
+        for(int i=0;i<data.length();i++){
+            if(Character.isDigit(data.charAt(i)) || data.charAt(i)=='-'){
+                check_str = true;
+            }else{
+                check_str = false;
+                break;
+            }
+        }
+        return check_str;
+
     }
 
     private void setCount(int num) {

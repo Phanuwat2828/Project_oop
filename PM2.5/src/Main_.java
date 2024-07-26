@@ -13,6 +13,10 @@ import component.ColorPanel;
 import component.middle;
 import component.Button_input;
 import component.Panel_table;
+// ================= ที่ต้องทำ 
+// รับค่า  เป็นช่วงได้ และ เมื่อมีรับที่ไม่ไช่เลขให้แจ้ง error
+// ค่าในไฟล์ มีค่า eeror ให้แจ้ง ถ้าเป็นตัวหนังสือให้เปลี่ยนเป็น -1
+// 
 
 public class Main_ {
     public static void main(String[] args) {

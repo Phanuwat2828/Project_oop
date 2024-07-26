@@ -38,8 +38,10 @@ public class Panel_table extends JPanel implements ActionListener {
                     bt.setBackground(Color.YELLOW);
                 } else if (pm25[i][j] >= 101 && pm25[i][j] <= 150) {
                     bt.setBackground(new Color(255, 125, 0));
-                } else if (pm25[i][j] >= 151 && pm25[i][j] <= 250) {
+                } else if (pm25[i][j] >= 151) {
                     bt.setBackground(Color.RED);
+                } else if(pm25[i][j]<0){
+                    bt.setBackground( new Color(135, 135, 135));
                 }
                 if(!status_file){
                     bt.setBackground( new Color(135, 135, 135));
@@ -66,10 +68,14 @@ public class Panel_table extends JPanel implements ActionListener {
                             persen = (int) (Math.random() * (30 - 20)) + 20;
                             color[0] = cl_all.cl_bg_or;
                             color[1] = cl_all.cl_li_or;
-                        } else if (data >= 151 && data <= 250) {
+                        } else if (data >= 151) {
                             persen = (int) (Math.random() * (51 - 30)) + 30;
                             color[0] = Color.RED;
                             color[1] = cl_all.cl_li_red;
+                        }else if(data<0){
+                            persen = 0;
+                            color[0] = new Color(135, 135, 135);
+                            color[1] = new Color(215, 215, 215) ;
                         }
                         
                         persen *= 0.01;

@@ -28,7 +28,7 @@ public class middle extends JPanel {
 
     // 5 ช่่อง
     public JPanel[] smallrect(int data[]) {
-        String data_1[] = { "PM2.5 : ","People : ", "Persen : ", "People Sick :", "People good: ", "Number : " };
+        String name[] = { "PM2.5 : ","People : ", "Persen : ", "People Sick :", "People good: ", "Number : " };
         JPanel[] pn3A = new JPanel[6];
        
         
@@ -37,18 +37,9 @@ public class middle extends JPanel {
             JLabel lable = new JLabel();
             pn3.setPreferredSize(new Dimension(320, 50));
             pn3.setBackground(new Color(255, 255, 255));
-            if (i != 2) {
-                lable.setText(data_1[i] + " " + data[i]);
-            } else {
-                lable.setText(data_1[i] + " " + data[i] + " %");
-            }
-            if(i==0){
-                lable.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
-            }else{
-                lable.setFont(new Font_all().font_kanit(14, "Kanit-Bold.ttf"));
-            }
-            
-
+            lable.setText(i !=2 ? name[i] + " "+data[i]:name[i] + " " + data[i] + " %");
+            lable.setText(data[i] <0 && i==0 ? name[i] + " Error Pm2.5 "+data[i]:name[i] + " "+data[i]);
+            lable.setFont(i==0?new Font_all().font_kanit(20, "Kanit-Bold.ttf"):new Font_all().font_kanit(14, "Kanit-Bold.ttf") );
             pn3.add(lable);
             pn3A[i] = pn3;
         }
