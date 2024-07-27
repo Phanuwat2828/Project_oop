@@ -10,15 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Panel_table extends JPanel implements ActionListener {
-    private int[][] pm25;
+
     private Data data_tr;
-    private int people[][];
+    private int[][] pm25 = new int[10][20];
     // ================== Constructer ===============
 
     public Panel_table(JPanel data,Data data_tr) {
-        this.pm25 = data_tr.getPm25();
-        this.people = data_tr.getPeople();
         this.data_tr = data_tr;
+        this.pm25 = data_tr.getPm25();
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 8));
         setPreferredSize(new Dimension(705, 500));
         setBackground(null);
@@ -28,12 +27,12 @@ public class Panel_table extends JPanel implements ActionListener {
     public void updateTable(JPanel status) {
         removeAll(); // ล้างคอมโพเนนต์เดิม
         int box_number = 0;
-        for (int i = 0; i < pm25.length; i++) {
-            for (int j = 0; j < pm25[i].length; j++) {
+        for (int i = 0; i <  data_tr.getPm25().length; i++) {
+            for (int j = 0; j <  data_tr.getPm25()[i].length; j++) {
                 // =========== Variable =================
 
                 box_number += 1;
-                int row = i, coloumn = j, people_in = this.people[row][coloumn], number = box_number;
+                int row = i, coloumn = j, number = box_number;
     
                 // ======================================
 
@@ -50,43 +49,16 @@ public class Panel_table extends JPanel implements ActionListener {
                 bt.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int data_1[] = new int[6];
                         data_tr.setStatus_all(row, coloumn);
                         Color color[] = data_tr.getColor_status();
                         float persen = data_tr.getPersen();
-                        persen *= 0.01;
                         if (!data_tr.getRain()) {
-                            if(data_tr.getFile()){
                                 persen = formatFloat(persen, 2);
                                 status.removeAll();
-                                data_1[0] = pm25[row][coloumn];
-                                data_1[1] = people_in;
-                                data_1[2] = (int) (persen * 100);
-                                data_1[3] = (int) (people_in * persen);
-                                data_1[4] = (people_in - (int) (people_in * persen));
-                                data_1[5] = number;
-    
-                                middle re_status = new middle(data_1, color);
+                                middle re_status = new middle(data_tr.getStatusData(row, coloumn, number), color);
                                 status.add(re_status);
                                 status.revalidate();
                                 status.repaint();
-                            } else {
-                                color[0] = new Color(135, 135, 135);
-                                color[1] = new Color(215, 215, 215);
-                                persen = formatFloat(persen, 2);
-                                status.removeAll();
-                                data_1[0] = pm25[row][coloumn];
-                                data_1[1] = people_in;
-                                data_1[2] = 0;
-                                data_1[3] = 0;
-                                data_1[4] = people_in;
-                                data_1[5] = number;
-    
-                                middle re_status = new middle(data_1, color);
-                                status.add(re_status);
-                                status.revalidate();
-                                status.repaint();
-                            }
                         } else {
                             setRain(row, coloumn);
                             updateTable(status);
@@ -103,7 +75,7 @@ public class Panel_table extends JPanel implements ActionListener {
         revalidate();
         repaint();
     }
-    
+
     // =================== Change Data ================== ฝนเทียม
     public void setRain(int row, int col) {
         // 50%

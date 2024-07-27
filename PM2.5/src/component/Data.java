@@ -74,25 +74,25 @@ public class Data {
         return false;
     }
 
-    public void setStatus_all(int i,int j){
-        if(people[i][j]>=0){
-            if (pm25[i][j] >= 0 && pm25[i][j] <= 50) {
+    public void setStatus_all(int row,int colunm){
+        if(people[row][colunm]>=0 && this.status_file){
+            if (pm25[row][colunm] >= 0 && pm25[row][colunm] <= 50) {
                 this.persen = (int) (Math.random() * (10)) + 0;
                 this.color_bt = Color.GREEN;
                 this.color_status = cl_all.getStatusGreen();
-            } else if (pm25[i][j] >= 51 && pm25[i][j] <= 100) {
+            } else if (pm25[row][colunm] >= 51 && pm25[row][colunm] <= 100) {
                 this.persen = (int) (Math.random() * (20 - 10)) + 10;
                 this.color_bt = Color.YELLOW;
                 this.color_status =cl_all.getStatusYellow();
-            } else if (pm25[i][j] >= 101 && pm25[i][j] <= 150) {
+            } else if (pm25[row][colunm] >= 101 && pm25[row][colunm] <= 150) {
                 this.persen = (int) (Math.random() * (30 - 20)) + 20;
                 this.color_bt = cl_all.cl_bg_or;
                 this.color_status = cl_all.getStatusOrange();
-            } else if (pm25[i][j] >= 151) {
+            } else if (pm25[row][colunm] >= 151) {
                 this.persen = (int) (Math.random() * (51 - 30)) + 30;
                 this.color_bt = Color.RED;
                 this.color_status =cl_all.getStatusRed();
-            } else if(pm25[i][j]<0){
+            } else if(pm25[row][colunm]<0){
                 this.persen = 0;
                 this.color_bt = new Color(135, 135, 135);
                 this.color_status =cl_all.getStatusGray();
@@ -102,7 +102,19 @@ public class Data {
             this.color_bt = new Color(135, 135, 135);
             this.color_status =cl_all.getStatusGray();
         }
+        this. persen *= 0.01;
         
+    }
+
+    public int[] getStatusData(int row,int col,int number_box){
+        int[] data = new int[6];
+        data[0] = this.pm25[row][col];
+        data[1] = this.people[row][col];
+        data[2] = (int) (this.persen * 100);
+        data[3] = (int) (people[row][col] * this.persen);
+        data[4] = (this.people[row][col] - (int) (this.people[row][col] * this.persen));
+        data[5] = number_box;
+        return data;
     }
 
     
