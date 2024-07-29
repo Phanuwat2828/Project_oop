@@ -22,9 +22,8 @@ import java.util.StringTokenizer;
 
 public class Select_data extends JFrame implements ActionListener {
     // ================ Attribute ======================== 
-    private Data data_tr ;
+    private Data data_tr;
     private JButton bt_count = new JButton("Enter");
-    JTextField input_count = new JTextField("5000");
     private JPanel tablePanel;
     private JPanel status;
     private int start =0;
@@ -39,25 +38,27 @@ public class Select_data extends JFrame implements ActionListener {
         // ======================================
 
         // =================== Layout ============-=============
+        JTextField input_count = new JTextField("5000");
         JPanel input_bt = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 17));
-        JButton bt = new JButton("Select File");
+        JButton bt_select_file = new JButton("Select File");
         JLabel Label = new JLabel();
         // =====================================================
         
         // =================== set ==============================
         input_bt.setPreferredSize(new Dimension(800, 80));
-        bt.setPreferredSize(new Dimension(100, 35));
+        bt_select_file.setPreferredSize(new Dimension(100, 35));
         bt_count.setPreferredSize(new Dimension(100, 35));
         input_count.setPreferredSize(new Dimension(200, 35));
         Label.setPreferredSize(new Dimension(300, 35));
 
         Label.setFont(new Font_all().font_kanit(17, "Kanit-Bold.ttf"));
         bt_count.setBackground(new Color_all().cl_bg_bt);
-        bt.setBackground(new Color_all().cl_bg_bt);
+        bt_select_file.setBackground(new Color_all().cl_bg_bt);
         input_bt.setBackground(null);
         // =========================================================
 
-        bt.addActionListener(new ActionListener() {
+        // =================== Submit ==========================
+        bt_select_file.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -85,11 +86,12 @@ public class Select_data extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == bt_count) {
                     String data = input_count.getText();
-                   for(int i=0;i<10;i++){
-                    for(int j=0;j<20;j++){
-                        setPeople(i, j, data);
+                    input_count.setText(null);
+                    for(int i=0;i<10;i++){
+                        for(int j=0;j<20;j++){
+                            setPeople(i, j, data);
+                        }
                     }
-                   }
 
                     updateTable();
                     reset_status();
@@ -99,7 +101,7 @@ public class Select_data extends JFrame implements ActionListener {
         });
         // ================== add ====================
 
-        input_bt.add(bt);
+        input_bt.add(bt_select_file);
         input_bt.add(Label);
         input_bt.add(bt_count);
         input_bt.add(input_count);
@@ -150,7 +152,6 @@ public class Select_data extends JFrame implements ActionListener {
                 btn2.setBackground(data_tr.getRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
             }
         });
-
         return btn2;
     }
 
@@ -280,6 +281,9 @@ public class Select_data extends JFrame implements ActionListener {
             data = Integer.parseInt(people);
         }else{
             data = -300;
+        }
+        if(data<0){
+            data_tr.setError(false);
         }
         data_tr.setPeople(row, col, data);
     }

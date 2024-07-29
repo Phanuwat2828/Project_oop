@@ -53,12 +53,12 @@ public class Panel_table extends JPanel implements ActionListener {
                         Color color[] = data_tr.getColor_status();
                         float persen = data_tr.getPersen();
                         if (!data_tr.getRain()) {
-                                persen = formatFloat(persen, 2);
-                                status.removeAll();
-                                middle re_status = new middle(data_tr.getStatusData(row, coloumn, number), color);
-                                status.add(re_status);
-                                status.revalidate();
-                                status.repaint();
+                            persen = formatFloat(persen, 2);
+                            status.removeAll();
+                            middle re_status = new middle(data_tr.getStatusData(row, coloumn, number), color);
+                            status.add(re_status);
+                            status.revalidate();
+                            status.repaint();
                         } else {
                             setRain(row, coloumn);
                             updateTable(status);

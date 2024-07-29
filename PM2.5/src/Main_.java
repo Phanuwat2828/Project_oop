@@ -13,6 +13,7 @@ import component.ColorPanel;
 import component.middle;
 import component.Select_data;
 import component.Panel_table;
+
 // ================= ที่ต้องทำ ==============
 // เกิความผิดพลาด ของโปรแกรม
 
@@ -24,7 +25,7 @@ public class Main_ {
         // ============================================================
 
         JFrame frame = new JFrame("PM2.5 version alpha");
-        Select_data bt_input = new Select_data();
+        Select_data Select_ = new Select_data();
         int data_start[] = new int[6];
         Color colorDefault[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
         middle box_status = new middle(data_start, colorDefault);
@@ -65,15 +66,15 @@ public class Main_ {
         Rain.setBackground(color_all.cl_bg_white);
         // Rain
 
-        JButton rainButton = bt_input.rain();
+        JButton rainButton = Select_.rain();
         Rain.setLayout(null);
         Rain.add(rainButton);
 
-        JButton rainButtonTwo = bt_input.rain_two();
+        JButton rainButtonTwo = Select_.rain_two();
         Rain.add(rainButtonTwo);
         content_2.setPreferredSize(new Dimension(450, 700));
 
-        JButton back = bt_input.back();
+        JButton back = Select_.back();
         Rain.add(back);
         content_2.setBackground(null);
         content_2.add(Status);
@@ -96,7 +97,7 @@ public class Main_ {
 
         // ====================== inputfile ==================
 
-        inputfile.add(bt_input.button(panelTable, box_status,data_tranfrom));
+        inputfile.add(Select_.button(panelTable, box_status,data_tranfrom));
         inputfile.setBackground(new Color_all().cl_bg_white);
 
         // ========================= add panel ===============================

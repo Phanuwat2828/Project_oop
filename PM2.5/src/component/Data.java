@@ -6,18 +6,23 @@ import javax.swing.JButton;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class Data {
+
     private int pm25[][] =new int[10][20];
     private int people[][] = new int[10][20];
     private Boolean status_rain = false;
     private Boolean status_file = false;
+    private Boolean status_Error = true;
     private String defualt_data = "5000";
     private Color_all cl_all = new Color_all();
+
     // ====================== Panel Table ======================
+
     private Color color_status[] = new Color[2];
     private float persen ;
     private Color color_bt ;
-    private int data_status;
+
     // ==================== Default Data ======================= 
+
     public Data(){
         for(int i=0;i<10;i++){
             for(int j=0;j<20;j++){
@@ -25,8 +30,10 @@ public class Data {
             }
         }
     }
+
     // =================== Real ===========================
        //================= Get Methode ===============
+
     public void setPeople(int x,int y,int data){
         this.people[x][y] = data;
     }
@@ -42,8 +49,12 @@ public class Data {
     public void setFile(Boolean data){
         this.status_file = data;
     }
+    public void setError(Boolean data){
+        this.status_Error = data;
+    }
 
         //================= Set Methode ===============
+
     public int[][] getPeople(){
         return this.people;
     }
@@ -52,6 +63,9 @@ public class Data {
     }
     public Boolean getRain(){
         return this.status_rain;
+    }
+    public Boolean getStatusError(){
+        return this.status_Error;
     }
     public Boolean getFile(){
         return this.status_file;
@@ -68,6 +82,7 @@ public class Data {
     public Color getColorbt(){
         return this.color_bt;
     }
+
         // =============== Create Data ================
 
     public Boolean Mistake(){
