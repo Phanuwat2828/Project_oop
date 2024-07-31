@@ -1,16 +1,23 @@
 package component;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class Data {
-
+    //  ArrayList<Float> persen = new ArrayList<>();
     private int pm25[][] ;
     private int people[][];
     private float persen[][];
+
+    // private ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>() ;
+    // private ArrayList<ArrayList<Integer>> people = new ArrayList<>() ;
+    // private ArrayList<ArrayList<Integer>> persen = new ArrayList<>() ;
+
+    
     private Boolean status_rain = false;
     private Boolean status_file = false;
     private Boolean status_Error = true;
