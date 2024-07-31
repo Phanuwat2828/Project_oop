@@ -1,14 +1,16 @@
 package component;
 
 import java.awt.Color;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class Data {
 
-    private int pm25[][] =new int[10][20];
-    private int people[][] = new int[10][20];
+    private int pm25[][] ;
+    private int people[][];
+    private float persen[][];
     private Boolean status_rain = false;
     private Boolean status_file = false;
     private Boolean status_Error = true;
@@ -18,7 +20,6 @@ public class Data {
     // ====================== Panel Table ======================
 
     private Color color_status[] = new Color[2];
-    private float persen ;
     private Color color_bt ;
 
     // ==================== Default Data ======================= 
@@ -41,6 +42,7 @@ public class Data {
         this.pm25[x][y] = data;
     }
     public void setPm25(int[][] data){
+        
         this.pm25 = data;
     }
     public void setRain(Boolean data){
@@ -76,8 +78,8 @@ public class Data {
     public Color[] getColor_status(){
         return this.color_status;
     }
-    public float getPersen(){
-        return this.persen;
+    public float getPersen(int row,int col){
+        return this.persen[row][col];
     }
     public Color getColorbt(){
         return this.color_bt;
@@ -89,35 +91,57 @@ public class Data {
         return false;
     }
 
+    public static boolean randomTrueWith5PercentChance(Double random_) {
+        Random random = new Random();
+        return random.nextDouble() < random_;
+    }
+
     public void setStatus_all(int row,int colunm){
         if(people[row][colunm]>=0 && this.status_file){
             if (pm25[row][colunm] >= 0 && pm25[row][colunm] <= 50) {
-                this.persen = (int) (Math.random() * (10)) + 0;
                 this.color_bt = Color.GREEN;
                 this.color_status = cl_all.getStatusGreen();
             } else if (pm25[row][colunm] >= 51 && pm25[row][colunm] <= 100) {
-                this.persen = (int) (Math.random() * (20 - 10)) + 10;
                 this.color_bt = Color.YELLOW;
                 this.color_status =cl_all.getStatusYellow();
             } else if (pm25[row][colunm] >= 101 && pm25[row][colunm] <= 150) {
-                this.persen = (int) (Math.random() * (30 - 20)) + 20;
                 this.color_bt = cl_all.cl_bg_or;
                 this.color_status = cl_all.getStatusOrange();
             } else if (pm25[row][colunm] >= 151) {
-                this.persen = (int) (Math.random() * (51 - 30)) + 30;
                 this.color_bt = Color.RED;
                 this.color_status =cl_all.getStatusRed();
             } else if(pm25[row][colunm]<0){
-                this.persen = 0;
                 this.color_bt = new Color(135, 135, 135);
                 this.color_status =cl_all.getStatusGray();
             }
         }else{
-            this.persen = 0;
             this.color_bt = new Color(135, 135, 135);
             this.color_status =cl_all.getStatusGray();
         }
-        this. persen *= 0.01;
+        
+    }
+    public void setStatus_persen(int row,int colunm){
+        if(people[row][colunm]>=0 && this.status_file){
+            if (pm25[row][colunm] >= 0 && pm25[row][colunm] <= 50) {
+                this.persen[row][colunm] = (int) (Math.random() * (10)) + 0;
+
+            } else if (pm25[row][colunm] >= 51 && pm25[row][colunm] <= 100) {
+                this.persen[row][colunm]  = (int) (Math.random() * (20 - 10)) + 10;
+
+            } else if (pm25[row][colunm] >= 101 && pm25[row][colunm] <= 150) {
+                this.persen[row][colunm]  = (int) (Math.random() * (30 - 20)) + 20;
+
+            } else if (pm25[row][colunm] >= 151) {
+                this.persen[row][colunm]  = (int) (Math.random() * (51 - 30)) + 30;
+
+            } else if(pm25[row][colunm]<0){
+                this.persen[row][colunm]  = 0;
+            }
+        }else{
+            this.persen[row][colunm]  = 0;
+        }
+
+        this. persen[row][colunm]  *= 0.01;
         
     }
 
@@ -125,9 +149,9 @@ public class Data {
         int[] data = new int[6];
         data[0] = this.pm25[row][col];
         data[1] = this.people[row][col];
-        data[2] = (int) (this.persen * 100);
-        data[3] = (int) (people[row][col] * this.persen);
-        data[4] = (this.people[row][col] - (int) (this.people[row][col] * this.persen));
+        data[2] = (int) (this.persen[row][col]  * 100);
+        data[3] = (int) (people[row][col] * this.persen[row][col] );
+        data[4] = (this.people[row][col] - (int) (this.people[row][col] * this.persen[row][col] ));
         data[5] = number_box;
         return data;
     }

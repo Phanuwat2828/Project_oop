@@ -15,13 +15,12 @@ import component.Select_data;
 import component.Panel_table;
 
 // ================= ที่ต้องทำ ==============
-// เกิความผิดพลาด ของโปรแกรม
+// connection page
 
 public class Main_ {
     public static void main(String[] args) {
         // ======================== data Tranfrom ======================
         Data data_tranfrom = new Data();
-        
         // ============================================================
 
         JFrame frame = new JFrame("PM2.5 version alpha");
@@ -42,7 +41,7 @@ public class Main_ {
         // ================== content_1 ===================
 
         content_1.setPreferredSize(new Dimension(800, 700));
-        content_1.setBackground(new Color_all().cl_bg);
+        content_1.setBackground(null);
 
         JPanel Tapbar = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         Tapbar.setPreferredSize(new Dimension(800, 100));
@@ -120,5 +119,6 @@ public class Main_ {
         frame.setVisible(true);
 
         // =======================================================
+
     }
 }

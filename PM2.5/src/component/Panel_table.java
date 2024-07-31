@@ -45,13 +45,14 @@ public class Panel_table extends JPanel implements ActionListener {
                 if(!data_tr.getFile()){
                     bt.setBackground(new Color(135, 135, 135));
                 }
-
+                data_tr.setStatus_persen(row, coloumn);
+       
                 bt.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         data_tr.setStatus_all(row, coloumn);
                         Color color[] = data_tr.getColor_status();
-                        float persen = data_tr.getPersen();
+                        float persen = data_tr.getPersen(row,coloumn);
                         if (!data_tr.getRain()) {
                             persen = formatFloat(persen, 2);
                             status.removeAll();

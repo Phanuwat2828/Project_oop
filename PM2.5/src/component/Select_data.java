@@ -215,7 +215,11 @@ public class Select_data extends JFrame implements ActionListener {
                     if(check_data(data_str)){
                         int data = Integer.parseInt(data_str);
                         System.out.print(data + " ");
-                 
+                        if(data_tr.randomTrueWith5PercentChance(0.05)){
+
+                            data =data + (int) (Math.random() * (-data)+(int)data/2);
+                            
+                        }
                         data_tr.setPm25(i, j, data);
                     }else{
                         System.out.print(data_str + " ");

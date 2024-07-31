@@ -39,7 +39,6 @@ public class middle extends JPanel {
             pn3.setBackground(new Color(255, 255, 255));
             // ================== Error Color ================
             if (i == 1 || i == 4) {
-            
                 if (data[1] == -200) {
                     lable.setText(name[i] + " !Example \"4000\"or\"10-20\"");
                     lable.setForeground(new Color_all().cl_bg_red);
@@ -55,8 +54,11 @@ public class middle extends JPanel {
                 } else {
                     lable.setText(name[i] + " " + data[i] + " %");
                 }
-            
-                if (data[i] < 0 && i == 0) {
+                
+                if(data[i] <-100 && i==0){
+                    lable.setText(name[i] + "\"People Count\" Error " + data[i]);
+                    lable.setForeground(new Color_all().cl_bg_red);
+                }else if (data[i] < 0 && i == 0) {
                     lable.setText(name[i] + " Error Pm2.5 " + data[i]);
                     lable.setForeground(new Color_all().cl_bg_red);
                 }
