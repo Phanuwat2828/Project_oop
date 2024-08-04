@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 
@@ -26,8 +27,6 @@ public class Select_data extends JFrame implements ActionListener {
     private JButton bt_count = new JButton("Enter");
     private JPanel tablePanel;
     private JPanel status;
-    private int start =0;
-    private int end =0;
     // =================================================
 
     public JPanel button(JPanel panelTable, JPanel status,Data data_tr) {
@@ -87,11 +86,8 @@ public class Select_data extends JFrame implements ActionListener {
                 if (e.getSource() == bt_count) {
                     String data = input_count.getText();
                     input_count.setText(null);
-                    for(int i=0;i<10;i++){
-                        for(int j=0;j<20;j++){
-                            setPeople(i, j, data);
-                        }
-                    }
+                    data_tr.setPeople_str(data);
+           
 
                     updateTable();
                     reset_status();
@@ -119,14 +115,12 @@ public class Select_data extends JFrame implements ActionListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int data[][] = data_tr.getPm25();
                 if (e.getSource() == btn) {
-                    for (int i = 0; i < 10; i++) {
-                        for (int j = 0; j < 20; j++) {
-                            data[i][j] = (int) (data[i][j] * 0.5);
+                    for (int i = 0; i < data_tr.getPm25().size(); i++) {
+                        for (int j = 0; j < data_tr.getPm25().get(i).size(); j++) {
+                            data_tr.setPm25(i, j, (int) (data_tr.getPm25().get(i).get(j)* 0.5));
                         }
                     }
-                    data_tr.setPm25(data);
                     updateTable();
                     reset_status();
 
@@ -161,7 +155,6 @@ public class Select_data extends JFrame implements ActionListener {
         btn2.setBounds(20, 150, 170, 40);
         btn2.setBackground(new Color_all().cl_bg_red);
         btn2.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
-        btn2.setForeground(new Color_all().cl_bg_white);
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -203,12 +196,12 @@ public class Select_data extends JFrame implements ActionListener {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             data_tr.setFile(true);
-            int i = 0;
+            ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>() ;
             while ((line = br.readLine()) != null) {
-                int j = 0;
 
                 StringTokenizer tk = new StringTokenizer(line);
 
+                ArrayList<Integer> data_pm = new ArrayList<>() ;
                 for (; tk.hasMoreTokens();) {
                     String data_str = tk.nextToken();
 
@@ -220,16 +213,20 @@ public class Select_data extends JFrame implements ActionListener {
                             data =data + (int) (Math.random() * (-data)+(int)data/2);
                             
                         }
-                        data_tr.setPm25(i, j, data);
+                        data_pm.add(data);
                     }else{
                         System.out.print(data_str + " ");
-                        data_tr.setPm25(i, j, -1);
+                        data_pm.add(-1);
                     }
-                    j++;
+                 
                 }
+                pm25.add(data_pm);
+                
                 System.out.print("|" + "\n");
-                i++;
+                
             }
+            data_tr.setPm25(pm25);
+            
         }
     }
 
@@ -247,49 +244,4 @@ public class Select_data extends JFrame implements ActionListener {
         return check_str;
 
     }
-
-    // ====================== Process data People ============ แปลงข้อมูลจำนวณคน
-    public void setPeople(int row,int col,String people_func){
-        String people = people_func;
-        int data;
-        if(people.contains("-")){
-            String pe[] = people.split("[-]");
-            
-            if(pe.length-1==1 && pe.length==2){
-                try {
-                    int data_random[] = new int[2];
-                    data_random[0] = Integer.parseInt(pe[0]);
-                    data_random[1] = Integer.parseInt(pe[1]);
-                 
-
-                    if (data_random[0] > data_random[1]) {
-                        this.end=data_random[0];
-                        this.start = data_random[1];
-                    }else {
-                        this.end=data_random[1];
-                        this.start = data_random[0];
-                    }
-
-                    if(end==start){
-                        data = start;
-                    }else{
-                        data = (int) (Math.random() * (end - start + 1)) + start;
-                    }
-                } catch (NumberFormatException e) {
-                    data= -200; // Handle number format exception
-                }
-            }else{
-                data = -200;
-            }
-        }else if(people.matches("\\d+")){ 
-            data = Integer.parseInt(people);
-        }else{
-            data = -300;
-        }
-        if(data<0){
-            data_tr.setError(false);
-        }
-        data_tr.setPeople(row, col, data);
-    }
-
 }

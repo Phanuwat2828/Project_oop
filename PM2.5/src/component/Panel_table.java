@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
 public class Panel_table extends JPanel implements ActionListener {
 
     private Data data_tr;
-    private int[][] pm25 = new int[10][20];
+    private ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>();
     // ================== Constructer ===============
 
     public Panel_table(JPanel data,Data data_tr) {
@@ -27,8 +28,11 @@ public class Panel_table extends JPanel implements ActionListener {
     public void updateTable(JPanel status) {
         removeAll(); // ล้างคอมโพเนนต์เดิม
         int box_number = 0;
-        for (int i = 0; i <  data_tr.getPm25().length; i++) {
-            for (int j = 0; j <  data_tr.getPm25()[i].length; j++) {
+        data_tr.people();
+        data_tr.persen();
+        // creat button
+        for (int i = 0; i <  data_tr.getPm25().size(); i++) {
+            for (int j = 0; j <  data_tr.getPm25().get(i).size(); j++) {
                 // =========== Variable =================
 
                 box_number += 1;
@@ -40,12 +44,10 @@ public class Panel_table extends JPanel implements ActionListener {
                 bt.setPreferredSize(new Dimension(33, 33));
                 data_tr.setStatus_all(i, j);
                 bt.setBackground(data_tr.getColorbt());  
-
                 // ======================================
                 if(!data_tr.getFile()){
                     bt.setBackground(new Color(135, 135, 135));
                 }
-                data_tr.setStatus_persen(row, coloumn);
        
                 bt.addActionListener(new ActionListener() {
                     @Override
@@ -80,12 +82,13 @@ public class Panel_table extends JPanel implements ActionListener {
     // =================== Change Data ================== ฝนเทียม
     public void setRain(int row, int col) {
         // 50%
-        data_tr.setPm25(row,col,(int) (this.pm25[row][col] * 0.5));
+        int data_pm = this.pm25.get(row).get(col);
+        data_tr.setPm25(row,col,(int) (data_pm * 0.5));
         // 30%
         for (int i = row - 1; i <= row + 1; i++) {
             for (int j = col - 1; j <= col + 1; j++) {
-                if (i >= 0 && i < 10 && j >= 0 && j < 20 && !(i == row && j == col)) {
-                    data_tr.setPm25(i,j,(int) (this.pm25[i][j] * 0.7));
+                if (i >= 0 && i < data_tr.getPm25().size() && j >= 0 && j < data_tr.getPm25().get(i).size() && !(i == row && j == col)) {
+                    data_tr.setPm25(i,j,(int) (data_pm* 0.7));
                 }
             }
         }

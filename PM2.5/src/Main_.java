@@ -14,8 +14,13 @@ import component.middle;
 import component.Select_data;
 import component.Panel_table;
 
+
 // ================= ที่ต้องทำ ==============
+
 // connection page
+// change 50% to 50 int
+
+// ========================================
 
 public class Main_ {
     public static void main(String[] args) {
@@ -46,6 +51,7 @@ public class Main_ {
         JPanel Tapbar = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         Tapbar.setPreferredSize(new Dimension(800, 100));
         Tapbar.setBackground(Color_all.cl_bg_white);
+        
         JPanel Table = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 40));
         Table.setBackground(Color_all.cl_bg_white);
 

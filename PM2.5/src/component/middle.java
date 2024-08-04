@@ -55,8 +55,8 @@ public class middle extends JPanel {
                     lable.setText(name[i] + " " + data[i] + " %");
                 }
                 
-                if(data[i] <-100 && i==0){
-                    lable.setText(name[i] + "\"People Count\" Error " + data[i]);
+                if(data[1] <-100 && i==0){
+                    lable.setText(name[i] + "\"People Count\" Error ");
                     lable.setForeground(new Color_all().cl_bg_red);
                 }else if (data[i] < 0 && i == 0) {
                     lable.setText(name[i] + " Error Pm2.5 " + data[i]);
