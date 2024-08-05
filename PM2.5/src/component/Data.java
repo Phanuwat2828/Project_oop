@@ -247,6 +247,7 @@ public class Data {
             
             }else{
                 data = -200;
+                alert_text.checkConditionAndShowError(true);
                 
             }
         }else if(people.matches("\\d+")){ 

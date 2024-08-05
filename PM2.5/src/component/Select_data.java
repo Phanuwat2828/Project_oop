@@ -88,7 +88,7 @@ public class Select_data implements ActionListener {
                     String data = input_count.getText();
                     input_count.setText(null);
                     data_tr.setPeople_str(data);
-                    alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO");
+                    // alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO");
 
                     updateTable();
                     reset_status();
