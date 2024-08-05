@@ -33,27 +33,11 @@ public class Data {
     // ==================== Default Data ======================= 
 
     public Data(){
-        for(int i=0;i<10;i++){
-            ArrayList<Integer> people = new ArrayList<>() ;
-            ArrayList<Integer> pm25 = new ArrayList<>() ;
-            ArrayList<Float> persen = new ArrayList<>() ;
-            for(int j=0;j<20;j++){
-                // this.people[i][j] = 5000;
-                people.add(5000);
-                pm25.add(0);
-                persen.add((float) 0);
-
-            
-            }
-            this.people.add(people);
-            this.pm25.add(pm25);
-            this.persen.add(persen);
-        }
-      
+        setDefault_Data();
     }
 
     // =================== Real ===========================
-       //================= Get Methode ===============
+    //================= set Methode ===============
 
     public void setPeople(int x,int y,int data){
         // this.people[x][y] = data;
@@ -79,8 +63,28 @@ public class Data {
         this.people_string = data;
         people();
     }
+    public void setDefault_Data(){
+        this.people.clear();
+        this.pm25.clear();
+        this.persen.clear();
+        this.status_file = false;
+        for(int i=0;i<10;i++){
+            ArrayList<Integer> people = new ArrayList<>() ;
+            ArrayList<Integer> pm25 = new ArrayList<>() ;
+            ArrayList<Float> persen = new ArrayList<>() ;
+            for(int j=0;j<20;j++){
+                // this.people[i][j] = 5000;
+                people.add(5000);
+                pm25.add(0);
+                persen.add((float) 0);
+            }
+            this.people.add(people);
+            this.pm25.add(pm25);
+            this.persen.add(persen);
+        }
+    }
 
-        //================= Set Methode ===============
+    //================= get Methode ===============
 
     public ArrayList<ArrayList<Integer>> getPeople(){
         return this.people;
@@ -109,8 +113,7 @@ public class Data {
     public Color getColorbt(){
         return this.color_bt;
     }
-
-        // =============== Create Data ================
+    // =============== Create Data ================
 
     public Boolean Mistake(){
         return false;
@@ -124,7 +127,6 @@ public class Data {
     public void setStatus_all(int row,int colunm){
         int data_people = this.people.get(row).get(colunm);
         int data_pm = this.pm25.get(row).get(colunm);
-
         if(data_people>=0 && this.status_file){
             if (data_pm >= 0 && data_pm <= 50) {
                 this.color_bt = Color.GREEN;

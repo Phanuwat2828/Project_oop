@@ -18,7 +18,6 @@ import component.Panel_table;
 // ================= ที่ต้องทำ ==============
 
 // connection page
-// change 50% to 50 int
 
 // ========================================
 
@@ -28,7 +27,7 @@ public class Main_ {
         Data data_tranfrom = new Data();
         // ============================================================
 
-        JFrame frame = new JFrame("PM2.5 version alpha");
+        JFrame frame = new JFrame("PM2.5 version Beta");
         Select_data Select_ = new Select_data();
         int data_start[] = new int[6];
         Color colorDefault[] = { new Color(135, 135, 135), new Color(215, 215, 215) };

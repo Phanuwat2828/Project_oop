@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 
-public class Select_data extends JFrame implements ActionListener {
+public class Select_data implements ActionListener {
     // ================ Attribute ======================== 
     private Data data_tr;
     private JButton bt_count = new JButton("Enter");
@@ -118,7 +118,15 @@ public class Select_data extends JFrame implements ActionListener {
                 if (e.getSource() == btn) {
                     for (int i = 0; i < data_tr.getPm25().size(); i++) {
                         for (int j = 0; j < data_tr.getPm25().get(i).size(); j++) {
-                            data_tr.setPm25(i, j, (int) (data_tr.getPm25().get(i).get(j)* 0.5));
+                            if(data_tr.getPm25().get(i).get(j)>=0){
+                                int pm25_rain = data_tr.getPm25().get(i).get(j)-50;
+                                if(pm25_rain>=0){
+                                    data_tr.setPm25(i, j, (int) pm25_rain);
+                                }else{
+                                    data_tr.setPm25(i, j, (int) 0);
+                                }
+                            }
+                           
                         }
                     }
                     updateTable();
@@ -193,9 +201,11 @@ public class Select_data extends JFrame implements ActionListener {
     // =================== Read ================ อ่าน ไฟล์
     public void readFile(File file) throws IOException {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (
+            BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             data_tr.setFile(true);
+            int count =0;
             ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>() ;
             while ((line = br.readLine()) != null) {
 
@@ -204,28 +214,28 @@ public class Select_data extends JFrame implements ActionListener {
                 ArrayList<Integer> data_pm = new ArrayList<>() ;
                 for (; tk.hasMoreTokens();) {
                     String data_str = tk.nextToken();
-
+                    count+=1;
                     if(check_data(data_str)){
                         int data = Integer.parseInt(data_str);
                         System.out.print(data + " ");
-                        if(data_tr.randomTrueWith5PercentChance(0.05)){
-
-                            data =data + (int) (Math.random() * (-data)+(int)data/2);
-                            
+                        // สุ่มความผิดพลาด 5%
+                        if(Data.randomTrueWith5PercentChance(0.05)){
+                            data =data + (int) (Math.random() * (-data)+(int)data/2);  
                         }
                         data_pm.add(data);
                     }else{
                         System.out.print(data_str + " ");
                         data_pm.add(-1);
                     }
-                 
                 }
                 pm25.add(data_pm);
-                
                 System.out.print("|" + "\n");
-                
             }
-            data_tr.setPm25(pm25);
+            if(count>200){
+                data_tr.setDefault_Data();
+            }else{
+                data_tr.setPm25(pm25);
+            }
             
         }
     }

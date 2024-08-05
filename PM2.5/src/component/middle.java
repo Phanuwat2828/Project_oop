@@ -28,10 +28,8 @@ public class middle extends JPanel {
 
     // 5 ช่่อง
     public JPanel[] smallrect(int data[]) {
-        String name[] = { "PM2.5 : ","People : ", "Persen : ", "People Sick :", "People good: ", "Number : " };
+        String name[] = { "PM2.5 : ","Total people : ", "Percent : ", "Sick people:", "Healthy people: ", "Station number: " };
         JPanel[] pn3A = new JPanel[6];
-       
-        
         for (int i = 0; i < 6; i++) {
             JPanel pn3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 15));
             JLabel lable = new JLabel();
