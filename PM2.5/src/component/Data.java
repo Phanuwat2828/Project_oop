@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.text.StyledEditorKit.BoldAction;
+
 
 public class Data {
     //  ArrayList<Float> persen = new ArrayList<>();
@@ -25,10 +24,20 @@ public class Data {
     private Color_all cl_all = new Color_all();
     private String people_string  = "5000";
 
+
+
+
+
     // ====================== Panel Table ======================
 
     private Color color_status[] = new Color[2];
     private Color color_bt ;
+
+    // ====================== Alert ======================
+
+    private alert alert_text = new alert();
+
+
 
     // ==================== Default Data ======================= 
 
@@ -190,7 +199,6 @@ public class Data {
 
 
 
-
     public int[] getStatusData(int row,int col,int number_box){
         int data_people = this.people.get(row).get(col);
         int data_pm = this.pm25.get(row).get(col);
@@ -236,8 +244,10 @@ public class Data {
                 } catch (NumberFormatException e) {
                     data= -200; // Handle number format exception
                 }
+            
             }else{
                 data = -200;
+                
             }
         }else if(people.matches("\\d+")){ 
             data = Integer.parseInt(people);
@@ -261,7 +271,7 @@ public class Data {
             this.people.add(people);
         }
     }
-
+    
 
     
 
