@@ -27,7 +27,7 @@ public class Select_data implements ActionListener {
     private JButton bt_count = new JButton("Enter");
     private JPanel tablePanel;
     private JPanel status;
-    private alert alert_text = new alert();
+
     // =================================================
 
     public JPanel button(JPanel panelTable, JPanel status,Data data_tr) {
@@ -88,7 +88,7 @@ public class Select_data implements ActionListener {
                     String data = input_count.getText();
                     input_count.setText(null);
                     data_tr.setPeople_str(data);
-                    alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO");
+                    
 
                     updateTable();
                     reset_status();
@@ -239,7 +239,7 @@ public class Select_data implements ActionListener {
             }
             
         }
-    }
+    } 
 
     // ==================== Check_data Pm2.5 ========= เช็ค ว่ามี text ใน file txt
     public Boolean check_data(String data){

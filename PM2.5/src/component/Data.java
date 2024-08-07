@@ -3,6 +3,7 @@ package component;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 
 
@@ -25,17 +26,12 @@ public class Data {
     private String people_string  = "5000";
 
 
-
-
-
     // ====================== Panel Table ======================
 
     private Color color_status[] = new Color[2];
     private Color color_bt ;
 
     // ====================== Alert ======================
-
-    private alert alert_text = new alert();
 
 
 
@@ -68,10 +64,18 @@ public class Data {
     public void setError(Boolean data){
         this.status_Error = data;
     }
-    public void setPeople_str(String data){
+
+    //ดึงformatPeople มาเช็คว่าผู้ใช้งานกรอกตรงเงื่อนไขหรือไม่
+    public void setPeople_str(String data) {
         this.people_string = data;
-        people();
+        int result = formatPeople();
+        if (result < 0) {
+            Alert.Error_alert("Please enter new information.", "Error");
+        } else {
+            people();
+        }
     }
+    
     public void setDefault_Data(){
         this.people.clear();
         this.pm25.clear();
@@ -156,7 +160,7 @@ public class Data {
         }else{
             this.color_bt = new Color(135, 135, 135);
             this.color_status =cl_all.getStatusGray();
-        }
+        } 
         
     }
     public float setStatus_persen(int data_people,int data_pm){
@@ -196,7 +200,10 @@ public class Data {
             this.persen.add(persen_add);
         }
     }
-
+    
+    // public void showAlert(String message) {
+    //     JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+    // }
 
 
     public int[] getStatusData(int row,int col,int number_box){
@@ -243,13 +250,14 @@ public class Data {
                     }
                 } catch (NumberFormatException e) {
                     data= -200; // Handle number format exception
+                    
                 }
             
-            }else{
+            }else{  
                 data = -200;
-                
+
             }
-        }else if(people.matches("\\d+")){ 
+        }else if(people.matches("\\d+")){   
             data = Integer.parseInt(people);
         }else{
             data = -300;
@@ -260,7 +268,6 @@ public class Data {
         return data;
     }
     
-
     public void people(){
         this.people.clear();
         for(int i=0;i<this.pm25.size();i++){
@@ -271,9 +278,6 @@ public class Data {
             this.people.add(people);
         }
     }
-    
-
-    
 
     
 }

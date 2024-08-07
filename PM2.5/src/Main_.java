@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import component.Color_all;
 import component.Data;
 import component.ColorPanel;
@@ -17,6 +18,7 @@ import component.Panel_table;
 // ================= ที่ต้องทำ ==============
 
 // connection page
+// change 50% to 50 int
 
 // ========================================
 
@@ -26,7 +28,7 @@ public class Main_ {
         Data data_tranfrom = new Data();
         // ============================================================
 
-        JFrame frame = new JFrame("PM2.5 version Beta");
+        JFrame frame = new JFrame("PM2.5 version alpha");
         Select_data Select_ = new Select_data();
         int data_start[] = new int[6];
         Color colorDefault[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
@@ -68,7 +70,7 @@ public class Main_ {
         Rain.setPreferredSize(new Dimension(450, 200));
         Rain.setBackground(color_all.cl_bg_white);
         // Rain
-
+        
         JButton rainButton = Select_.rain();
         Rain.setLayout(null);
         Rain.add(rainButton);
@@ -126,3 +128,4 @@ public class Main_ {
 
     }
 }
+ 
