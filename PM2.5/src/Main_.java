@@ -14,11 +14,16 @@ import component.Select_data;
 import component.Panel_table;
 
 
-// ================= ที่ต้องทำ ==============
+// *================= ที่ต้องทำ ==============
 
-// connection page
+//! connection page
+//! ran dom percent
+//! check error befor cilck rain
 
-// ========================================
+// *========================================
+
+// * ความสามารถ ของสถานี
+
 
 public class Main_ {
     public static void main(String[] args) {

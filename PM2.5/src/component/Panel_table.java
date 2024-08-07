@@ -13,12 +13,10 @@ import javax.swing.JPanel;
 public class Panel_table extends JPanel implements ActionListener {
 
     private Data data_tr;
-    private ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>();
     // ================== Constructer ===============
 
     public Panel_table(JPanel data,Data data_tr) {
         this.data_tr = data_tr;
-        this.pm25 = data_tr.getPm25();
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 8));
         setPreferredSize(new Dimension(705, 500));
         setBackground(null);
@@ -44,6 +42,7 @@ public class Panel_table extends JPanel implements ActionListener {
                 bt.setPreferredSize(new Dimension(33, 33));
                 data_tr.setStatus_all(i, j);
                 bt.setBackground(data_tr.getColorbt());  
+
                 // ======================================
                 if(!data_tr.getFile()){
                     bt.setBackground(new Color(135, 135, 135));
@@ -81,9 +80,11 @@ public class Panel_table extends JPanel implements ActionListener {
 
     // =================== Change Data ================== ฝนเทียม
     public void setRain(int row, int col) {
-        // 50%
-        int data_pm = this.pm25.get(row).get(col);
-        if(data_pm>=0){
+    
+        int data_pm = data_tr.getPm25(row,col);
+        int data_people = data_tr.getPeople(row,col);
+        if(data_pm>=0 && data_people>=0){
+            // 50%
             data_tr.setPm25(row,col,(int) (data_pm * 0.5));
             // 30%
             for (int i = row - 1; i <= row + 1; i++) {
@@ -94,7 +95,8 @@ public class Panel_table extends JPanel implements ActionListener {
                 }
             }
         }else{
-            
+            // ============== alert ===============
+
         }
     }
     // ============ Format Float ====================
@@ -102,6 +104,8 @@ public class Panel_table extends JPanel implements ActionListener {
         float scale = (float) Math.pow(10, decimalPlaces);
         return Math.round(value * scale) / scale;
     }
+
+    // interfect
     @Override
     public void actionPerformed(ActionEvent e) {
 
