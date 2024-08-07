@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Panel_table extends JPanel implements ActionListener {
-
+    private Alert alert = new Alert();
     private Data data_tr;
     // ================== Constructer ===============
 
@@ -69,6 +69,11 @@ public class Panel_table extends JPanel implements ActionListener {
                             middle new_status = new middle(new int[6], color_t);
                             status.add(new_status);
                         }
+                        if(data_tr.getPm25(row, coloumn)<0){
+                            alert.Error_alert("Please Check pm2.5 pm: "+Integer.toString(data_tr.getPm25(row, coloumn)), " Error PM2.5");
+                        }else if(data_tr.getPeople(row, coloumn)<0){
+                            alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(row, coloumn))+"]  !Please enter people again ", "Error People");
+                        }
                     }
                 });
                 add(bt);
@@ -90,13 +95,11 @@ public class Panel_table extends JPanel implements ActionListener {
             for (int i = row - 1; i <= row + 1; i++) {
                 for (int j = col - 1; j <= col + 1; j++) {
                     if (i >= 0 && i < data_tr.getPm25().size() && j >= 0 && j < data_tr.getPm25().get(i).size() && !(i == row && j == col)) {
-                        data_tr.setPm25(i,j,(int) (data_pm* 0.7));
+                        data_tr.setPm25(i,j,(int) (data_tr.getPm25(i, j)* 0.7));
                     }
                 }
             }
         }else{
-            // ============== alert ===============
-
         }
     }
     // ============ Format Float ====================

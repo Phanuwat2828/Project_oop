@@ -27,6 +27,8 @@ public class Select_data implements ActionListener {
     private JButton bt_count = new JButton("Enter");
     private JPanel tablePanel;
     private JPanel status;
+    private Alert alert = new Alert();
+
     // =================================================
 
     public JPanel button(JPanel panelTable, JPanel status,Data data_tr) {
@@ -92,6 +94,7 @@ public class Select_data implements ActionListener {
                     input_count.setText(null);
                     data_tr.setPeople_str(data);
                     // alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO");
+                    
 
                     updateTable();
                     reset_status();
@@ -122,17 +125,18 @@ public class Select_data implements ActionListener {
                 if (e.getSource() == btn) {
                     for (int i = 0; i < data_tr.getPm25().size(); i++) {
                         for (int j = 0; j < data_tr.getPm25().get(i).size(); j++) {
-                            if(data_tr.getPm25(i,j)>=0 && data_tr.getPeople(i,j)>=0){
-                                int pm25_rain = data_tr.getPm25().get(i).get(j)-50;
-                                if(pm25_rain>=0){
+                            if(data_tr.getPeople(i,j)>=0){
+                                int pm25_rain = data_tr.getPm25(i, j)-50;
+                                if(pm25_rain>=0 ){
                                     data_tr.setPm25(i, j, (int) pm25_rain);
-                                }else{
+                                }else if(data_tr.getPm25(i, j)>=0){
                                     data_tr.setPm25(i, j, (int) 0);
                                 }
                             }else{
-
+                                // !Alert
+                                alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(i,j))+"]  !Please enter people again  ", "Error People");
+                                return;
                             }
-                           
                         }
                     }
                     updateTable();
@@ -247,7 +251,7 @@ public class Select_data implements ActionListener {
         } catch (IOException e) {
             
         }
-    }
+    } 
 
     // ==================== Check_data Pm2.5 ========= เช็ค ว่ามี text ใน file txt
     public Boolean check_data(String data){

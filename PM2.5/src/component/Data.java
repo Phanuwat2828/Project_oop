@@ -3,6 +3,7 @@ package component;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 
 
@@ -57,7 +58,12 @@ public class Data {
     }
     public void setPeople_str(String data){
         this.people_string = data;
-        people();
+        int result = formatPeople();
+        if (result < 0) {
+            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "Error People");
+        } else {
+            people();
+        }
     }
     // Default_Data Methode 
     // ! เมื่อเปิดโปรแกรม constructor จะเรียก Methode นี้เพื่อกำหนดข้อมูล
@@ -185,7 +191,7 @@ public class Data {
         }else{
             this.color_bt = new Color(135, 135, 135);
             this.color_status =cl_all.getStatusGray();
-        }
+        } 
         
     }
     // Random Percent 
@@ -303,9 +309,6 @@ public class Data {
             this.people.add(people);
         }
     }
-    
-
-    
 
     
 }
