@@ -32,6 +32,7 @@ public class ColorPanel extends JPanel {
         g.setFont(new Font_all().font_kanit(13, "Kanit-Bold.ttf") );
 
         ColorRectangle rectangle = new ColorRectangle(20, 10, 55, 50, rectColor, "จำนวนผู้ป๋วย", txt1);
+        
         rectangle.draw(g);
     }
 }

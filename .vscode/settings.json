@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "PM2.5\\src"
+    ],
+    "java.project.referencedLibraries": [],
+    "java.project.outputPath": "PM2.5\\bin"
+}

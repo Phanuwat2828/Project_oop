@@ -17,4 +17,29 @@ public class Color_all {
        public Color cl_li_or = new Color(255, 200, 150);
        public Color cl_li_green = new Color(200, 255, 200);
        public Color cl_li_yellow = new Color(255, 255, 200);
+
+       // =========== Method GET ==========
+
+       public Color[] getStatusGray(){
+              Color color[] = {new Color(135, 135, 135),new Color(215, 215, 215)};
+              return color;
+       }
+       public Color[] getStatusRed(){
+              Color color[] = {Color.RED,cl_li_red};
+              return color;
+       }
+       public Color[] getStatusGreen(){
+              Color color[] = {Color.GREEN,cl_li_green};
+              return color;
+       }
+       public Color[] getStatusYellow(){
+              Color color[] = {Color.YELLOW,cl_li_yellow};
+              return color;
+       }
+       public Color[] getStatusOrange(){
+              Color color[] = {cl_bg_or,cl_li_or};
+              return color;
+       }
+
+
 }
