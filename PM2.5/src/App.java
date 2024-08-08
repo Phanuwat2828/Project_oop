@@ -13,7 +13,8 @@ public class App {
         frame.setIconImage(new ImageIcon(App.class.getResource(path_image)).getImage());
         frame.setLayout(new GridLayout());
         frame.setSize(1300,750);
-        // frame.add(new Main_());
+        //frame.add(new Main_());
+        frame.add(new StudentIDCardLayout());
         // =======================================================
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

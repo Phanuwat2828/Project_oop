@@ -33,36 +33,36 @@ public class StudentIDCardLayout extends JPanel {
 
         });
         // =====================================
-        JPanel tobutton = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        tobutton.setBackground(color.cl_bg);
-        tobutton.setPreferredSize(new Dimension(1000, 100));
-        tobutton.add(button);
+        // JPanel tobutton = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        // tobutton.setBackground(color.cl_bg);
+        // tobutton.setPreferredSize(new Dimension(1000, 100));
+        // tobutton.add(button);
 
         // Add three student cards with example data
         // Replace these with actual file paths, names, and IDs
-        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา",
+        cardPanel.add(createStudentCard("PM2.5/src/image/Night.jpg", "ภานุวัฒน์ คำทา",
                 "66011212124"));
-        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร",
+        cardPanel.add(createStudentCard("PM2.5/src/image/Mark.png", "นนทพัทธ์ กัตโร",
                 "66011212106"));
-        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น",
+        cardPanel.add(createStudentCard("PM2.5/src/image/Nate.jpg", "จิรัชยา พันอุ่น",
                 "66011212079"));
 
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
         mainPanel.setOpaque(false);
         mainPanel.add(cardPanel);
-        mainPanel.add(tobutton);
+        mainPanel.add(button);
 
         add(mainPanel);
     }
 
-    private JPanel createStudentCard(URL url, String name, String studentId) {
+    private JPanel createStudentCard(String string, String name, String studentId) {
         JPanel card = new JPanel(null);
         card.setOpaque(false);
         card.setPreferredSize(new Dimension(300, 400));
 
         // Load and display the image with rounded corners
-        ImageIcon imageIcon = new ImageIcon(url);
+        ImageIcon imageIcon = new ImageIcon(string);
         Image image = imageIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         RoundedImageLabel imageLabel = new RoundedImageLabel(new ImageIcon(image), 30);
         imageLabel.setBounds(25, 0, 250, 250);
