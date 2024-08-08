@@ -14,7 +14,6 @@ import component.middle;
 import component.Select_data;
 import component.Panel_table;
 
-
 // *================= ที่ต้องทำ ==============
 
 //! connection page

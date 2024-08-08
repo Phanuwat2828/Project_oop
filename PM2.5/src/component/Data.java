@@ -60,7 +60,7 @@ public class Data {
         this.people_string = data;
         int result = formatPeople();
         if (result < 0) {
-            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "AlertError People");
+            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "Alert Error People");
         } else {
             people();
         }

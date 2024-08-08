@@ -11,7 +11,6 @@ public class App {
         frame.setLayout(null);
         frame.setSize(1300,700);
 
-
         // =======================================================
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

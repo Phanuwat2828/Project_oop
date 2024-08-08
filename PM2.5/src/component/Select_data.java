@@ -127,8 +127,8 @@ public class Select_data implements ActionListener {
                         for (int j = 0; j < data_tr.getPm25().get(i).size(); j++) {
                             if(data_tr.getFile()){
                                 if(data_tr.getPeople(i,j)>=0){
-                                    int pm25_rain = data_tr.getPm25(i, j)-50;
-                                    if(pm25_rain>=0 ){
+                                    int pm25_rain = data_tr.getPm25(i, j)-50; // !ดึงค่าออกมาลบ 50
+                                    if(pm25_rain>=0 ){ // !แล้วถามว่าที่ลบไปติดลบไหม ถ้าไม่ติดให้ update ค่าไปเลย แต่ถ้าติด - 
                                         data_tr.setPm25(i, j, (int) pm25_rain);
                                     }else if(data_tr.getPm25(i, j)>=0){
                                         data_tr.setPm25(i, j, (int) 0);
@@ -165,9 +165,9 @@ public class Select_data implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(data_tr.getFile()){
-                    data_tr.setRain(!data_tr.getRain());
+                    data_tr.setRain(!data_tr.getRain());// !เปลี่ยน สถานะเป็นtrue เพื่อเปิดโหมดฝนเทียม
                     updateTable();
-                    btn2.setText(data_tr.getRain() ? "Stop": "Atificial Rain");
+                    btn2.setText(data_tr.getRain() ? "Stop": "Atificial Rain"); // !เปลี่ยนคำเมื่อกด ปุ่ม
                     btn2.setBackground(data_tr.getRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
                 }else{
                     alert.Error_alert("You forgot to enter the file.", "Alert Files!");
@@ -238,27 +238,28 @@ public class Select_data implements ActionListener {
                 for (; tk.hasMoreTokens();) {// !เช็คว่าเป็นตัวต่อไปเป็น null ไหม
                     String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
                     count+=1;
-                    if(check_data(data_str)){
-                        int data = Integer.parseInt(data_str);
+                    if(check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
+                        int data = Integer.parseInt(data_str); // !แปลงเป็น int
                         System.out.print(data + " ");
                         // สุ่มความผิดพลาด 5%
-                        if(Data.randomTrueWith5PercentChance(0.05)){
-                            data =data + (int) (Math.random() * (-data)+(int)data/2);  
+                        if(Data.randomTrueWith5PercentChance(0.05)){ // !โอกาสความผิดพลาด 5%
+                            data =data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -50 ถึง 50/2 แล้วเก็บลง data
                         }
-                        data_pm.add(data);
-                    }else{
+                        data_pm.add(data); // !add ลง datapm
+                    }else{ // !ถ้ามี text ให้เช็ด pm25 = -1 เพื่อแสดง error
                         System.out.print(data_str + " ");
                         data_pm.add(-1);
                     }
+                    
                 }
                 pm25.add(data_pm);
                 System.out.print("|" + "\n");
             }
-            if(count>200){
+            if(count>200){// !เช็คว่าเกิน 200 สถานีไหม
                 alert.Error_alert("Error Station are more than 200 Check Your File or change File", "Alert Error Station");
                 data_tr.setDefault_Data();
-            }else{
-                data_tr.setPm25(pm25);
+            }else{// !ไม่เกิน ให้โยนค่าไปเก็บเลย
+                data_tr.setPm25(pm25); 
             }  
         } catch (IOException e) {
             
@@ -270,7 +271,7 @@ public class Select_data implements ActionListener {
     public Boolean check_data(String data){ // !ส่งตัวเลขที่แยกออกจากแถวมาเช็คว่ามี อักษรไหมหรือมีข้อความไหม
         Boolean check_str = false;
         for(int i=0;i<data.length();i++){
-            if(Character.isDigit(data.charAt(i)) || data.charAt(i)=='-'){ 
+            if(Character.isDigit(data.charAt(i)) || data.charAt(0)=='-'){  // !ถามว่าเป็น Digit ไหม ถ้า
                 check_str = true;
             }else{
                 check_str = false;
