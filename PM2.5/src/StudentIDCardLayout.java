@@ -10,18 +10,11 @@ import java.net.URL;
 import component.Color_all;
 import component.Font_all;
 
-public class StudentIDCardLayout extends JFrame {
+public class StudentIDCardLayout extends JPanel {
 
     public StudentIDCardLayout() {
-        setTitle("Organizer");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1300, 700);
-        setLocationRelativeTo(null);
-
-        // Set the background color (light purple)
         Color_all color = new Color_all();
-        getContentPane().setBackground(color.cl_bg);
-
         // Create a panel to hold the student cards
         JPanel cardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         cardPanel.setOpaque(false);
@@ -79,7 +72,7 @@ public class StudentIDCardLayout extends JFrame {
             imageLabel.setHorizontalAlignment(JLabel.CENTER);
             imageLabel.setVerticalAlignment(JLabel.CENTER);
             imageLabel.setForeground(Color.RED);
-            imageLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            imageLabel.setFont(new Font("Kanit", Font.BOLD, 24));
         }
 
         // Name and Student ID labels

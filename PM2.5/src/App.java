@@ -1,3 +1,5 @@
+import java.awt.GridLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -7,10 +9,10 @@ public class App {
         JFrame frame = new JFrame("PM2.5 version alpha");
         // =======================================================
         // ===================== Setting_app =====================
-        frame.setIconImage(new ImageIcon(menu.class.getResource(path_image)).getImage());
-        frame.setLayout(null);
+        frame.setIconImage(new ImageIcon(App.class.getResource(path_image)).getImage());
+        frame.setLayout(new GridLayout());
         frame.setSize(1300,700);
-
+        frame.add(new StudentIDCardLayout());
         // =======================================================
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
