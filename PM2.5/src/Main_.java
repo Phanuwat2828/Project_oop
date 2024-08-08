@@ -2,6 +2,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,26 +27,27 @@ import component.Panel_table;
 // * ความสามารถ ของสถานี
 
 
-public class Main_ {
-    public static void main(String[] args) {
+public class Main_ extends JPanel {
+    public Main_() {
         // ======================== data Tranfrom ======================
         Data data_tranfrom = new Data();
         // ============================================================
-
-        JFrame frame = new JFrame("PM2.5 version Beta");
+        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        setPreferredSize(new Dimension(1300,700));
+        setBackground(new Color_all().cl_bg);
         Select_data Select_ = new Select_data();
         int data_start[] = new int[6];
         Color colorDefault[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
         middle box_status = new middle(data_start, colorDefault);
         Panel_table panelTable = new Panel_table(box_status,data_tranfrom);
         Color_all color_all = new Color_all();
-        JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT,10, 0));
         JPanel content_1 = new JPanel();
         JPanel content_2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         // ======================= Panel_1 ===============================
 
-        panel_1.setBackground(new Color_all().cl_bg);
+        panel_1.setBackground(null);
 
         // ================== content_1 ===================
 
@@ -118,16 +121,19 @@ public class Main_ {
 
         panel_1.add(content_1);
         panel_1.add(content_2);
-        frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
-        frame.setSize(1300, 750);
-        frame.add(panel_1);
 
-        // =======================================================
+        add(panel_1);
+        
+        // frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
+        // frame.setSize(1300, 750);
+        // frame.add(panel_1);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        // // =======================================================
 
-        // =======================================================
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setVisible(true);
+
+        // // =======================================================
 
     }
 }

@@ -13,7 +13,8 @@ import component.Font_all;
 public class StudentIDCardLayout extends JPanel {
 
     public StudentIDCardLayout() {
-        setSize(1300, 700);
+        setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(1300,700));
         Color_all color = new Color_all();
         // Create a panel to hold the student cards
         JPanel cardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));

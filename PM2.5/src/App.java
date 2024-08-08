@@ -1,3 +1,4 @@
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -11,8 +12,8 @@ public class App {
         // ===================== Setting_app =====================
         frame.setIconImage(new ImageIcon(App.class.getResource(path_image)).getImage());
         frame.setLayout(new GridLayout());
-        frame.setSize(1300,700);
-        frame.add(new StudentIDCardLayout());
+        frame.setSize(1300,750);
+        // frame.add(new Main_());
         // =======================================================
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
