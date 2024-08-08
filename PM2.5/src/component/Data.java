@@ -60,7 +60,7 @@ public class Data {
         this.people_string = data;
         int result = formatPeople();
         if (result < 0) {
-            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "Error People");
+            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "AlertError People");
         } else {
             people();
         }
@@ -195,8 +195,8 @@ public class Data {
         
     }
     // Random Percent 
-    // !สุ่มค่า % สมมติ ถ้า pm 123 จะสุ่มค่าตั้งแต่ 20-29 อาจจะได้ค่า 23.34%
-    // กำลังปรับแก้ตามความสามารถ
+    // !สุ่มค่า % สมมติ ถ้า pm 123 จะสุ่มค่าตั้งแต่ 20-29 อาจจะได้ค่า 23%
+    // ปรับแก้สำเร็จ
     public float setStatus_percent(int data_people,int data_pm){
         float data_persen=0;
         // ? เช็คว่าจำนวณคนมีค่าน้อยกว่า 0 หรือไม่ และ ค่าสถาณะไฟล์เข้ามาทำงานหรือยัง
@@ -220,7 +220,7 @@ public class Data {
         }else{
             data_persen  = 0;
         }
-        // !สมมติได้ค่า 23.34 ต้องนำมาคูณ 0.01 ก่อนนำไปคำนวณทางคณิตศาสตร์
+        // !สมมติได้ค่า 23 ต้องนำมาคูณ 0.01 ก่อนนำไปคำนวณทางคณิตศาสตร์
         data_persen  *= 0.01;
         // ~ 0.2334
         return data_persen;

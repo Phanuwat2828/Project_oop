@@ -73,9 +73,10 @@ public class Select_data implements ActionListener {
                 int returnValue = fileChooser.showOpenDialog(null);
                  // !เมื่อเปรียบเทียบ returnValue กับ JFileChooser.APPROVE_OPTION จะทำให้รู้ว่าเลือกไฟล์ไปแล้ว
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File selectfile = fileChooser.getSelectedFile();// !ดึงค่าไฟล์ที่เลือกมา
-                    Label.setText(selectfile.getName());// !ชื่อไฟล์ที่เลือก
+                    File selectfile = fileChooser.getSelectedFile();// !ดึงค่าในไฟล์ที่เลือกมาเก็บไว้ในตัวแปร
+                    Label.setText(selectfile.getName());// !แสดงชื่อไฟล์ที่เลือก
                     try {
+                        // #ไม่เข้าใจ Methode ไหนให้ CTRL ค้าง และคลิกที่ Methode นั้น
                         readFile(selectfile);//! ส่งค่าไฟล์ที่เลือกมาไปยัง methode อ่านไฟล์
                         reset_status();// !เปลี่ยนค่ากลับไป default
                         updateTable();// !อัพเดทค่าไหม่ที่ส่งไฟล์เข้ามา
@@ -85,7 +86,7 @@ public class Select_data implements ActionListener {
                 }
             }
         });
-
+        // Button Enter send count people to class Data
         bt_count.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,9 +94,8 @@ public class Select_data implements ActionListener {
                     String data = input_count.getText();
                     input_count.setText(null);
                     data_tr.setPeople_str(data);
-                    // alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO");
+                    // alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO"); 
                     
-
                     updateTable();
                     reset_status();
                 }
@@ -125,18 +125,24 @@ public class Select_data implements ActionListener {
                 if (e.getSource() == btn) {
                     for (int i = 0; i < data_tr.getPm25().size(); i++) {
                         for (int j = 0; j < data_tr.getPm25().get(i).size(); j++) {
-                            if(data_tr.getPeople(i,j)>=0){
-                                int pm25_rain = data_tr.getPm25(i, j)-50;
-                                if(pm25_rain>=0 ){
-                                    data_tr.setPm25(i, j, (int) pm25_rain);
-                                }else if(data_tr.getPm25(i, j)>=0){
-                                    data_tr.setPm25(i, j, (int) 0);
+                            if(data_tr.getFile()){
+                                if(data_tr.getPeople(i,j)>=0){
+                                    int pm25_rain = data_tr.getPm25(i, j)-50;
+                                    if(pm25_rain>=0 ){
+                                        data_tr.setPm25(i, j, (int) pm25_rain);
+                                    }else if(data_tr.getPm25(i, j)>=0){
+                                        data_tr.setPm25(i, j, (int) 0);
+                                    }
+                                }else{
+                                    // !Alert
+                                    alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(i,j))+"]  !Please enter people again  ", "Error People");
+                                    return;
                                 }
                             }else{
-                                // !Alert
-                                alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(i,j))+"]  !Please enter people again  ", "Error People");
+                                alert.Error_alert("You forgot to enter the file.", "Alert Files!");
                                 return;
                             }
+
                         }
                     }
                     updateTable();
@@ -158,10 +164,15 @@ public class Select_data implements ActionListener {
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                data_tr.setRain(!data_tr.getRain());
-                updateTable();
-                btn2.setText(data_tr.getRain() ? "Stop": "Atificial Rain");
-                btn2.setBackground(data_tr.getRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
+                if(data_tr.getFile()){
+                    data_tr.setRain(!data_tr.getRain());
+                    updateTable();
+                    btn2.setText(data_tr.getRain() ? "Stop": "Atificial Rain");
+                    btn2.setBackground(data_tr.getRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
+                }else{
+                    alert.Error_alert("You forgot to enter the file.", "Alert Files!");
+                }
+                
             }
         });
         return btn2;
@@ -207,7 +218,7 @@ public class Select_data implements ActionListener {
         Panel_table newTable = new Panel_table(status, data_tr); //!สร้าง object และส่งพารามิเคอร์ object status และ data เข้าไป
         tablePanel.add(newTable);// !แล้วเพิ่ม Object jpanel เข้าไปไหม่
         tablePanel.revalidate();
-        tablePanel.repaint(); // !รีค่าไหม่ panel ไหม่
+        tablePanel.repaint(); // !รีค่าใน panel ไหม่
     }
 
     // =================== Read ================ อ่าน ไฟล์
@@ -219,13 +230,13 @@ public class Select_data implements ActionListener {
             data_tr.setFile(true);
             int count =0;
             ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>() ;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) { // !อ่านไฟล์ไปที่ละแถว เช่น 12 34 56 78 90 จน กว่าแถวจะเป็น null
 
-                StringTokenizer tk = new StringTokenizer(line);
+                StringTokenizer tk = new StringTokenizer(line); // !เก็บ ค่าแถวแล้วนำไป แยกเป็น เลขออกทีละตัว 
 
                 ArrayList<Integer> data_pm = new ArrayList<>() ;
-                for (; tk.hasMoreTokens();) {
-                    String data_str = tk.nextToken();
+                for (; tk.hasMoreTokens();) {// !เช็คว่าเป็นตัวต่อไปเป็น null ไหม
+                    String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
                     count+=1;
                     if(check_data(data_str)){
                         int data = Integer.parseInt(data_str);
@@ -244,6 +255,7 @@ public class Select_data implements ActionListener {
                 System.out.print("|" + "\n");
             }
             if(count>200){
+                alert.Error_alert("Error Station are more than 200 Check Your File or change File", "Alert Error Station");
                 data_tr.setDefault_Data();
             }else{
                 data_tr.setPm25(pm25);
@@ -254,10 +266,11 @@ public class Select_data implements ActionListener {
     } 
 
     // ==================== Check_data Pm2.5 ========= เช็ค ว่ามี text ใน file txt
-    public Boolean check_data(String data){
+    // !เช็คว่ามีข้อความในไฟล์ไหม
+    public Boolean check_data(String data){ // !ส่งตัวเลขที่แยกออกจากแถวมาเช็คว่ามี อักษรไหมหรือมีข้อความไหม
         Boolean check_str = false;
         for(int i=0;i<data.length();i++){
-            if(Character.isDigit(data.charAt(i)) || data.charAt(i)=='-'){
+            if(Character.isDigit(data.charAt(i)) || data.charAt(i)=='-'){ 
                 check_str = true;
             }else{
                 check_str = false;
