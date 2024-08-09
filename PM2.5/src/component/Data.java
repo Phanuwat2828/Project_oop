@@ -1,9 +1,11 @@
 package component;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 
@@ -25,13 +27,18 @@ public class Data {
     private Color color_status[] = new Color[2]; // !เก็บสีของสถานะบอกผู้ป๋วย pm จำนวณคนทั้งหมด
     private Color color_bt ; // !สีของสถานนี 10X20
 
+    private JPanel mainPanel ;
+    private CardLayout cardLayout;
+
     // ====================== Alert ======================
 
 
 
     // ==================== Default Data ======================= 
 
-    public Data(){
+    public Data(CardLayout cardLayout,JPanel Main){
+        this.cardLayout = cardLayout;
+        this.mainPanel = Main;
         setDefault_Data();
     }
     // Mutetor Mothode
@@ -126,6 +133,12 @@ public class Data {
     }
     public Color getColorbt(){
         return this.color_bt;
+    }
+    public JPanel getMainPanel(){
+        return this.mainPanel;
+    }
+    public CardLayout getCardLayout(){
+        return this.cardLayout;
     }
     // Get Status Data of Station
     // !ดึงข้อมูล ที่ต้องการโชว์เพื่องบ่งบอกค่าสถานี

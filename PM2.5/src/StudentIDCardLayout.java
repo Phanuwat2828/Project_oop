@@ -11,9 +11,9 @@ import component.Color_all;
 import component.Font_all;
 
 public class StudentIDCardLayout extends JPanel {
-    void StudentIDCardLayout(App app) {
+    public StudentIDCardLayout(CardLayout cardLayout, JPanel MainPanel) {
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        setPreferredSize(new Dimension(1300,700));
+        setPreferredSize(new Dimension(1300,750));
         Color_all color = new Color_all();
         // Create a panel to hold the student cards
         JPanel cardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -26,8 +26,13 @@ public class StudentIDCardLayout extends JPanel {
         button.setPreferredSize(new Dimension(200, 50));
         button.setBackground(color.cl_bg_red);
         button.setForeground(color.cl_bg_white);
-        button.addActionListener(e->{
-            app.show("menu");
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(MainPanel, "Menu");
+            }
+            
         });
         // =====================================
         // JPanel tobutton = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -47,7 +52,7 @@ public class StudentIDCardLayout extends JPanel {
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,80));
         // mainPanel.setOpaque(false);
-        mainPanel. setPreferredSize(new Dimension(1300,700));
+        mainPanel. setPreferredSize(new Dimension(1300,750));
         mainPanel.add(cardPanel);
         button_panel.add(button);
         cardPanel.setPreferredSize(new Dimension(1300, 400));
@@ -57,7 +62,6 @@ public class StudentIDCardLayout extends JPanel {
         mainPanel.add(button_panel);
         setBackground(color.cl_bg);
         add(mainPanel);
-        
     }
 
     private JPanel createStudentCard(String string, String name, String studentId) {

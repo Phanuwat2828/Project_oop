@@ -1,26 +1,16 @@
 
-import java.util.concurrent.CountedCompleter;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import javax.tools.Tool;
 import javax.swing.JLabel;
 
-import java.awt.BorderLayout; 
-import java.awt.Color;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Label;
-import java.awt.Panel;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Image;
 
 
@@ -31,23 +21,24 @@ import component.Button_;
 import component.Font_all;
 
 public class Menu extends JPanel {
-    public Menu(App app){
+    private JPanel Menu ;
+    public Menu(CardLayout cardLayout, JPanel cardPanel){
+        this.Menu = this;
         // =================================
         String path_image = "/image/mark2.png";
         // ===================== ประกาศ object ===================
         JFrame frame = new JFrame("PM2.5 version alpha");
         Color_all color = new Color_all();// สี
-        Button_ bt = new Button_("Start Program",400,70,color.cl_bg_white,20);
+       
         Button_ bt_1 = new Button_("Organizer",400,70,color.cl_bg_white,20);
         Button_ bt_2 = new Button_("Exit",400,70,color.cl_bg_white,20);
         Font_all font = new Font_all();
         Label label = new Label();
 
-
         // =====================  Panel ==================================
 
 
-         // ==================== panel 1 ==================================
+        // ==================== panel 1 ==================================
 
         JPanel pn1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pn1.setPreferredSize(new Dimension(1300,750));
@@ -71,14 +62,33 @@ public class Menu extends JPanel {
         pn2.add(lable);
 
         // ====================== Start Program =============================
+        Button_ bt = new Button_("Start Program",400,70,color.cl_bg_white,20);
+        bt.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Main"); // แสดง Card 1
+            }
+
+        });
+        
         pn2.add(bt);
 
 
         // ====================== Organizer =============================
+        bt_1.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                cardPanel.setVisible(true);
+                cardLayout.show(cardPanel, "Organizer"); // แสดง Card 2
+                Menu.setVisible(false);
+            }
+
+        });
         pn2.add(bt_1);
 
 
         // ====================== Exit =============================
+        bt_2.addActionListener(e -> System.exit(0));
         pn2.add(bt_2);
 
 
@@ -90,12 +100,6 @@ public class Menu extends JPanel {
         setPreferredSize(new Dimension(1300,750));
         add(pn1);
         //=============================================
-        bt.addActionListener(e->{
-            app.show("main");
-        });
-        bt_1.addActionListener(e->{
-            app.show("orgenizer");
-        });
         
     }
 }

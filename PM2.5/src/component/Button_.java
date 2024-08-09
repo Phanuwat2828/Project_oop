@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 public class Button_ extends JButton{
-   public Button bt_main =new Button();
    
     public Font getFont(int s){
             return new Font_all().font_kanit(s,"Kanit-Bold.ttf");

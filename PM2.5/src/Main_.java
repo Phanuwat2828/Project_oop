@@ -1,4 +1,5 @@
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -28,9 +29,9 @@ import component.Panel_table;
 
 
 public class Main_ extends JPanel {
-    public Main_(App app) {
+    public Main_(CardLayout cardLayout,JPanel mainpPanel) {
         // ======================== data Tranfrom ======================
-        Data data_tranfrom = new Data();
+        Data data_tranfrom = new Data(cardLayout,mainpPanel);
         // ============================================================
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         setPreferredSize(new Dimension(1300,700));

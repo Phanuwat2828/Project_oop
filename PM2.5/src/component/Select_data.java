@@ -187,7 +187,7 @@ public class Select_data implements ActionListener {
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.print("Back");
+                data_tr.getCardLayout().show(data_tr.getMainPanel(), "Menu");
             }
         });
 
