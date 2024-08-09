@@ -31,7 +31,7 @@ import component.Button_;
 import component.Font_all;
 
 public class Menu extends JPanel {
-    public Menu(){
+    public Menu(App app){
         // =================================
         String path_image = "/image/mark2.png";
         // ===================== ประกาศ object ===================
@@ -89,6 +89,13 @@ public class Menu extends JPanel {
         // ===================== Setting_app =====================
         setPreferredSize(new Dimension(1300,750));
         add(pn1);
+        //=============================================
+        bt.addActionListener(e->{
+            app.show("main");
+        });
+        bt_1.addActionListener(e->{
+            app.show("orgenizer");
+        });
         
     }
 }

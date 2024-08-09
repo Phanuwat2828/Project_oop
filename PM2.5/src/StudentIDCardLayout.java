@@ -11,8 +11,7 @@ import component.Color_all;
 import component.Font_all;
 
 public class StudentIDCardLayout extends JPanel {
-
-    public StudentIDCardLayout() {
+    void StudentIDCardLayout(App app) {
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setPreferredSize(new Dimension(1300,700));
         Color_all color = new Color_all();
@@ -27,13 +26,8 @@ public class StudentIDCardLayout extends JPanel {
         button.setPreferredSize(new Dimension(200, 50));
         button.setBackground(color.cl_bg_red);
         button.setForeground(color.cl_bg_white);
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("555555");
-            }
-
+        button.addActionListener(e->{
+            app.show("menu");
         });
         // =====================================
         // JPanel tobutton = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -63,6 +57,7 @@ public class StudentIDCardLayout extends JPanel {
         mainPanel.add(button_panel);
         setBackground(color.cl_bg);
         add(mainPanel);
+        
     }
 
     private JPanel createStudentCard(String string, String name, String studentId) {
@@ -102,12 +97,6 @@ public class StudentIDCardLayout extends JPanel {
         card.add(idLabel);
 
         return card;
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new StudentIDCardLayout().setVisible(true);
-        });
     }
 }
 

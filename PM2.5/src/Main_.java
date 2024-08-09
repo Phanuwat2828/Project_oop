@@ -28,7 +28,7 @@ import component.Panel_table;
 
 
 public class Main_ extends JPanel {
-    public Main_() {
+    public Main_(App app) {
         // ======================== data Tranfrom ======================
         Data data_tranfrom = new Data();
         // ============================================================
