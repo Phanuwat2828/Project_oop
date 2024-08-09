@@ -30,8 +30,8 @@ import component.Color_all;
 import component.Button_;
 import component.Font_all;
 
-public class menu {
-    public static void main(String[] args){
+public class Menu extends JPanel {
+    public Menu(){
         // =================================
         String path_image = "/image/mark2.png";
         // ===================== ประกาศ object ===================
@@ -50,7 +50,7 @@ public class menu {
          // ==================== panel 1 ==================================
 
         JPanel pn1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        pn1.setPreferredSize(new Dimension(1300,700));
+        pn1.setPreferredSize(new Dimension(1300,750));
         pn1.setBackground(color.cl_bg);
 
         // ==================== panel 2 ==================================
@@ -61,7 +61,7 @@ public class menu {
 
         // ====================== Image Pm2.5 =============================
         // JPanel image_Label = new JPanel(new GridBagLayout());
-        ImageIcon image_ = new ImageIcon(menu.class.getResource(path_image));
+        ImageIcon image_ = new ImageIcon(Menu.class.getResource(path_image));
         Image image_2 = image_.getImage();
         Image scaled = image_2.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         image_ = new ImageIcon(scaled);
@@ -83,21 +83,12 @@ public class menu {
 
 
         pn1.add(pn2);
-
+        setLayout(new FlowLayout());
 
         // =======================================================
         // ===================== Setting_app =====================
-        frame.setIconImage(new ImageIcon(menu.class.getResource(path_image)).getImage());
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT));
-        frame.setSize(1300,700);
-
-
-        // =======================================================
-        frame.add(pn1);
-        // =======================================================
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        // =======================================================
+        setPreferredSize(new Dimension(1300,750));
+        add(pn1);
         
     }
 }

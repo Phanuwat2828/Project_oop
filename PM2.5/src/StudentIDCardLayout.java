@@ -13,17 +13,20 @@ import component.Font_all;
 public class StudentIDCardLayout extends JPanel {
 
     public StudentIDCardLayout() {
-        setLayout(new FlowLayout());
+        setLayout(new FlowLayout(FlowLayout.LEFT));
         setPreferredSize(new Dimension(1300,700));
         Color_all color = new Color_all();
         // Create a panel to hold the student cards
         JPanel cardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        cardPanel.setOpaque(false);
+        JPanel button_panel = new JPanel(new FlowLayout(FlowLayout.LEFT,50,0));
+        button_panel.setPreferredSize(new Dimension(1300,100));
+        // cardPanel.setOpaque(false);
         // ===========================
         JButton button = new JButton("Back");
-        button.setFont(new Font_all().font_kanit(18, "Kanit-Bold.ttf"));
+        button.setFont(new Font_all().font_Tahoma(18));
         button.setPreferredSize(new Dimension(200, 50));
-        button.setBackground(color.cl_bg_gray);
+        button.setBackground(color.cl_bg_red);
+        button.setForeground(color.cl_bg_white);
         button.addActionListener(new ActionListener() {
 
             @Override
@@ -40,19 +43,25 @@ public class StudentIDCardLayout extends JPanel {
 
         // Add three student cards with example data
         // Replace these with actual file paths, names, and IDs
-        cardPanel.add(createStudentCard("PM2.5/src/image/Night.jpg", "ภานุวัฒน์ คำทา",
+        cardPanel.add(createStudentCard("./image/Night.jpg", "ภานุวัฒน์ คำทา",
                 "66011212124"));
-        cardPanel.add(createStudentCard("PM2.5/src/image/Mark.png", "นนทพัทธ์ กัตโร",
+        cardPanel.add(createStudentCard("./image/Mark.png", "นนทพัทธ์ กัตโร",
                 "66011212106"));
-        cardPanel.add(createStudentCard("PM2.5/src/image/Nate.jpg", "จิรัชยา พันอุ่น",
+        cardPanel.add(createStudentCard("./image/Nate.jpg", "จิรัชยา พันอุ่น",
                 "66011212079"));
-
+        
         // Add some padding around the card panel
-        JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
-        mainPanel.setOpaque(false);
+        JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,80));
+        // mainPanel.setOpaque(false);
+        mainPanel. setPreferredSize(new Dimension(1300,700));
         mainPanel.add(cardPanel);
-        mainPanel.add(button);
-
+        button_panel.add(button);
+        cardPanel.setPreferredSize(new Dimension(1300, 400));
+        button_panel.setBackground(null);
+        cardPanel.setBackground(null);
+        mainPanel.setBackground(null);
+        mainPanel.add(button_panel);
+        setBackground(color.cl_bg);
         add(mainPanel);
     }
 

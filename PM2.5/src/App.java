@@ -14,7 +14,8 @@ public class App {
         frame.setLayout(new GridLayout());
         frame.setSize(1300,750);
         //frame.add(new Main_());
-        frame.add(new StudentIDCardLayout());
+        // frame.add(new StudentIDCardLayout());
+        frame.add(new Menu());
         // =======================================================
         // =======================================================
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
