@@ -1,6 +1,5 @@
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,8 +8,6 @@ import javax.swing.JPanel;
 class App extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private Menu menu;
-    private StudentIDCardLayout orgenizer;
     App(){
         cardLayout =new CardLayout();
         mainPanel = new JPanel(cardLayout);

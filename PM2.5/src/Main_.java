@@ -33,7 +33,7 @@ public class Main_ extends JPanel {
         // ======================== data Tranfrom ======================
         Data data_tranfrom = new Data(cardLayout,mainpPanel);
         // ============================================================
-        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
         setPreferredSize(new Dimension(1300,700));
         setBackground(new Color_all().cl_bg);
         Select_data Select_ = new Select_data();
