@@ -42,9 +42,18 @@ public class StudentIDCardLayout extends JPanel {
 
         // Add three student cards with example data
         // Replace these with actual file paths, names, and IDs
+<<<<<<< HEAD
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา","66011212124"));
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร"  ,"66011212106"));
         cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น","66011212079"));
+=======
+        cardPanel.add(createStudentCard("PM2.5/src/image/Night.jpg", "ภานุวัฒน์ คำทา",
+                "66011212124"));
+        cardPanel.add(createStudentCard("PM2.5/src/image/Mark.png", "นนทพัทธ์ กัตโร",
+                "66011212106"));
+        cardPanel.add(createStudentCard("PM2.5/src/image/Nate.jpg", "จิรัชยา พันอุ่น",
+                "66011212079"));
+>>>>>>> 83d8c88c197185b89abc32a90a3acd9a3dadd9c9
         
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,80));
