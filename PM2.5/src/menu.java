@@ -90,7 +90,7 @@ public class Menu extends JPanel {
         // ====================== Exit =============================
         bt_2.addActionListener(e -> System.exit(0));
         pn2.add(bt_2);
-
+        
 
         pn1.add(pn2);
         setLayout(new FlowLayout());
