@@ -44,12 +44,9 @@ public class StudentIDCardLayout extends JPanel {
 
         // Add three student cards with example data
         // Replace these with actual file paths, names, and IDs
-        cardPanel.add(createStudentCard("PM2.5/src/image/Night.jpg", "ภานุวัฒน์ คำทา",
-                "66011212124"));
-        cardPanel.add(createStudentCard("PM2.5/src/image/Mark.png", "นนทพัทธ์ กัตโร",
-                "66011212106"));
-        cardPanel.add(createStudentCard("PM2.5/src/image/Nate.jpg", "จิรัชยา พันอุ่น",
-                "66011212079"));
+       //cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา","66011212124"));
+       // cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร"  ,"66011212106"));
+        //cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น","66011212079"));
         
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,80));
@@ -66,7 +63,7 @@ public class StudentIDCardLayout extends JPanel {
         add(mainPanel);
     }
 
-    private JPanel createStudentCard(String string, String name, String studentId) {
+    private JPanel createStudentCard(URL string, String name, String studentId) {
         JPanel card = new JPanel(null);
         card.setOpaque(false);
         card.setPreferredSize(new Dimension(300, 400));

@@ -12,8 +12,6 @@ import javax.swing.JPanel;
 class App extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private Menu menu;
-    private StudentIDCardLayout orgenizer;
     App(){
         cardLayout =new CardLayout();
         mainPanel = new JPanel(cardLayout);
