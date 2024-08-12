@@ -43,7 +43,6 @@ public class Panel_table extends JPanel implements ActionListener {
                 bt.setPreferredSize(new Dimension(33, 33));
                 data_tr.setStatus_all(i, j);
                 bt.setBackground(data_tr.getColorbt());  
-
                 // ======================================
                 if(!data_tr.getFile()){
                     bt.setBackground(new Color(135, 135, 135));
@@ -83,8 +82,6 @@ public class Panel_table extends JPanel implements ActionListener {
                 add(bt);
             }
         }
-        revalidate();
-        repaint();
     }
 
     // =================== Change Data ================== ฝนเทียม

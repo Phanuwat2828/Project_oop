@@ -188,7 +188,6 @@ public class Select_data implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 data_tr.getCardLayout().show(data_tr.getMainPanel(), "Menu");
-                data_tr.setDefault_Data();
             }
         });
 

@@ -58,7 +58,6 @@ class App extends JFrame {
                             "You cannot close the application from this panel.",
                             "Action Not Allowed", JOptionPane.WARNING_MESSAGE);
                             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                    
                 }
             }
         });

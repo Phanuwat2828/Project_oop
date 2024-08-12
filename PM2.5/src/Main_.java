@@ -30,6 +30,7 @@ import component.Panel_table;
 
 public class Main_ extends JPanel {
     public Main_(CardLayout cardLayout,JPanel mainpPanel) {
+        removeAll();
         // ======================== data Tranfrom ======================
         Data data_tranfrom = new Data(cardLayout,mainpPanel);
         // ============================================================
@@ -124,17 +125,8 @@ public class Main_ extends JPanel {
         panel_1.add(content_2);
 
         add(panel_1);
-        
-        // frame.setIconImage(new ImageIcon(Main_.class.getResource("/image/mark2.png")).getImage());
-        // frame.setSize(1300, 750);
-        // frame.add(panel_1);
-
-        // // =======================================================
-
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setVisible(true);
-
-        // // =======================================================
+        repaint();
+        validate();
 
     }
 }
