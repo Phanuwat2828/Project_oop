@@ -19,14 +19,14 @@ public class StudentIDCardLayout extends JPanel {
         Color_all color = new Color_all();
         // Create a panel to hold the student cards
         JPanel cardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JPanel button_panel = new JPanel(new FlowLayout(FlowLayout.LEFT,50,0));
+        JPanel button_panel = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,0));
         button_panel.setPreferredSize(new Dimension(1300,100));
         // cardPanel.setOpaque(false);
         // ===========================
         JButton button = new JButton("Back");
         button.setFont(new Font_all().font_Tahoma(18));
         button.setPreferredSize(new Dimension(200, 50));
-        button.setBackground(color.cl_bg_red);
+        button.setBackground(color.cl_bg_p);
         button.setForeground(color.cl_bg_white);
         button.addActionListener(new ActionListener() {
 
@@ -41,12 +41,12 @@ public class StudentIDCardLayout extends JPanel {
         // tobutton.setBackground(color.cl_bg);
         // tobutton.setPreferredSize(new Dimension(1000, 100));
         // tobutton.add(button);
-
+        cardPanel.add(title("ORGENIZER"));
         // Add three student cards with example data
         // Replace these with actual file paths, names, and IDs
-        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา","66011212124"));
-        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร"  ,"66011212106"));
-        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น","66011212079"));
+        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Night.jpg"), "ภานุวัฒน์ คำทา","66011212124","ORGENIZER"));
+        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Mark.png"), "นนทพัทธ์ กัตโร"  ,"66011212106",""));
+        cardPanel.add(createStudentCard(StudentIDCardLayout.class.getResource("/image/Nate.jpg"), "จิรัชยา พันอุ่น","66011212079",""));
         
         // Add some padding around the card panel
         JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,80));
@@ -62,8 +62,20 @@ public class StudentIDCardLayout extends JPanel {
         setBackground(color.cl_bg);
         add(mainPanel);
     }
+    private JPanel title(String titel_ ){
+        JPanel cardtt = new JPanel(new FlowLayout(FlowLayout.CENTER,50,80));
+        cardtt.setOpaque(false);
+        cardtt.setPreferredSize(new Dimension(300,400));
+        JLabel ttLabel = new JLabel(titel_, JLabel.CENTER);
+        ttLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
+        ttLabel.setForeground((new Color_all().cl_bg_bu));
+        ttLabel.setBounds(0, 300, 300, 30);
+        cardtt.add(ttLabel);
 
-    private JPanel createStudentCard(URL string, String name, String studentId) {
+        return cardtt;
+    }
+
+    private JPanel createStudentCard(URL string, String name, String studentId,String titel_) {
         JPanel card = new JPanel(null);
         card.setOpaque(false);
         card.setPreferredSize(new Dimension(300, 400));
@@ -86,12 +98,15 @@ public class StudentIDCardLayout extends JPanel {
         // Name and Student ID labels
         JLabel nameLabel = new JLabel(name, JLabel.CENTER);
         JLabel idLabel = new JLabel(studentId, JLabel.CENTER);
-        nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        idLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        nameLabel.setForeground((new Color_all().cl_bg_bu));
+        idLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        idLabel.setForeground((new Color_all().cl_bg_bu));
+        
 
         // Position name and ID labels 50 pixels below the image
-        nameLabel.setBounds(0, 300, 300, 25);
-        idLabel.setBounds(0, 325, 300, 25);
+        nameLabel.setBounds(0, 300, 300, 30);
+        idLabel.setBounds(0, 340, 300, 25);
         // ============================================
 
         // Add components to the card

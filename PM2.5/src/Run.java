@@ -39,6 +39,7 @@ class App extends JFrame {
                 // Check which panel is currently visible
                 CardLayout cl = (CardLayout) mainPanel.getLayout();
                 JPanel currentPanel = (JPanel) mainPanel.getComponent(0);
+                //===============สร้างวนลูปเพื่อเช็คว่าpanelปัจจุบันที่เปิดเป็น menuไหม===========
                 for (int i = 0; i < mainPanel.getComponentCount(); i++) {
                     if (mainPanel.getComponent(i).isVisible()) {
                         currentPanel = (JPanel) mainPanel.getComponent(i);
@@ -46,7 +47,7 @@ class App extends JFrame {
                     }
                 }
 
-                // Only allow closing if the current panel is the menu panel
+                // =========Only allow closing if the current panel is the menu panel
                 if (currentPanel == menu_panel) {
                     int response = JOptionPane.showConfirmDialog(App.this,
                             "Are you sure you want to exit?", "Confirm Exit", JOptionPane.YES_NO_OPTION);
