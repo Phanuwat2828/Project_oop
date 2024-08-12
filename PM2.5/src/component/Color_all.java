@@ -11,6 +11,8 @@ public class Color_all {
        public Color cl_bg_sky = new Color(181, 207, 248);
        public Color cl_bg_bt = new Color(215, 156, 229);
        public Color cl_bg_or = new Color(255, 125, 0);
+       public Color cl_bg_bu = new Color(64, 31, 113);
+       public Color cl_bg_p = new Color(103, 65, 136);
 
        // ============ light
        public Color cl_li_red = new Color(255, 200, 200);
