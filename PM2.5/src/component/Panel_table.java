@@ -40,7 +40,8 @@ public class Panel_table extends JPanel implements ActionListener {
                 // ======================================
 
                 JButton bt = new JButton();
-                bt.setPreferredSize(new Dimension(50, 50));
+                bt.setFont(new Font_all().font_kanit(4,"Kanit-Bold.ttf"));
+                bt.setPreferredSize(new Dimension(33, 33));
                 data_tr.setStatus_all(i, j);
                 bt.setBackground(data_tr.getColorbt());  
                 // ======================================
