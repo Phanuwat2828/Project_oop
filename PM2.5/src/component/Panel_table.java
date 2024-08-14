@@ -48,7 +48,6 @@ public class Panel_table extends JPanel implements ActionListener {
                 if(!data_tr.getFile()){
                     bt.setBackground(new Color(135, 135, 135));
                 }
-       
                 bt.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
