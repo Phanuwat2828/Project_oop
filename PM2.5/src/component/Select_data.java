@@ -39,10 +39,10 @@ public class Select_data implements ActionListener {
         // ======================================
 
         // =================== Layout ============-=============
-        JTextField input_count = new JTextField("5000");
+        JTextField input_count = new JTextField("5000"); //people
         JPanel input_bt = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 17));
-        JButton bt_select_file = new JButton("Select File");
-        JLabel Label = new JLabel();
+        JButton bt_select_file = new JButton("Select File"); //select file
+        JLabel Label = new JLabel(); //name file
         // =====================================================
         
         // =================== set ==============================
@@ -52,7 +52,7 @@ public class Select_data implements ActionListener {
         input_count.setPreferredSize(new Dimension(200, 35));
         Label.setPreferredSize(new Dimension(300, 35));
 
-        Label.setFont(new Font_all().font_kanit(17, "Kanit-Bold.ttf"));
+        Label.setFont(new Font_all().font_Tahoma(17));
         bt_count.setBackground(new Color_all().cl_bg_bt);
         bt_select_file.setBackground(new Color_all().cl_bg_bt);
         input_bt.setBackground(null);
@@ -72,7 +72,7 @@ public class Select_data implements ActionListener {
                 // !คือการเปิดให้เลือกไฟล์
                 int returnValue = fileChooser.showOpenDialog(null);
                  // !เมื่อเปรียบเทียบ returnValue กับ JFileChooser.APPROVE_OPTION จะทำให้รู้ว่าเลือกไฟล์ไปแล้ว
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                if (returnValue == JFileChooser.APPROVE_OPTION) { //ture or false
                     File selectfile = fileChooser.getSelectedFile();// !ดึงค่าในไฟล์ที่เลือกมาเก็บไว้ในตัวแปร
                     Label.setText(selectfile.getName());// !แสดงชื่อไฟล์ที่เลือก
                     try {
@@ -93,7 +93,7 @@ public class Select_data implements ActionListener {
                 if (e.getSource() == bt_count) {
                     String data = input_count.getText();
                     input_count.setText(null);
-                    data_tr.setPeople_str(data);
+                    data_tr.setPeople_str(data); 
                     // alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO"); 
                     
                     updateTable();
@@ -117,7 +117,7 @@ public class Select_data implements ActionListener {
         JButton btn = new JButton("RAIN");
         btn.setBounds(20, 20, 170, 70);
         btn.setBackground(new Color(215, 156, 229));
-        btn.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
+        btn.setFont(new Font_all().font_Tahoma(20));
         btn.addActionListener(new ActionListener() {
 
             @Override
@@ -159,20 +159,19 @@ public class Select_data implements ActionListener {
         JButton btn2 = new JButton("Atificial Rain");
         btn2.setBounds(250, 20, 170, 70);
         btn2.setBackground(new Color(215, 156, 229));
-        btn2.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
+        btn2.setFont(new Font_all().font_Tahoma(20));
 
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(data_tr.getFile()){
                     data_tr.setRain(!data_tr.getRain());// !เปลี่ยน สถานะเป็นtrue เพื่อเปิดโหมดฝนเทียม
-                    updateTable();
+                    // updateTable();
                     btn2.setText(data_tr.getRain() ? "Stop": "Atificial Rain"); // !เปลี่ยนคำเมื่อกด ปุ่ม
                     btn2.setBackground(data_tr.getRain() ? new Color_all().cl_bg_red:new Color(215, 156, 229));
                 }else{
                     alert.Error_alert("You forgot to enter the file.", "Alert Files!");
                 }
-                
             }
         });
         return btn2;
@@ -183,7 +182,7 @@ public class Select_data implements ActionListener {
         JButton btn2 = new JButton("Back to Manu");
         btn2.setBounds(20, 150, 170, 40);
         btn2.setBackground(new Color_all().cl_bg_red);
-        btn2.setFont(new Font_all().font_kanit(20, "Kanit-Bold.ttf"));
+        btn2.setFont(new Font_all().font_Tahoma(20));
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -206,7 +205,6 @@ public class Select_data implements ActionListener {
         Color color_t[] = { new Color(135, 135, 135), new Color(215, 215, 215) };
         middle new_status = new middle(new int[6], color_t);// !ส่งค่าไปยัง Methode ที่สร้างกล่องบอกสถาณะ
         this.status.add(new_status);// !แล้วเพิ่ม Object jpanel เข้าไปไหม่
-
     }
 
 
@@ -223,7 +221,6 @@ public class Select_data implements ActionListener {
 
     // =================== Read ================ อ่าน ไฟล์
     public void readFile(File file) throws IOException {
-
         try (
             BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
@@ -231,9 +228,7 @@ public class Select_data implements ActionListener {
             int count =0;
             ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>() ;
             while ((line = br.readLine()) != null) { // !อ่านไฟล์ไปที่ละแถว เช่น 12 34 56 78 90 จน กว่าแถวจะเป็น null
-
                 StringTokenizer tk = new StringTokenizer(line); // !เก็บ ค่าแถวแล้วนำไป แยกเป็น เลขออกทีละตัว 
-
                 ArrayList<Integer> data_pm = new ArrayList<>() ;
                 for (; tk.hasMoreTokens();) {// !เช็คว่าเป็นตัวต่อไปเป็น null ไหม
                     String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
@@ -241,9 +236,9 @@ public class Select_data implements ActionListener {
                     if(check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
                         int data = Integer.parseInt(data_str); // !แปลงเป็น int
                         System.out.print(data + " ");
-                        // สุ่มความผิดพลาด 5%
+                        // สุ่มความผิดพลาด 5% pm =50
                         if(Data.randomTrueWith5PercentChance(0.05)){ // !โอกาสความผิดพลาด 5%
-                            data =data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -50 ถึง 50/2 แล้วเก็บลง data
+                            data = data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -50 ถึง 50/2 แล้วเก็บลง data 
                         }
                         data_pm.add(data); // !add ลง datapm
                     }else{ // !ถ้ามี text ให้เช็ด pm25 = -1 เพื่อแสดง error

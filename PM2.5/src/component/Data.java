@@ -41,6 +41,10 @@ public class Data {
         this.mainPanel = Main;
         setDefault_Data();
     }
+
+
+
+
     // Mutetor Mothode
     // *================= set Methode ===============*
     // !Array ปกติ data[1][1] = Array List data.get(1).get(1) เรียกค่า
@@ -171,6 +175,8 @@ public class Data {
     // *ค่าที่ส่งเข้ามาคือ % ที่จะเกิดความผิดพลาด
     public static boolean randomTrueWith5PercentChance(Double random_) {
         Random random = new Random();
+
+        // 0.0-0.99  < 0.5 true 0.00 0.01 0.02 0.03 0.04  5/100
         // &return True or False
         return random.nextDouble() < random_;
     }
@@ -251,11 +257,12 @@ public class Data {
             this.percent.add(percent_add);
         }
     }
+
     // Process Data People 
     // !ปรับแก้ข้อมูลให้ได้ตามที่ต้องการ
     public int formatPeople(){
         // !ข้อมูลที่ป้อนเข้ามา
-        String people = this.people_string;
+        String people = this.people_string; //9000-100000
         int start =0;
         int end = 0;
         int data;
@@ -274,6 +281,8 @@ public class Data {
                 data_random[0] = Integer.parseInt(pe[0]);
                 data_random[1] = Integer.parseInt(pe[1]);
                 // !หาว่าใครมีค่ามากสุด เช่น ถ้ามี '100','5000' end = 5000 start = 100 เพื่อนำไป Random
+                
+                // max min
                 if (data_random[0] > data_random[1]) {
                     end=data_random[0];
                     start = data_random[1];
@@ -292,7 +301,7 @@ public class Data {
                 data= -200; // Handle number format exception
                 // ! Alert
             }
-        }else if(people.matches("\\d+")){
+        }else if(people.matches("\\d+")){ 
             // !"\\d+": เป็น Regular Expression (regex) ที่ใช้ในการตรวจสอบสตริง
             // !\\d เป็นรูปแบบ regex ที่ตรงกับตัวเลขใดๆ (0-9)
             // !เครื่องหมาย + หมายถึง "หนึ่งตัวหรือมากกว่า" ของตัวที่อยู่ก่อนหน้า ดังนั้น \\d+ จะตรงกับกลุ่มของตัวเลขหนึ่งตัวหรือมากกว่า 
@@ -322,6 +331,4 @@ public class Data {
             this.people.add(people);
         }
     }
-
-    
 }

@@ -18,7 +18,7 @@ public class ColorPanel extends JPanel {
     public ColorPanel(Color rectColor, Color bgColor,String txt1) {
         this.rectColor = rectColor;
         this.bgColor = bgColor;
-        this.setPreferredSize(new Dimension(180, 80)); // Set the preferred size to 200x200
+        this.setPreferredSize(new Dimension(185, 80)); // Set the preferred size to 200x200
         this.setBackground(bgColor);
         this.txt1 = txt1;
         
@@ -27,12 +27,9 @@ public class ColorPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Ensure proper rendering
-
-
-        g.setFont(new Font_all().font_kanit(13, "Kanit-Bold.ttf") );
-
-        ColorRectangle rectangle = new ColorRectangle(20, 10, 55, 50, rectColor, "จำนวนผู้ป๋วย", txt1);
-        
+        g.setFont(new Font_all().font_Tahoma(13) );
+        ColorRectangle rectangle = new ColorRectangle(18, 10, 55, 50, rectColor, "จำนวนผู้ป๋วย", txt1);
         rectangle.draw(g);
     }
 }
+

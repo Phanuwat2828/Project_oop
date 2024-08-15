@@ -27,12 +27,11 @@ import component.Panel_table;
 
 // * ความสามารถ ของสถานี
 
-
 public class Main_ extends JPanel {
     public Main_(CardLayout cardLayout,JPanel mainpPanel) {
         removeAll();
         // ======================== data Tranfrom ======================
-        Data data_tranfrom = new Data(cardLayout,mainpPanel);
+        Data data_tranfrom = new Data(cardLayout,mainpPanel); 
         // ============================================================
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
         setPreferredSize(new Dimension(1300,700));

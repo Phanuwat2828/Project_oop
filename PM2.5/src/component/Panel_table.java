@@ -27,20 +27,18 @@ public class Panel_table extends JPanel implements ActionListener {
     public void updateTable(JPanel status) {
         removeAll(); // ล้างคอมโพเนนต์เดิม
         int box_number = 0;
-        data_tr.people();
+        data_tr.people(); // !ให้ขนาด array เท่ากับฝุ่น pm 2.5
         data_tr.persen();
         // creat button
-        for (int i = 0; i <  data_tr.getPm25().size(); i++) {
-            for (int j = 0; j <  data_tr.getPm25().get(i).size(); j++) {
+        for (int i = 0; i <  data_tr.getPm25().size() ; i++) {
+            for (int j = 0; j <  data_tr.getPm25().get(i).size() ; j++) {
                 // =========== Variable =================
-
                 box_number += 1;
                 int row = i, coloumn = j, number = box_number;
     
                 // ======================================
 
                 JButton bt = new JButton();
-                bt.setFont(new Font_all().font_kanit(4,"Kanit-Bold.ttf"));
                 bt.setPreferredSize(new Dimension(33, 33));
                 data_tr.setStatus_all(i, j);
                 bt.setBackground(data_tr.getColorbt());  
@@ -82,6 +80,9 @@ public class Panel_table extends JPanel implements ActionListener {
                 add(bt);
             }
         }
+        revalidate();
+        repaint();
+
     }
 
     // =================== Change Data ================== ฝนเทียม
@@ -93,6 +94,7 @@ public class Panel_table extends JPanel implements ActionListener {
             // 50%
             data_tr.setPm25(row,col,(int) (data_pm * 0.5));
             // 30%
+            
             for (int i = row - 1; i <= row + 1; i++) {
                 for (int j = col - 1; j <= col + 1; j++) {
                     if (i >= 0 && i < data_tr.getPm25().size() && j >= 0 && j < data_tr.getPm25().get(i).size() && !(i == row && j == col)) {

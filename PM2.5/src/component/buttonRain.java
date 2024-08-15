@@ -12,7 +12,7 @@ public class buttonRain implements ActionListener {
         JButton btn = new JButton("RAIN");
         btn.setBounds(20, 50, 170, 70);
         btn.setBackground(new Color(215, 156, 229));
-        btn.setFont(new Font_all().font_kanit(20, "Bold"));
+        btn.setFont(new Font_all().font_Tahoma(20));
         btn.addActionListener(new ActionListener() {
 
             @Override
@@ -29,7 +29,7 @@ public class buttonRain implements ActionListener {
         JButton btn2 = new JButton("Atificial Rain");
         btn2.setBounds(250, 50, 170, 70);
         btn2.setBackground(new Color(215, 156, 229));
-        btn2.setFont(new Font_all().font_kanit(20, "Bold"));
+        btn2.setFont(new Font_all().font_Tahoma(20));
         return btn2;
     }
 

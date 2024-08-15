@@ -9,7 +9,7 @@ import java.awt.Font;
 public class Button_ extends JButton{
    
     public Font getFont(int s){
-            return new Font_all().font_kanit(s,"Kanit-Bold.ttf");
+            return new Font_all().font_Tahoma(s);
     }
    
     public Button_(String name,int s){

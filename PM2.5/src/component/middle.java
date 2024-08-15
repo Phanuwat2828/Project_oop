@@ -51,7 +51,6 @@ public class middle extends JPanel {
                 } else {
                     lable.setText(name[i] + " " + data[i] + " %");
                 }
-                
                 if(data[1] <-100 && i==0){
                     lable.setText(name[i] + "\"People Count\" Error ");
                     lable.setForeground(new Color_all().cl_bg_red);
@@ -61,8 +60,7 @@ public class middle extends JPanel {
                 }
             }
             
-            
-            lable.setFont(i==0?new Font_all().font_kanit(20, "Kanit-Bold.ttf"):new Font_all().font_kanit(14, "Kanit-Bold.ttf") );
+            lable.setFont(i==0?new Font_all().font_Tahoma(20):new Font_all().font_Tahoma(14) );
             pn3.add(lable);
             pn3A[i] = pn3;
         }

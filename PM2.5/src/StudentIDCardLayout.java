@@ -37,10 +37,6 @@ public class StudentIDCardLayout extends JPanel {
             
         });
         // =====================================
-        // JPanel tobutton = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        // tobutton.setBackground(color.cl_bg);
-        // tobutton.setPreferredSize(new Dimension(1000, 100));
-        // tobutton.add(button);
         cardPanel.add(title("ORGENIZER"));
         // Add three student cards with example data
         // Replace these with actual file paths, names, and IDs
