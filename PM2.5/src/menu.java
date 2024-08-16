@@ -1,6 +1,4 @@
 
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -8,7 +6,6 @@ import javax.swing.JLabel;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Image;
@@ -18,7 +15,6 @@ import java.awt.Image;
 import component.Color_all;
 
 import component.Button_;
-import component.Font_all;
 
 public class Menu extends JPanel {
     private JPanel Menu ;
@@ -27,13 +23,10 @@ public class Menu extends JPanel {
         // =================================
         String path_image = "/image/mark2.png";
         // ===================== ประกาศ object ===================
-        JFrame frame = new JFrame("PM2.5 version alpha");
         Color_all color = new Color_all();// สี
        
         Button_ bt_1 = new Button_("Organizer",400,70,color.cl_bg_white,20);
         Button_ bt_2 = new Button_("Exit",400,70,color.cl_bg_white,20);
-        Font_all font = new Font_all();
-        Label label = new Label();
 
         // =====================  Panel ==================================
 

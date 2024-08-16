@@ -6,23 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Font_all {
-
-
     public Font font_Tahoma(int size){
         return  new Font("Tahoma",Font.BOLD,size);
     }
     public Font font_Tahoma_pl(int size){
         return  new Font("Tahoma",Font.PLAIN,size);
     }
-    
-    // public Font font_kanit(int size,String style){
-    //     try{
-    //         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("/font/Kanit/"+style));
-    //         return font.deriveFont(Font.BOLD,size);
-    //     }catch (FontFormatException | IOException e){
-    //         System.out.println(e);
-    //         return font_Tahoma(size);
-    //     }
-    // }
     
 } 

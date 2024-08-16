@@ -17,7 +17,6 @@ class App extends JFrame {
         cardLayout =new CardLayout();
         mainPanel = new JPanel(cardLayout);
         String path_image = "/image/mark2.png";
-        JFrame frame = new JFrame("PM2.5 version alpha");
         // =======================================================
         // ===================== Setting_app =====================
         setIconImage(new ImageIcon(App.class.getResource(path_image)).getImage());
