@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,16 +73,12 @@ public class Select_data implements ActionListener {
                 int returnValue = fileChooser.showOpenDialog(null);
                  // !เมื่อเปรียบเทียบ returnValue กับ JFileChooser.APPROVE_OPTION จะทำให้รู้ว่าเลือกไฟล์ไปแล้ว
                 if (returnValue == JFileChooser.APPROVE_OPTION) { //ture or false
-                    File selectfile = fileChooser.getSelectedFile();// !ดึงค่าในไฟล์ที่เลือกมาเก็บไว้ในตัวแปร
+                    File selectfile = fileChooser.getSelectedFile();// !Path fileที่เลือก
                     Label.setText(selectfile.getName());// !แสดงชื่อไฟล์ที่เลือก
-                    try {
-                        // #ไม่เข้าใจ Methode ไหนให้ CTRL ค้าง และคลิกที่ Methode นั้น
-                        readFile(selectfile);//! ส่งค่าไฟล์ที่เลือกมาไปยัง methode อ่านไฟล์
-                        reset_status();// !เปลี่ยนค่ากลับไป default
-                        updateTable();// !อัพเดทค่าไหม่ที่ส่งไฟล์เข้ามา
-                    } catch (IOException ex) {
-                       System.out.println(ex);
-                    }
+                    // #ไม่เข้าใจ Methode ไหนให้ CTRL ค้าง และคลิกที่ Methode นั้น
+                    readFile(selectfile);//! ส่งค่าไฟล์ที่เลือกมาไปยัง methode อ่านไฟล์
+                    reset_status();// !เปลี่ยนค่ากลับไป default
+                    updateTable();// !อัพเดทค่าไหม่ที่ส่งไฟล์เข้ามา
                 }
             }
         });
@@ -91,7 +88,8 @@ public class Select_data implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == bt_count) {
                     String data = input_count.getText();
-                    if(data!=null){
+
+                    if(!data.isEmpty()){
                         input_count.setText(null);
                         data_tr.setPeople_str(data); 
                         updateTable();
@@ -181,7 +179,7 @@ public class Select_data implements ActionListener {
 
     // ================== Back ==================== กลับไป menu
     public JButton back() {
-        JButton btn2 = new JButton("Back to Manu");
+        JButton btn2 = new JButton("Back to Menu");
         btn2.setBounds(20, 150, 170, 40);
         btn2.setBackground(new Color_all().cl_bg_red);
         btn2.setFont(new Font_all().font_Tahoma(20));
@@ -210,7 +208,6 @@ public class Select_data implements ActionListener {
     }
 
 
-
     // ================== Udate ================== Upsate ค่า table
     // !Reset ค่า สถานี ให้เป็น ค่าไหม่ที่อัพเดทจากไฟล์ไหม่ ค่าเริ่มต้น
     private void updateTable() {
@@ -222,39 +219,50 @@ public class Select_data implements ActionListener {
     }
 
     // =================== Read ================ อ่าน ไฟล์
-    public void readFile(File file) throws IOException {
-        try (
-            BufferedReader br = new BufferedReader(new FileReader(file))) {
+    public void readFile(File file){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             data_tr.setFile(true);
             int count =0;
             ArrayList<ArrayList<Integer>> pm25 = new ArrayList<>() ;
-            while ((line = br.readLine()) != null) { // !อ่านไฟล์ไปที่ละแถว เช่น 12 34 56 78 90 จน กว่าแถวจะเป็น null
-                StringTokenizer tk = new StringTokenizer(line); // !เก็บ ค่าแถวแล้วนำไป แยกเป็น เลขออกทีละตัว 
-                ArrayList<Integer> data_pm = new ArrayList<>() ;
-                for (; tk.hasMoreTokens();) {// !เช็คว่าเป็นตัวต่อไปเป็น null ไหม
-                    String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
-                    count+=1;
-                    if(data_tr.check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
-                        int data = Integer.parseInt(data_str); // !แปลงเป็น int
-                        // สุ่มความผิดพลาด 5% pm =50
-                        if(Data.randomTrueWith5PercentChance(0.05)){ // !โอกาสความผิดพลาด 5%
-                            data = data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -50 ถึง 50/2 แล้วเก็บลง data 
-                        }
-                        data_pm.add(data); // !add ลง datapm
-                    }else{ // !ถ้ามี text ให้เช็ด pm25 = -1 เพื่อแสดง error
-                        data_pm.add(-1);
-                    }
+            do{
+                line = br.readLine();
+                if(line==null && count==0){
+                    data_tr.setDefault_Data();
+                    alert.Error_alert("Error Station is null Check Your File or change File", "Alert Error Station");  
                 }
-                pm25.add(data_pm);
-            }
+                try{
+                    StringTokenizer tk = new StringTokenizer(line); // !เก็บ ค่าแถวแล้วนำไป แยกเป็น เลขออกทีละตัว 
+                    ArrayList<Integer> data_pm = new ArrayList<>() ;
+                    for (; tk.hasMoreTokens();) {// !เช็คว่าเป็นตัวต่อไปเป็น null ไหม
+                        String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
+                        count+=1;
+                        if(data_tr.check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
+                            int data = Integer.parseInt(data_str); // !แปลงเป็น int
+                            // สุ่มความผิดพลาด 5% pm =50
+                            if(Data.randomTrueWith5PercentChance(0.05)){ // !โอกาสความผิดพลาด 5%
+                                data = data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -25 ถึง 25 แล้วเก็บลง data 
+                            }
+                            data_pm.add(data); // !add ลง datapm
+                        }else{ // !ถ้ามี text ให้เช็ด pm25 = -5000 เพื่อแสดง error
+                            data_pm.add(-5000);
+                        }
+                    }
+                    pm25.add(data_pm);
+                }catch(NullPointerException e){
+                    
+                }
+
+            }while(line != null);
             if(count>200){// !เช็คว่าเกิน 200 สถานีไหม
-                alert.Error_alert("Error Station are more than 200 Check Your File or change File", "Alert Error Station");
                 data_tr.setDefault_Data();
-            }else{// !ไม่เกิน ให้โยนค่าไปเก็บเลย
+                alert.Error_alert("Error Station are more than 200 Check Your File or change File", "Alert Error Station");
+            }else if(count != 0){// !ไม่เกิน ให้โยนค่าไปเก็บเลย
                 data_tr.setPm25(pm25); 
             }  
-        } catch (IOException e) {
+        } catch(IOException e){
         }
+
     }
 }

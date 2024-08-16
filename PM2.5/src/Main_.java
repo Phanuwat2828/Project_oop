@@ -104,7 +104,7 @@ public class Main_ extends JPanel {
 
         // ====================== inputfile ==================
 
-        inputfile.add(Select_.button(panelTable, box_status,data_tranfrom));
+        inputfile.add(Select_.button(Table,Status,data_tranfrom));
         inputfile.setBackground(new Color_all().cl_bg_white);
 
         // ========================= add panel ===============================

@@ -3,10 +3,8 @@ package component;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -25,7 +23,7 @@ public class Panel_table extends JPanel implements ActionListener {
     }
 
     public void updateTable(JPanel status) {
-        removeAll(); // ล้างคอมโพเนนต์เดิม
+        removeAll();
         int box_number = 0;
         data_tr.people(); // !ให้ขนาด array เท่ากับฝุ่น pm 2.5
         data_tr.persen();

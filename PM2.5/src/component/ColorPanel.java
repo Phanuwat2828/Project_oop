@@ -18,7 +18,6 @@ public class ColorPanel extends JPanel {
         this.txt2 = txt2;
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Ensure proper rendering
         g.setFont(new Font_all().font_Tahoma(12) );
