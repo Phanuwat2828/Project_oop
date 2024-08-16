@@ -32,7 +32,7 @@ public class Data {
 
     // ====================== Alert ======================
 
-
+        
 
     // ==================== Default Data ======================= 
 
@@ -67,15 +67,20 @@ public class Data {
     public void setFile(Boolean data){
         this.status_file = data;
     }
+
+
     public void setPeople_str(String data){
         this.people_string = data;
+    // ! เรียก formatPeople มาเก็บไว้ในตัวแปร result เพื่อนำไปเช็คตามเงื่อนไข
         int result = formatPeople();
+        // ! นำ resultมาเช็คว่าค่าน้อยกว่า 0 หรือไม่ ถ้าน้อยกว่า จะมีการเรียกใช้ Alert เพื่อแจ้ง User 
         if (result < 0) {
-            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "Alert Error People");
+            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"] !Please enter people again ", "Error People");
         } else {
             people();
         }
     }
+
     // Default_Data Methode 
     // ! เมื่อเปิดโปรแกรม constructor จะเรียก Methode นี้เพื่อกำหนดข้อมูล
     // ! ที่เป็นข้อมูลเริ่มต้น pm จะถูกกำหนดที่ 0 percent ก็เช่นเดียวกัน แต่ people จะถูกเช็ตที่ 5000
@@ -276,28 +281,33 @@ public class Data {
             // !Split 100-5000 เอา "-" ออก จะได้ '100','5000' เป็น array
             String pe[] = people.split("[-]");
             try {
-                int data_random[] = new int[2];
-                // !เมื่อได้สองค่าแล้ว นำมาแปลง เป็น int
-                data_random[0] = Integer.parseInt(pe[0]);
-                data_random[1] = Integer.parseInt(pe[1]);
-                // !หาว่าใครมีค่ามากสุด เช่น ถ้ามี '100','5000' end = 5000 start = 100 เพื่อนำไป Random
+                try{
+                    int data_random[] = new int[2];
+                    // !เมื่อได้สองค่าแล้ว นำมาแปลง เป็น int
+                    data_random[0] = Integer.parseInt(pe[0]);
+                    data_random[1] = Integer.parseInt(pe[1]);
+                    // !หาว่าใครมีค่ามากสุด เช่น ถ้ามี '100','5000' end = 5000 start = 100 เพื่อนำไป Random
+                    // max min
+                    if (data_random[0] > data_random[1]) {
+                        end=data_random[0];
+                        start = data_random[1];
+                    }else {
+                        end=data_random[1];
+                        start = data_random[0];
+                    }
+                    // !ถ้าค่าเท่ากันเช่น 5000-5000 data = 5000
+                    if(end==start){
+                        data = start;
+                    }else{
+                        // !Random 100-5000 data = Random
+                        data = (int) (Math.random() * (end - start + 1)) + start;
+                    }
+                }catch (ArrayIndexOutOfBoundsException e){ 
+                    data= -200; // Handle number format exception
+                    // ! Alert
+                }
                 
-                // max min
-                if (data_random[0] > data_random[1]) {
-                    end=data_random[0];
-                    start = data_random[1];
-                }else {
-                    end=data_random[1];
-                    start = data_random[0];
-                }
-                // !ถ้าค่าเท่ากันเช่น 5000-5000 data = 5000
-                if(end==start){
-                    data = start;
-                }else{
-                    // !Random 100-5000 data = Random
-                    data = (int) (Math.random() * (end - start + 1)) + start;
-                }
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e ) {
                 data= -200; // Handle number format exception
                 // ! Alert
             }

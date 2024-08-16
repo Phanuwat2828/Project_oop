@@ -93,7 +93,7 @@ public class Main_ extends JPanel {
         content_2.add(Rain);
 
         // ====================== Tabbar ==================
-
+        JPanel x = new ColorPanel(null, null, null);
         JPanel redPanel = new ColorPanel(Color.RED, color_all.cl_li_red, "มากกว่า 30%");
         JPanel orangePanel = new ColorPanel(color_all.cl_bg_or, color_all.cl_li_or, "ตั้งแต่ 20-29%");
         JPanel yellowPanel = new ColorPanel(Color.YELLOW, color_all.cl_li_yellow, "ตั้งแต่ 10-19%");

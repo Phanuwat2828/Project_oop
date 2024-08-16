@@ -37,10 +37,10 @@ public class middle extends JPanel {
             // ================== Error Color ================
             if (i == 1 || i == 4) {
                 if (data[1] == -200) {
-                    lable.setText(name[i] + " !Example \"4000\"or\"10-20\"");
+                    lable.setText(name[i] + " !Example 10-20 No -500");
                     lable.setForeground(new Color_all().cl_bg_red);
                 } else if (data[1] == -300) {
-                    lable.setText(name[i] + " !Please Integer \"4000\"or\"10-20\"");
+                    lable.setText(name[i] + " !Please Integer");
                     lable.setForeground(new Color_all().cl_bg_red);
                 } else {
                     lable.setText(name[i] + " " + data[i]);
