@@ -92,12 +92,15 @@ public class Select_data implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == bt_count) {
                     String data = input_count.getText();
-                    input_count.setText(null);
-                    data_tr.setPeople_str(data); 
-                    // alert_text.showErrorDialog("ERROR_ONE", "ERROR_TWO"); 
-                    
-                    updateTable();
-                    reset_status();
+                    if(data!=null){
+                        input_count.setText(null);
+                        data_tr.setPeople_str(data); 
+                        updateTable();
+                        reset_status();
+                    }else{
+                        alert.Error_alert("!People is null", "Error People");
+                    }
+                   
                 }
             }
 
@@ -233,22 +236,18 @@ public class Select_data implements ActionListener {
                 for (; tk.hasMoreTokens();) {// !เช็คว่าเป็นตัวต่อไปเป็น null ไหม
                     String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
                     count+=1;
-                    if(check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
+                    if(data_tr.check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
                         int data = Integer.parseInt(data_str); // !แปลงเป็น int
-                        System.out.print(data + " ");
                         // สุ่มความผิดพลาด 5% pm =50
                         if(Data.randomTrueWith5PercentChance(0.05)){ // !โอกาสความผิดพลาด 5%
                             data = data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -50 ถึง 50/2 แล้วเก็บลง data 
                         }
                         data_pm.add(data); // !add ลง datapm
                     }else{ // !ถ้ามี text ให้เช็ด pm25 = -1 เพื่อแสดง error
-                        System.out.print(data_str + " ");
                         data_pm.add(-1);
                     }
-                    
                 }
                 pm25.add(data_pm);
-                System.out.print("|" + "\n");
             }
             if(count>200){// !เช็คว่าเกิน 200 สถานีไหม
                 alert.Error_alert("Error Station are more than 200 Check Your File or change File", "Alert Error Station");
@@ -257,23 +256,6 @@ public class Select_data implements ActionListener {
                 data_tr.setPm25(pm25); 
             }  
         } catch (IOException e) {
-            
         }
-    } 
-
-    // ==================== Check_data Pm2.5 ========= เช็ค ว่ามี text ใน file txt
-    // !เช็คว่ามีข้อความในไฟล์ไหม
-    public Boolean check_data(String data){ // !ส่งตัวเลขที่แยกออกจากแถวมาเช็คว่ามี อักษรไหมหรือมีข้อความไหม
-        Boolean check_str = false;
-        for(int i=0;i<data.length();i++){
-            if(Character.isDigit(data.charAt(i)) || data.charAt(0)=='-'){  // !ถามว่าเป็น Digit ไหม ถ้า
-                check_str = true;
-            }else{
-                check_str = false;
-                break;
-            }
-        }
-        return check_str;
-
     }
 }

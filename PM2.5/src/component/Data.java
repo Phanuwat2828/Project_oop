@@ -301,11 +301,7 @@ public class Data {
                 data= -200; // Handle number format exception
                 // ! Alert
             }
-        }else if(people.matches("\\d+")){ 
-            // !"\\d+": เป็น Regular Expression (regex) ที่ใช้ในการตรวจสอบสตริง
-            // !\\d เป็นรูปแบบ regex ที่ตรงกับตัวเลขใดๆ (0-9)
-            // !เครื่องหมาย + หมายถึง "หนึ่งตัวหรือมากกว่า" ของตัวที่อยู่ก่อนหน้า ดังนั้น \\d+ จะตรงกับกลุ่มของตัวเลขหนึ่งตัวหรือมากกว่า 
-            // !people.matches("\\d+") return ture and false
+        }else if(check_data(people)){ 
             data = Integer.parseInt(people);
         }else{
             data = -300;
@@ -331,4 +327,20 @@ public class Data {
             this.people.add(people);
         }
     }
+        // ==================== Check_data Pm2.5 ========= เช็ค ว่ามี text ใน file txt
+    // !เช็คว่ามีข้อความในไฟล์ไหม
+    public Boolean check_data(String data){ // !ส่งตัวเลขที่แยกออกจากแถวมาเช็คว่ามี อักษรไหมหรือมีข้อความไหม
+        Boolean check_str = false;
+        for(int i=0;i<data.length();i++){
+            if(Character.isDigit(data.charAt(i)) || data.charAt(0)=='-'){  // !ถามว่าเป็น Digit ไหม ถ้า
+                check_str = true;
+            }else{
+                check_str = false;
+                break;
+            }
+        }
+        return check_str;
+
+    }
 }
+
