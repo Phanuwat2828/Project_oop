@@ -277,10 +277,11 @@ public class Data {
             // &แปลงค่าเป็น int แล้วเก็บใว้ใน Data
         // ?ไม่ตรงเงื่อนไขไหนเลย
             // &ให้ Data -300
-        if(people.contains("-")){
-            // !Split 100-5000 เอา "-" ออก จะได้ '100','5000' เป็น array
-            String pe[] = people.split("[-]");
-            try {
+        try {
+            if(people.contains("-")){
+                // !Split 100-5000 เอา "-" ออก จะได้ '100','5000' เป็น array
+                String pe[] = people.split("[-]");
+        
                 try{
                     int data_random[] = new int[2];
                     // !เมื่อได้สองค่าแล้ว นำมาแปลง เป็น int
@@ -306,21 +307,22 @@ public class Data {
                     data= -200; // Handle number format exception
                     // ! Alert
                 }
-                
-            } catch (NumberFormatException e ) {
-                data= -200; // Handle number format exception
+                    
+    
+            }else if(check_data(people)){ 
+                data = Integer.parseInt(people);
+            }else{
+                data = -300;
                 // ! Alert
             }
-        }else if(check_data(people)){ 
-            data = Integer.parseInt(people);
-        }else{
-            data = -300;
-            // ! Alert
+        } catch (NumberFormatException e ) {
+        data= -200; // Handle number format exception
+        // ! Alert
         }
         // ~ return ค่าออกไปเป็น int
         return data;
     }
-    
+
     // Set จำนวณคน
     // !Array ปกติ data[1][1] = Array List data.get(1).get(1) เรียกค่า
     // !Array ปกติ data[1][1] = 13 = Array List data.get(1).set(1,13) setค่าตามตำแหน่ง
