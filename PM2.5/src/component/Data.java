@@ -27,7 +27,7 @@ public class Data {
 
     // ====================== Alert ======================
 
-
+        
 
     // ==================== Default Data ======================= 
 
@@ -56,15 +56,20 @@ public class Data {
     public void setFile(Boolean data){
         this.status_file = data;
     }
+
+
     public void setPeople_str(String data){
         this.people_string = data;
+    // ! เรียก formatPeople มาเก็บไว้ในตัวแปร result เพื่อนำไปเช็คตามเงื่อนไข
         int result = formatPeople();
+        // ! นำ resultมาเช็คว่าค่าน้อยกว่า 0 หรือไม่ ถ้าน้อยกว่า จะมีการเรียกใช้ Alert เพื่อแจ้ง User 
         if (result < 0) {
-            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"]  !Please enter people again ", "Error People");
+            Alert.Error_alert("Check People StatusError: ["+Integer.toString(result)+"] !Please enter people again ", "Error People");
         } else {
             people();
         }
     }
+
     // Default_Data Methode 
     // ! เมื่อเปิดโปรแกรม constructor จะเรียก Methode นี้เพื่อกำหนดข้อมูล
     // ! ที่เป็นข้อมูลเริ่มต้น pm จะถูกกำหนดที่ 0 percent ก็เช่นเดียวกัน แต่ people จะถูกเช็ตที่ 5000

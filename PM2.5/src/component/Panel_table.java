@@ -72,7 +72,7 @@ public class Panel_table extends JPanel implements ActionListener {
                         if(data_tr.getPm25(row, coloumn)<0){
                             alert.Error_alert("Please Check pm2.5 pm: "+Integer.toString(data_tr.getPm25(row, coloumn)), " Error PM2.5");
                         }else if(data_tr.getPeople(row, coloumn)<0){
-                            alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(row, coloumn))+"]  !Please enter people again ", "Error People");
+                            alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(row, coloumn))+"] !Please enter people again ", "Error People");
                         }
                     }
                 });
