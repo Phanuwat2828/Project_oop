@@ -217,16 +217,16 @@ public class Data {
         // ~ ผลลัพทธ์ุ คือ ถ้าตรงตามเงื่อนไขสมารถ set ตามปกติ แต่ ถ้าไม่จะ set ค่าเป็น 0
         if(data_people>=0 && this.status_file){
             if (data_pm >= 0 && data_pm <= 50) {
-                data_persen = (int) (Math.random() * (10)) + 0;
+                data_persen = (int) (Math.random() * (10)) ; // ! สุ่ม 0-9 
 
             } else if ( data_pm >= 51 &&  data_pm  <= 100) {
-                data_persen = (int) (Math.random() * (20 - 10)) + 10;
+                data_persen = (int) (Math.random() * (10)) + 10; // ! สุ่ม 0-9 เอามาบวก 10
 
             } else if ( data_pm  >= 101 &&  data_pm <= 150) {
-                data_persen = (int) (Math.random() * (30 - 20)) + 20;
+                data_persen = (int) (Math.random() * (10)) + 20; // ! สุ่ม 0-9 เอามาบวก 20
 
             } else if ( data_pm >= 151 && data_pm<=250) {
-                data_persen  = (int) (Math.random() * (51 - 30)) + 30;
+                data_persen  = (int) (Math.random() * (21)) + 30;// ! สุ่ม 0-20 เอามาบวก 30
 
             } else {
                 data_persen  = 0;
