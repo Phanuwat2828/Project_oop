@@ -61,7 +61,6 @@ public class middle extends JPanel {
                 }
             }
             
-            
             lable.setFont(i==0?new Font_all().font_kanit(20, "Kanit-Bold.ttf"):new Font_all().font_kanit(14, "Kanit-Bold.ttf") );
             pn3.add(lable);
             pn3A[i] = pn3;

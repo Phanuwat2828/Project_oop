@@ -98,7 +98,7 @@ public class Panel_table extends JPanel implements ActionListener {
                         data_tr.setPm25(i,j,(int) (data_tr.getPm25(i, j)* 0.7));
                     }
                 }
-            }
+            } 
         }else{
         }
     }

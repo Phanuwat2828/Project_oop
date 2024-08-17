@@ -12,12 +12,11 @@ public class ColorPanel extends JPanel {
 
     public ColorPanel(Color rectColor, Color color, String txt2) {
         this.rectColor = rectColor;
-        this.color = color;
         this.setPreferredSize(new Dimension(180, 80));
         this.setBackground(color);
         this.txt2 = txt2;
     }
-
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

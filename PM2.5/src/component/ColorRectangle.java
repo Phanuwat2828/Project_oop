@@ -26,4 +26,5 @@ public class ColorRectangle {
         g.drawString(text1, x + width + 20, y + 20);
         g.drawString(txt2, x + width + 20, y + 39);
     }
+    
 }
