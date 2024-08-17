@@ -7,4 +7,4 @@ public class Alert {
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
         
     }
-}
+} 

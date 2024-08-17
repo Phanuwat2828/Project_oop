@@ -27,3 +27,4 @@ public class ColorPanel extends JPanel {
         rectangle.draw(g);
     }
 }
+    

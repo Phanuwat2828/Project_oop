@@ -27,4 +27,4 @@ public class ColorRectangle {
         g.drawString(txt2, x + width + 20, y + 39);
     }
     
-}
+} 
