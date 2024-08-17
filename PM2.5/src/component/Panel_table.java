@@ -65,7 +65,7 @@ public class Panel_table extends JPanel implements ActionListener {
                             middle new_status = new middle(new int[6], color_t);
                             status.add(new_status);
                         }
-                        if(data_tr.getPm25(row, coloumn)<0){
+                        if(data_tr.getPm25(row, coloumn)<0 || data_tr.getPm25(row,coloumn)>250){
                             alert.Error_alert("Please Check file pm2.5 pm: "+Integer.toString(data_tr.getPm25(row, coloumn)), "Alert Error PM2.5");
                         }else if(data_tr.getPeople(row, coloumn)<0){
                             alert.Error_alert("Check People StatusError: ["+Integer.toString(data_tr.getPeople(row, coloumn))+"]  !Please enter people again ", "Alert Error People");

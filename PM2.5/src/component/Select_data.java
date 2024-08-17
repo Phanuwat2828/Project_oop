@@ -239,12 +239,12 @@ public class Select_data implements ActionListener {
                         String data_str = tk.nextToken(); // !แยกตัวเลขออกจากแถวทีละตัว
                         count+=1;
                         if(data_tr.check_data(data_str)){// !ส่งค่าที่แยกออกไปเช็ค ว่ามี text
-                            int data = Integer.parseInt(data_str); // !แปลงเป็น int
-                            // สุ่มความผิดพลาด 5% pm =50
-                            if(Data.randomTrueWith5PercentChance(0.05)){ // !โอกาสความผิดพลาด 5%
-                                data = data + (int) (Math.random() * (-data)+(int)data/2); //! สุ่มค่าความผิดพลาด เช่น pm 50  จะสุ่มตั้งแต่ -25 ถึง 25 แล้วเก็บลง data 
-                            }
-                            data_pm.add(data); // !add ลง datapm
+                            try{
+                                int data = Integer.parseInt(data_str); // !แปลงเป็น int
+                                data_pm.add(data); // !add ลง datapm
+                            }catch (NumberFormatException e){ // !ถ้ามี เลขยาวเกิน ให้เช็ด pm25 = -5000 เพื่อแสดง error
+                                data_pm.add(5000);
+                            }                           
                         }else{ // !ถ้ามี text ให้เช็ด pm25 = -5000 เพื่อแสดง error
                             data_pm.add(-5000);
                         }

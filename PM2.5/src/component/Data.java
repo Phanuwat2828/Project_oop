@@ -175,16 +175,6 @@ public class Data {
         return false;
     }
 
-    // Random_Mistake Methode
-    // !สุ่มความผิดพลาด ตาม ค่าที่ส่งเข้ามา 
-    // *ค่าที่ส่งเข้ามาคือ % ที่จะเกิดความผิดพลาด
-    public static boolean randomTrueWith5PercentChance(Double random_) {
-        Random random = new Random();
-
-        // 0.0-0.99  < 0.5 true 0.00 0.01 0.02 0.03 0.04  5/100
-        // &return True or False
-        return random.nextDouble() < random_;
-    }
 
     // Status Color Methode
     // !Set ค่าสีของสถานี และ เก็บค่าสี กล่องบอกสถาณะของสถานี เช่นถ้า pm2.5 
@@ -205,10 +195,10 @@ public class Data {
             } else if (data_pm >= 101 && data_pm<= 150) {
                 this.color_bt = cl_all.cl_bg_or;
                 this.color_status = cl_all.getStatusOrange();
-            } else if (data_pm>= 151) {
+            } else if (data_pm>= 151 && data_pm<=250) {
                 this.color_bt = Color.RED;
                 this.color_status =cl_all.getStatusRed();
-            } else if(data_pm<0){
+            } else{
                 this.color_bt = new Color(135, 135, 135);
                 this.color_status =cl_all.getStatusGray();
             }
@@ -235,10 +225,10 @@ public class Data {
             } else if ( data_pm  >= 101 &&  data_pm <= 150) {
                 data_persen = (int) (Math.random() * (30 - 20)) + 20;
 
-            } else if ( data_pm >= 151) {
+            } else if ( data_pm >= 151 && data_pm<=250) {
                 data_persen  = (int) (Math.random() * (51 - 30)) + 30;
 
-            } else if( data_pm <0){
+            } else {
                 data_persen  = 0;
             }
         }else{
