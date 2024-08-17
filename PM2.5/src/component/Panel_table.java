@@ -88,15 +88,17 @@ public class Panel_table extends JPanel implements ActionListener {
     
         int data_pm = data_tr.getPm25(row,col);
         int data_people = data_tr.getPeople(row,col);
-        if(data_pm>=0 && data_people>=0){
+        if(data_pm>=0 && data_pm<=250&&data_people>=0){
             // 50%
             data_tr.setPm25(row,col,(int) (data_pm * 0.5));
             // 30%
-            
             for (int i = row - 1; i <= row + 1; i++) {
                 for (int j = col - 1; j <= col + 1; j++) {
                     if (i >= 0 && i < data_tr.getPm25().size() && j >= 0 && j < data_tr.getPm25().get(i).size() && !(i == row && j == col)) {
-                        data_tr.setPm25(i,j,(int) (data_tr.getPm25(i, j)* 0.7));
+                        if(data_tr.getPm25(i,j)>=0 && data_tr.getPm25(i,j)<=250){
+                            data_tr.setPm25(i,j,(int) (data_tr.getPm25(i, j)* 0.7));
+                        }
+                        
                     }
                 }
             }

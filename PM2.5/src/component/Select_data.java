@@ -128,9 +128,9 @@ public class Select_data implements ActionListener {
                             if(data_tr.getFile()){
                                 if(data_tr.getPeople(i,j)>=0){
                                     int pm25_rain = data_tr.getPm25(i, j)-50; // !ดึงค่าออกมาลบ 50
-                                    if(pm25_rain>=0 ){ // !แล้วถามว่าที่ลบไปติดลบไหม ถ้าไม่ติดให้ update ค่าไปเลย แต่ถ้าติด - 
+                                    if(pm25_rain>=0 && data_tr.getPm25(i, j)<=250){ // !แล้วถามว่าที่ลบไปติดลบไหม ถ้าไม่ติดให้ update ค่าไปเลย แต่ถ้าติด - 
                                         data_tr.setPm25(i, j, (int) pm25_rain);
-                                    }else if(data_tr.getPm25(i, j)>=0){
+                                    }else if(data_tr.getPm25(i, j)>=0 && data_tr.getPm25(i,j)<=250){
                                         data_tr.setPm25(i, j, (int) 0);
                                     }
                                 }else{
